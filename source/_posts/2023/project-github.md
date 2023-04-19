@@ -120,4 +120,4 @@ git push -u origin master -f
 ```
 git commit -m 更改说明
 ```
-就可以把更改推到远程仓库
+再选择同步更改就可以把更改推到远程仓库
