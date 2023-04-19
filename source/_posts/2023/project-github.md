@@ -112,7 +112,7 @@ git push -u origin master -f
 以后再做修改，就可以直接选择右上角的`commit`(ctrl+k)和`push`
 
 ## 使用vscode
-虽然vscde自带git插件，但是我习惯上可视化和命令行一起用
+虽然vscde自带git插件，但是我习惯上可视化和命令行一起用(可视化界面还没有全弄明白)
 
 首先在左侧源代码管理中，初始化仓库，并登录github，选择远程仓库之后就可以了
 
