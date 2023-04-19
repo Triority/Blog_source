@@ -1,0 +1,167 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Triority's blog
+subtitle: ''
+description: ''
+keywords:
+author: Triority
+language: zh-CN
+timezone: ''
+
+# URL
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
+url: http://triority.cn
+permalink: :year/:title/
+permalink_defaults:
+pretty_urls:
+  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
+  trailing_html: true # Set to false to remove trailing '.html' from permalinks
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :year/:title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link:
+  enable: true # Open external links in new tab
+  field: site # Apply to the whole site
+  exclude: ''
+filename_case: 0
+render_drafts: false
+post_asset_folder: true
+marked:
+  prependRoot: true
+  postAsset: true
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace: ''
+  wrap: true
+  hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
+
+# Home page setting
+# path: Root path for your blogs index page. (default = '')
+# per_page: Posts displayed per page. (0 = disable pagination)
+# order_by: Posts order. (Order by date descending by default)
+index_generator:
+  path: ''
+  per_page: 20
+  order_by: -date
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Metadata elements
+## https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta
+meta_generator: true
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 0
+pagination_dir: page
+
+# Include / Exclude file(s)
+## include:/exclude: options only apply to the 'source/' folder
+include:
+exclude:
+ignore:
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: fluid
+
+# Deployment
+## Docs: https://hexo.io/docs/one-command-deployment
+deploy:
+  type: git
+  message: update
+  repo: root@www.triority.cn:/root/hexo.git
+  branch: master
+
+spoiler:
+  style: box
+  color: black
+  p: false
+
+markdown:
+  plugins:
+    - markdown-it-ruby
+
+search: 
+  path: search.xml;
+  field: post;
+
+# Security
+encrypt: # hexo-blog-encrypt
+  abstract: 有东西被加密了, 请输入密码查看.
+  message: 您好, 这里需要密码.
+  tags:
+  - {name: password , password: hello}
+  wrong_pass_message: 抱歉, 这个密码看着不太对, 请再试试.
+
+# Extensions
+plugins:
+  hexo-generator-feed
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
+lazyload:
+  enable: false
+  onlypost: true
+  loadingImg: /img/loading.gif
+
+# Ice Kano Plus_in
+# Hexo Github Canlendar
+# Author: Ice Kano
+# Modify: Lete乐特
+githubcalendar:
+  enable: false  # true/false,是否开启插件
+  enable_page: /about/ # 路由地址，如我的 /blog/是代表网站的root主页。/blog/about/代表的是关于页等等
+  user: Triority # github 或者 gitee 用户名
+  layout:
+    type: id
+    name: recent-posts
+    index: 0
+  githubcalendar_html: '<div class="recent-post-item" style="width:100%;height:auto;padding:10px;"><div id="github_loading" style="width:10%;height:100%;margin:0 auto;display: block"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 50 50" style="enable-background:new 0 0 50 50" xml:space="preserve"><path fill="#d0d0d0" d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z" transform="rotate(275.098 25 25)"><animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform></path></svg></div><div id="github_container"></div></div>'
+  pc_minheight: 280px
+  mobile_minheight: 0px
+  color: "['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f']"
+  api: http://triority.cn:5000/
+  # api: https://python-gitee-calendar-api.vercel.app/api
+  calendar_js: https://jsdelivr.triority.cn/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js
+  plus_style: ""
