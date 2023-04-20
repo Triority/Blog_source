@@ -46,3 +46,18 @@ STM32单片机支持3种程序下载方式
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
  	GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIO
 ```
+# 程序编写
+编程使用keil软件
+
+未完待续
+
+# 使用arduino编程
+突然得知stm32可以用arduino编程，喜出望外hhh用keil的事还是等一等吧hhh
+
+## 前置任务
+添加开发板管理器地址
+```
+http://dan.drown.org/stm32duino/package_STM32duino_index.json
+```
+然后就可以找到`STM32F103C`来给我的板子编程了。
+
