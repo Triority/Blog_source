@@ -16,7 +16,19 @@ excerpt: stm32基础学习笔记
 
 [STM32F103系列中文芯片手册](https://cr.triority.cn/f/1r0uP/STM32F103%E4%B8%AD%E6%96%87%E6%95%99%E7%A8%8B%E5%8F%8A%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C.pdf)
 
-# 程序下载
+# 使用arduino编程
+突然得知stm32可以用arduino编程，喜出望外hhh
+
+添加开发板管理器地址
+```
+http://dan.drown.org/stm32duino/package_STM32duino_index.json
+```
+然后就可以找到`STM32F103C`来给我的板子编程了。
+
+但是usb接口不能串口下载就很烦了，不如直接用st-link，不是很想用emmmm
+
+# 使用keil的程序编写和下载
+## 下载方式
 STM32单片机支持3种程序下载方式
 + ISP串口下载(使用USB-TTL接PA9、PA10)
 + SWD下载(使用ST-LINK接PA13、PA14)
@@ -46,18 +58,4 @@ STM32单片机支持3种程序下载方式
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz; 
  	GPIO_Init(GPIOA, &GPIO_InitStructure);//初始化GPIO
 ```
-# 程序编写
-编程使用keil软件
-
-未完待续
-
-# 使用arduino编程
-突然得知stm32可以用arduino编程，喜出望外hhh用keil的事还是等一等吧hhh
-
-## 前置任务
-添加开发板管理器地址
-```
-http://dan.drown.org/stm32duino/package_STM32duino_index.json
-```
-然后就可以找到`STM32F103C`来给我的板子编程了。
-
+## 编程方法
