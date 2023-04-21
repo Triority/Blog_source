@@ -1029,23 +1029,6 @@ ESP32通过Wi-Fi的`DTIM Beacon`机制与路由器保持连接。在`Modem-sleep
 
 `Deep-sleep`可以用于低功耗的传感器应用,或者大部分时间都不需要进行数据传输的情况。设备可以每隔一段时间从`Deep-sleep`状态醒来测量数据并上传,之后继续进入`Deep-sleep`。也可以将多个数据存储于`RTC memory`(`RTC memory`在`Deep-sleep`模式下仍然可以保存数据),然后一次发送出去
 
-+ External wakeup (ext0)
-
-`RTC IO`模块包含当其中一个`RTC IO`的电平为唤醒电平（可配置为逻辑高或低）触发唤醒的逻辑。
-`RTC IO`是 RTC 外设电源域的一部分，因此如果使能该唤醒源，RTC 外设将在睡眠期间保持上电状态。在 ESP32 的修订版 0 和 1 中，此唤醒源与 ULP 和触摸唤醒源不兼容。
-
-由于在此模式下启用了`RTC IO`模块，因此也可以使用内部上拉或下拉电阻。
-`esp_sleep_enable_ext0_wakeup()`函数可用于启用此唤醒源。
-
-+ External wakeup (ext1)
-
-RTC 控制器包含使用 多个 RTC IO 触发唤醒的逻辑。两个逻辑功能之一可用于触发唤醒：
-如果任何一个所选 IO 为高电平，则唤醒（`ESP_EXT1_WAKEUP_ANY_HIGH`）
-如果所有选定的 IO 都为低电平，则唤醒（`ESP_EXT1_WAKEUP_ALL_LOW`）
-该唤醒源由 RTC 控制器实现。因此，RTC 外设和 RTC 存储器可以在此模式下断电。
-
-但是，如果 RTC 外设断电，内部上拉和下拉电阻将被禁用。要使用内部上拉或下拉电阻，请在睡眠期间请求 RTC 外设电源域保持上电。`esp_sleep_enable_ext1_wakeup()`函数可用于启用此唤醒源。
-
 ##### 定时唤醒：6uA左右
 这是官方提供的示例代码，已经把注释改成了中文。
 ```
@@ -1173,6 +1156,23 @@ void setup(){
 void loop(){}
 ```
 ##### GPIO唤醒：6uA左右
++ `External wakeup` (ext0)
+
+`RTC IO`模块包含当其中一个`RTC IO`的电平为唤醒电平（可配置为逻辑高或低）触发唤醒的逻辑。
+`RTC IO`是 RTC 外设电源域的一部分，因此如果使能该唤醒源，RTC 外设将在睡眠期间保持上电状态。在 ESP32 的修订版 0 和 1 中，此唤醒源与 ULP 和触摸唤醒源不兼容。
+
+由于在此模式下启用了`RTC IO`模块，因此也可以使用内部上拉或下拉电阻。
+`esp_sleep_enable_ext0_wakeup()`函数可用于启用此唤醒源。
+
++ `External wakeup` (ext1)
+
+RTC 控制器包含使用 多个 RTC IO 触发唤醒的逻辑。两个逻辑功能之一可用于触发唤醒：
+如果任何一个所选 IO 为高电平，则唤醒（`ESP_EXT1_WAKEUP_ANY_HIGH`）
+如果所有选定的 IO 都为低电平，则唤醒（`ESP_EXT1_WAKEUP_ALL_LOW`）
+该唤醒源由 RTC 控制器实现。因此，RTC 外设和 RTC 存储器可以在此模式下断电。
+
+但是，如果 RTC 外设断电，内部上拉和下拉电阻将被禁用。要使用内部上拉或下拉电阻，请在睡眠期间请求 RTC 外设电源域保持上电。`esp_sleep_enable_ext1_wakeup()`函数可用于启用此唤醒源。
+
 ```
 /*
 此代码展示如何将深度睡眠与作为唤醒源的外部触发器，以及如何将数据存储在 RTC 内存中，以便在重新启动时使用它
