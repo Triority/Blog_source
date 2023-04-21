@@ -995,8 +995,48 @@ void loop() {
   delay(1000);
 }
 ```
-### (未完成)低功耗
+### 低功耗
+#### 各种低功耗模式电流
 ![各种低功耗模式电流](esp32功耗.png)
+#### 低功耗测试
+这是esp32的低功耗定时唤醒模式的示例代码，已经把注释改成了中文。
+```
+#define uS_TO_S_FACTOR 1000000ULL  //微秒到秒的转换
+#define TIME_TO_SLEEP  5        //进入休眠模式时间
+RTC_DATA_ATTR int bootCount = 0;
+//打印被唤醒原因的方法
+void print_wakeup_reason(){
+  esp_sleep_wakeup_cause_t wakeup_reason;
+  wakeup_reason = esp_sleep_get_wakeup_cause();
+  switch(wakeup_reason){
+    case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
+    case ESP_SLEEP_WAKEUP_EXT1 : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
+    case ESP_SLEEP_WAKEUP_TIMER : Serial.println("Wakeup caused by timer"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : Serial.println("Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_ULP : Serial.println("Wakeup caused by ULP program"); break;
+    default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
+  }
+}
+void setup(){
+  Serial.begin(115200);
+  delay(1000);
+  ++bootCount;
+  Serial.println("Boot number: " + String(bootCount));
+  
+  print_wakeup_reason();
+  //配置唤醒源，每五秒唤醒一次，在没有提供唤醒源的情况下睡眠，除非硬件重置，它将永远休眠
+  esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_S_FACTOR);
+  Serial.println("Setup ESP32 to sleep for every " + String(TIME_TO_SLEEP) + " Seconds");
+  Serial.println("Going to sleep now");
+  Serial.flush(); 
+  //开始进入休眠
+  esp_deep_sleep_start();
+  Serial.println("This will never be printed");
+}
+
+void loop(){}
+```
+
 
 ### web服务器
 连接wifi后，浏览器输入串口输出的ip，打开网页就会让led灯亮起一秒。考虑到学弟喜欢写脚本疯狂访问来让继电器输出PWM，加了个10s的延时不接受新的连接。
