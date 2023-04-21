@@ -998,8 +998,9 @@ void loop() {
 ### 低功耗
 #### 各种低功耗模式电流
 ![各种低功耗模式电流](esp32功耗.png)
-#### 低功耗测试
-这是esp32的低功耗定时唤醒模式的示例代码，已经把注释改成了中文。
+#### Deep-sleep模式
+##### 定时唤醒：6uA左右
+这是官方提供的示例代码，已经把注释改成了中文。
 ```
 #define uS_TO_S_FACTOR 1000000ULL  //微秒到秒的转换
 #define TIME_TO_SLEEP  5        //进入休眠模式时间
@@ -1036,7 +1037,138 @@ void setup(){
 
 void loop(){}
 ```
+##### Touchpad唤醒：36uA左右
+调用`esp_deep_sleep_enable_touchpad_wakeup()`函数使能`touchpad`唤醒，然后调用`esp_deep_sleep_start()`函数进入`Deep-sleep`模式
+```
+/*
+此代码展示深度睡眠以触摸作为唤醒源以及如何存储数据，RTC内存在重新启动时使用
 
+ESP32 可以启用多个触摸作为唤醒源
+ESP32-S2 和 ESP32-S3 仅支持 1 个触摸作为唤醒源启用
+*/
+
+#if CONFIG_IDF_TARGET_ESP32
+  #define THRESHOLD   40      //值越大，灵敏度越高
+#else //ESP32-S2 和 ESP32-S3
+  #define THRESHOLD   5000   //值越低，灵敏度越高
+#endif
+
+RTC_DATA_ATTR int bootCount = 0;
+touch_pad_t touchPin;
+
+void print_wakeup_reason(){
+  esp_sleep_wakeup_cause_t wakeup_reason;
+  wakeup_reason = esp_sleep_get_wakeup_cause();
+
+  switch(wakeup_reason){
+    case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
+    case ESP_SLEEP_WAKEUP_EXT1 : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
+    case ESP_SLEEP_WAKEUP_TIMER : Serial.println("Wakeup caused by timer"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : Serial.println("Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_ULP : Serial.println("Wakeup caused by ULP program"); break;
+    default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
+  }
+}
+
+void print_wakeup_touchpad(){
+  touchPin = esp_sleep_get_touchpad_wakeup_status();
+
+  #if CONFIG_IDF_TARGET_ESP32
+    switch(touchPin){
+      case 0  : Serial.println("Touch detected on GPIO 4"); break;
+      case 1  : Serial.println("Touch detected on GPIO 0"); break;
+      case 2  : Serial.println("Touch detected on GPIO 2"); break;
+      case 3  : Serial.println("Touch detected on GPIO 15"); break;
+      case 4  : Serial.println("Touch detected on GPIO 13"); break;
+      case 5  : Serial.println("Touch detected on GPIO 12"); break;
+      case 6  : Serial.println("Touch detected on GPIO 14"); break;
+      case 7  : Serial.println("Touch detected on GPIO 27"); break;
+      case 8  : Serial.println("Touch detected on GPIO 33"); break;
+      case 9  : Serial.println("Touch detected on GPIO 32"); break;
+      default : Serial.println("Wakeup not by touchpad"); break;
+    }
+  #else
+    if(touchPin < TOUCH_PAD_MAX){
+      Serial.printf("Touch detected on GPIO %d\n", touchPin); 
+    }
+    else{
+      Serial.println("Wakeup not by touchpad");
+    }
+  #endif
+}
+
+void setup(){
+  Serial.begin(115200);
+  delay(1000);
+  ++bootCount;
+  Serial.println("Boot number: " + String(bootCount));
+
+  //打印唤醒原因和触摸引脚
+  print_wakeup_reason();
+  print_wakeup_touchpad();
+
+  #if CONFIG_IDF_TARGET_ESP32 
+  //设置唤醒引脚为 GPIO15 + GPIO 27
+  touchSleepWakeUpEnable(T3,THRESHOLD);
+  touchSleepWakeUpEnable(T7,THRESHOLD);
+  
+  #else //ESP32-S2 + ESP32-S3
+  //设置唤醒引脚为 GPIO3
+  touchSleepWakeUpEnable(T3,THRESHOLD);
+  #endif
+
+  //进入睡眠模式
+  Serial.println("Going to sleep now");
+  esp_deep_sleep_start();
+  Serial.println("This will never be printed");
+}
+
+void loop(){}
+```
+##### GPIO唤醒：6uA左右
+```
+/*
+此代码展示如何将深度睡眠与作为唤醒源的外部触发器，以及如何将数据存储在 RTC 内存中，以便在重新启动时使用它
+按下 GPIO 33 按钮以 10K 欧姆向下拉
+注意，只有 RTC IO 可以用作外部唤醒的源。它们是引脚：0，2，4，12-15，25-27，32-39。
+*/
+#define BUTTON_PIN_BITMASK 0x200000000 // 2^33 in hex
+RTC_DATA_ATTR int bootCount = 0;
+
+void print_wakeup_reason(){
+  esp_sleep_wakeup_cause_t wakeup_reason;
+  wakeup_reason = esp_sleep_get_wakeup_cause();
+  switch(wakeup_reason){
+    case ESP_SLEEP_WAKEUP_EXT0 : Serial.println("Wakeup caused by external signal using RTC_IO"); break;
+    case ESP_SLEEP_WAKEUP_EXT1 : Serial.println("Wakeup caused by external signal using RTC_CNTL"); break;
+    case ESP_SLEEP_WAKEUP_TIMER : Serial.println("Wakeup caused by timer"); break;
+    case ESP_SLEEP_WAKEUP_TOUCHPAD : Serial.println("Wakeup caused by touchpad"); break;
+    case ESP_SLEEP_WAKEUP_ULP : Serial.println("Wakeup caused by ULP program"); break;
+    default : Serial.printf("Wakeup was not caused by deep sleep: %d\n",wakeup_reason); break;
+  }
+}
+
+void setup(){
+  Serial.begin(115200);
+  delay(1000);
+  ++bootCount;
+  Serial.println("Boot number: " + String(bootCount));
+  print_wakeup_reason();
+  /*
+  首先，我们将 ESP32 设置为外部唤醒触发器。ESP32 有两种类型，ext0 和 ext1。
+  ext0 使用RTC_IO唤醒，因此需要 RTC 外设
+  ext1 在使用 RTC 控制器时打开，所以不需要打开电源的外围设备。
+  请注意，使用内部上拉/下拉还需要打开 RTC 外围设备。
+  */
+  esp_sleep_enable_ext0_wakeup(GPIO_NUM_33,1);
+  //如果你使用 ext1：esp_sleep_enable_ext1_wakeup(BUTTON_PIN_BITMASK,ESP_EXT1_WAKEUP_ANY_HIGH);
+  Serial.println("Going to sleep now");
+  esp_deep_sleep_start();
+  Serial.println("This will never be printed");
+}
+
+void loop(){}
+```
 
 ### web服务器
 连接wifi后，浏览器输入串口输出的ip，打开网页就会让led灯亮起一秒。考虑到学弟喜欢写脚本疯狂访问来让继电器输出PWM，加了个10s的延时不接受新的连接。
