@@ -1004,6 +1004,7 @@ void loop() {
 + `Modem-sleep` 模式：CPU 可运行，时钟可被配置。Wi-Fi/蓝牙基带和射频关闭
 + `Light-sleep` 模式：CPU 暂停运行，Wi-Fi/蓝牙基带和射频关闭。RTC 存储器和外设以及 ULP 协处理器运行。任何唤醒事件(MAC、主机、RTC 定时器或外部中断)都会唤醒芯片
 + `Deep-sleep` 模式：CPU 和大部分外设都会掉电，Wi-Fi/蓝牙基带和射频关闭，只有 RTC 存储器和 RTC 外设以及 ULP 协处理器可以工作。Wi-Fi 和蓝牙连接数据存储在 RTC 中
+
 #### Modem-sleep
 目前 ESP32 的`Modem-sleep`仅工作在`Station`模式下,连接路由器后生效。`Station`会周期性在工作状态和睡眠状态两者之间切换。
 ESP32通过Wi-Fi的`DTIM Beacon`机制与路由器保持连接。在`Modem-sleep`模式下，系统可以自动被唤醒，无需配置唤醒源
