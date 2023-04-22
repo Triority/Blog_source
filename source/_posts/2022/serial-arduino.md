@@ -4,7 +4,7 @@ excerpt: 记录了Arduino串口通讯相关的函数
 index_img: /img/arduino.png
 date: 2022-05-09 22:04:53
 categories: 
-- 学习
+- [计算机, 知识整理]
 tags:
 - arduino
 - 笔记

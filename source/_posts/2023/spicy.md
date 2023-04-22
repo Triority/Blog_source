@@ -5,7 +5,7 @@ tags:
   - 全原图文章
 index_img: /img/
 categories:
-  - 生活
+- [生活, 游览记录]
 notshow: true
 date: 2023-02-04 01:53:54
 excerpt: SPICY！（全原图文章！移动网络环境慎入！）

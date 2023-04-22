@@ -4,7 +4,7 @@ tags:
   - 摄影
 index_img: /img/DSC03695(1).png
 categories:
-  - 生活
+- [生活, 天文摄影]
 notshow: false
 date: 2023-03-26 12:52:12
 excerpt: 手机拍银河！

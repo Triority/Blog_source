@@ -4,7 +4,7 @@ tags:
   - python
 index_img: /img/aboutqqbot.png
 categories:
-  - 小工具
+- [计算机, 源码分享]
 notshow: false
 date: 2023-01-24 13:40:42
 excerpt: 别问，问就是闲的

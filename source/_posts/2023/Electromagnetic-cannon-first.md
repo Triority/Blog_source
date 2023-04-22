@@ -4,7 +4,8 @@ tags:
   - 电磁炉
 index_img: /img/fbq.png
 categories:
-  - 学习
+- [计算机, 知识整理]
+- [计算机, 折腾记录]
 notshow: false
 date: 2023-01-18 16:33:33
 excerpt: 电磁炉设计第一版

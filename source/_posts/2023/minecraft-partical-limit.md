@@ -4,7 +4,8 @@ tags:
   - minecraft
 index_img: /img/villager_particle.jpg
 categories:
-  - 学习
+- [计算机, 折腾记录]
+- minecraft
 notshow: false
 date: 2023-01-22 13:12:32
 excerpt: 新年快乐！

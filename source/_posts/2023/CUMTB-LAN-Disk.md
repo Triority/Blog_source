@@ -5,7 +5,7 @@ tags:
   - 文档
 index_img: /img/
 categories:
-  - 小工具
+- [计算机, 文档教程]
 notshow: true
 date: 2023-03-24 10:47:23
 excerpt: 请务必连接校园网使用

@@ -7,7 +7,7 @@ tags:
 excerpt: conda常用命令
 index_img: /img/conda.png
 categories: 
-- 记录
+- [计算机, 知识整理]
 ---
 ## 下载及安装
 ```

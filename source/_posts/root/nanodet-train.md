@@ -1,5 +1,5 @@
 ---
-title: 使用nanodet进行模型训练和识别
+title: pytorch环境配置及使用nanodet进行模型训练和识别
 date: 2022-11-13 13:01:55
 tags:
 - python
@@ -9,7 +9,7 @@ tags:
 excerpt: 由于这次需要使用CPU进行识别，同时要求较高帧率，因此使用nanodet而非yolo进行目标识别，同时这也是我第一次尝试模型训练，如有错误欢迎指出
 index_img: /img/nanodet-plus.jpg
 categories: 
-- 学习
+- [计算机, 折腾记录]
 permalink: root/使用nanodet进行模型训练和识别/
 ---
 # 环境配置

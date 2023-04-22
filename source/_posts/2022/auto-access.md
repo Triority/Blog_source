@@ -7,7 +7,7 @@ tags:
 excerpt: esp32连接web服务器获取命令实现远程控制
 index_img: /img/auto-access.jpg
 categories: 
-- 学习
+- [计算机, 源码分享]
 ---
 ## 前言
 最近需要做一个远程控制的门禁，最好可以公网连接[所以下面的server.py在公网服务器运行]，还要有权限管理，和进入行为记录。所以。。。

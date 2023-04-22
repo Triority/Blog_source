@@ -6,7 +6,7 @@ tags:
 excerpt: hexo的fluidd主题设置文章首页隐藏
 index_img: /img/lyk2.jpg
 categories: 
-- 学习
+- [计算机, 折腾记录]
 ---
 ## 需求
 有时候首页只想放一些关于编程的文章，日记一类不希望被放在首页上直接被看到，但是又想通过写文章记录下来。

@@ -8,7 +8,7 @@ tags:
   - root
 index_img: /img/ros.png
 categories:
-  - 学习
+- [计算机, 知识整理]
 notshow: false
 date: 2023-02-21 16:37:19
 excerpt: 重写一篇笔记

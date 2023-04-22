@@ -4,7 +4,7 @@ excerpt: 很久很久以前我想做arduino从蓝牙串口接受手机信息调�
 index_img: /img/arduino-serial-rgb.png
 date: 2022-05-15 12:24:04
 categories: 
-- 学习
+- [计算机, 知识整理]
 tags:
 - arduino
 ---

@@ -4,7 +4,7 @@ tags:
   - windows
 index_img: /img/QQ截图20230204020745.png
 categories:
-  - 学习
+- [计算机, CV工程师]
 notshow: false
 date: 2023-02-04 02:08:32
 excerpt: mklink

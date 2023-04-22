@@ -4,7 +4,10 @@ tags:
   - arduino
 index_img: /img/fc092efaf8286e4f6bd0228af448ab3.jpg
 categories:
-  - 学习
+- [计算机, 折腾记录]
+- [计算机, 源码分享]
+- [计算机, 知识整理]
+- 值得一提的文章
 notshow: false
 date: 2023-02-26 21:27:06
 excerpt: cool!

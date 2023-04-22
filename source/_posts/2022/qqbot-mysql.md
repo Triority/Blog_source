@@ -8,7 +8,8 @@ tags:
 excerpt: 基于nonebot2+cqhttp的QQ机器人以及使用mySQL的记分系统
 index_img: /img/nonebot.png
 categories: 
-- 小工具
+- [计算机, 折腾记录]
+- [计算机, 源码分享]
 ---
 ## 前言
 这篇文章主要讲nonebot的使用，如果内容不多的话整个机器人的制作都写在这吧。

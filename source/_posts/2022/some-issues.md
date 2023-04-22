@@ -1,12 +1,12 @@
 ---
-title: 一些常见的小问题
+title: 一些常见的一行命令小问题
 date: 2022-07-12 16:25:00
 tags:
 - 笔记
 excerpt: 总有那么一些小问题，一行命令就能解决，但是这一行似乎永远记不住......
 index_img: /img/tips.png
 categories: 
-- 记录
+- [计算机, CV工程师]
 ---
 ## windows清除原有SSH公钥
 在powershell输入：

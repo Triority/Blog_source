@@ -5,7 +5,7 @@ tags:
   - python
 index_img: /img/
 categories:
-  - 学习
+- [计算机, 折腾记录]
 notshow: true
 date: 2023-04-16 20:44:17
 excerpt: 使用cuda加速opencv

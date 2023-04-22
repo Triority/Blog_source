@@ -4,7 +4,7 @@ date: 2022-06-21 22:47:02
 excerpt: 数据集标注真的是太累了hhh所以开始偷懒:...
 index_img: /img/auto-marking.png
 categories: 
-- 小工具
+- [计算机, 源码分享]
 tags: 
 - python
 - opencv

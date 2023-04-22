@@ -4,7 +4,7 @@ tags:
   - linux
 index_img: /img/QQ截图20230120162127.png
 categories:
-  - 学习
+- [计算机, 折腾记录]
 notshow: false
 date: 2023-01-20 15:41:17
 excerpt: ubuntu下使用rclone将onedrive挂载

@@ -9,7 +9,8 @@ tags:
 excerpt: 看了go-cqhttp的文档之后，深感我要框架做何用，直接python写个后端和cqhttp用http通讯多简单啊hhh
 index_img: /img/go-cqhttp.png
 categories: 
-- 学习
+- [计算机, 知识整理]
+- [计算机, 折腾记录]
 ---
 ## 前言
 > 不懂就问，这篇文章的那张图片是go-cqhttp的logo吗

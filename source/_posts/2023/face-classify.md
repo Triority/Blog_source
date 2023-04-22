@@ -6,7 +6,7 @@ tags:
 excerpt: 人脸识别图像分类
 index_img: /img/syk3.jpg
 categories: 
-- 学习
+- [计算机, 知识整理]
 ---
 ## 人脸识别
 ### 人脸识别的基本过程

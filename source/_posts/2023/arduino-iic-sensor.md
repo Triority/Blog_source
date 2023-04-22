@@ -1,10 +1,11 @@
 ---
-title: 使用arduino的同轴麦轮自平衡车
+title: 使用arduino的同轴麦轮自平衡车[正在鸽子]
 tags:
   - arduino
 index_img: /img/
 categories:
-  - 记录
+- [计算机, 源码分享]
+- [计算机, 折腾记录]
 notshow: false
 date: 2023-02-25 23:28:44
 excerpt: 使用arduino的同轴麦轮自平衡车

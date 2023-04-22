@@ -4,7 +4,8 @@ tags:
   - arduino
 index_img: /img/ff589b65d94461294ee7c69f4bd4eef.jpg
 categories:
-  - 记录
+- [计算机, 源码分享]
+- [计算机, 知识整理]
 notshow: false
 date: 2023-02-24 21:56:43
 excerpt: arduino舵机库的使用

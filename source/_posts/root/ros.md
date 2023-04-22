@@ -8,7 +8,7 @@ tags:
 - ROS
 - root
 categories: 
-- 学习
+- [计算机, 知识整理]
 index_img: /img/ros.png
 excerpt: ros学习知识整理和过程记录
 permalink: root/ros学习笔记/

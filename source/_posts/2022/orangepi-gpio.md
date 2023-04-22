@@ -8,7 +8,7 @@ tags:
 excerpt: 香橙派GPIO的简单用法
 index_img: /img/香橙派zero2.png
 categories: 
-- 学习
+- [计算机, 源码分享]
 ---
 ## 编译安装wiringOP
 ```

@@ -6,7 +6,7 @@ tags:
 excerpt: python使用selenium操作edge浏览器
 index_img: /img/selenium.webp
 categories: 
-- 学习
+- [计算机, 折腾记录]
 ---
 ## 安装所需文件
 ### python库

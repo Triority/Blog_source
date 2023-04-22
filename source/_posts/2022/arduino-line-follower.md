@@ -7,7 +7,7 @@ tags:
 excerpt: 之前浅学了一下做巡线车，代码很烂仅供参考
 index_img: /img/arduino_line_follower.jpg
 categories: 
-- 学习
+- [计算机, 源码分享]
 ---
 ```c
 //引脚定义

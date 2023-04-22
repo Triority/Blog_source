@@ -4,7 +4,8 @@ excerpt: 目前机器人框架有很多,框架内也有很多插件实现各种�
 index_img: /img/nonebot.png
 date: 2022-01-22 16:54:02
 categories: 
-- 学习
+- [计算机, 折腾记录]
+- [计算机, 源码分享]
 tags:
 - python
 - QQ机器人

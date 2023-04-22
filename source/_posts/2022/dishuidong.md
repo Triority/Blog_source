@@ -5,7 +5,7 @@ tags:
 - 旅游
 - 摄影
 categories: 
-- 生活
+- [生活, 游览摄影]
 excerpt: 今日游览拍摄记录
 index_img: /img/dishuidong.jpg
 ---

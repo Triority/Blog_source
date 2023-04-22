@@ -9,7 +9,8 @@ tags:
 excerpt: 改进了之前的自动标注算法，增加一些自定义功能使其适应更多情况
 index_img: /img/auto-marking.png
 categories: 
-- 小工具
+- [计算机, 源码分享]
+- 值得一提的文章
 permalink: root/图片数据集自动生成与标注算法/
 ---
 ## 前言

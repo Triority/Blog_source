@@ -8,7 +8,7 @@ tags:
 excerpt: opencv经常使用颜色识别某一物体，而找到这一参数范围极其麻烦，因此写了这个程序来帮助确认最佳参数
 index_img: /img/opencv-hsv-adjust.png
 categories: 
-- 小工具
+- [计算机, 源码分享]
 permalink: root/opencv-hsv辅助调参工具/
 ---
 ## 前言

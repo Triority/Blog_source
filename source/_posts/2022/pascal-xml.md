@@ -7,7 +7,7 @@ tags:
 - python
 - 神经网络
 categories: 
-- 小工具
+- [计算机, 源码分享]
 ---
 
 ## 前言

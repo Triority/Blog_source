@@ -8,7 +8,8 @@ tags:
 excerpt: 在智能车航天组中的视觉识别赛道并拟合数据
 index_img: /img/opencv-for-Aerospace.png
 categories: 
-- 学习
+- [计算机, 源码分享]
+- 值得一提的文章
 permalink: root/在智能车航天组中的视觉识别赛道并拟合数据/
 ---
 ## 在智能车航天组中的视觉识别赛道

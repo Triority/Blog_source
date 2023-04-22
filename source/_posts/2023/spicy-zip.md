@@ -4,7 +4,7 @@ tags:
   - travel
 index_img: /img/3cb471f9c32bbe95fec7ec3acadd550.jpg
 categories:
-  - 生活
+- [生活, 游览记录]
 notshow: false
 date: 2023-02-04 01:00:01
 excerpt: SPICY！

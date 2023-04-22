@@ -4,7 +4,7 @@ tags:
   - 电磁炉
 index_img: /img/
 categories:
-  - 学习
+- [计算机, 知识整理]
 notshow: true
 date: 2023-01-13 22:50:16
 excerpt: 哪个小男孩不想要一个小男孩呢？

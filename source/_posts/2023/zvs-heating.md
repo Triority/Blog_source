@@ -4,7 +4,8 @@ tags:
   - 电磁炉
 index_img: /img/
 categories:
-  - 学习
+- [计算机, 知识整理]
+- [计算机, 折腾记录]
 notshow: true
 date: 2023-01-15 15:43:33
 excerpt: 来自与立创开源广场的电路

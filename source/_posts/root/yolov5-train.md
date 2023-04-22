@@ -8,7 +8,8 @@ tags:
 excerpt: yolov5数据集训练
 index_img: /img/yolov5.png
 categories: 
-- 学习
+- [计算机, 知识整理]
+- [计算机, 折腾记录]
 permalink: root/yolov5数据集训练/
 ---
 ## 下载yolov5

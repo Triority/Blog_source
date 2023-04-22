@@ -1,13 +1,15 @@
 ---
-title: Capoo-Desktop-Pet
+title: Capoo-Desktop-Pet：使用PyQT开发桌宠程序并打包为windows软件
 date: 2022-12-07 15:38:24
 tags:
 - python
 - Qt
-excerpt: Capoo!
+excerpt: 使用PyQT开发桌宠程序并打包为windows软件
 index_img: /img/Capoo.jpg
 categories: 
-- 学习
+- [计算机, 知识整理]
+- [计算机, 折腾记录]
+- 值得一提的文章
 ---
 ## 前言
 之前在b站刷到了Capoo的视频，这猫猫也太好玩了哈哈，最近原作者做了一个桌宠app，但是付款方式只有paypel(据说价格挺贵)，so自己搓一个？

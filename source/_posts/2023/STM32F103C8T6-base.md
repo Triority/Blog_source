@@ -4,7 +4,7 @@ tags:
   - stm32
 index_img: /img/STM32F103C8T6.png
 categories:
-  - 学习
+- [计算机, 知识整理]
 notshow: false
 date: 2023-04-17 15:25:47
 excerpt: stm32基础学习笔记

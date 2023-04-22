@@ -7,7 +7,7 @@ tags:
   - opencv
 index_img: /img/QQ截图20230227164056.png
 categories:
-  - 学习
+- [计算机, 源码分享]
 notshow: false
 date: 2023-02-27 16:38:34
 excerpt: 使用python控制车模

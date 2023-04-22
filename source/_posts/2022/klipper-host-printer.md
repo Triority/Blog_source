@@ -6,7 +6,8 @@ tags:
 excerpt: 一切开始于fluidd页面真的帅啊hhhhhhhc
 index_img: /img/klipper.png
 categories: 
-- 学习
+- [计算机, 折腾记录]
+- [计算机, CV工程师]
 ---
 ## 前言
 这里主要讲上位机klipper的配置，硬件使用大鱼的设计，主板mks genl2.1，klipper安装于上位机。
