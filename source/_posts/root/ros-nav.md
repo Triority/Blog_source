@@ -9,7 +9,7 @@ tags:
 excerpt: 使用ros的仿真，建图，导航等
 index_img: /img/ros.png
 categories:
-  - 记录
+- [计算机, 知识整理]
 notshow: false
 permalink: root/ros-nav/
 date: 2023-02-21 23:30:49
