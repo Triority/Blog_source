@@ -74,8 +74,146 @@ excerpt: 神经网络入门笔记
 import numpy as np
 ```
 ### 正向传播函数
+#### 函数代码
+```
+def affine_forward(x, w, b):   
+    out = None                       # 初始化返回值为None
+    # 输入参数处理
+    n = x.shape[0]                   # 获取输入参数X的形状
+    x_row = x.reshape(n, -1)         # (N,D)
+    # 矩阵的线性运算
+    out = np.dot(x_row, w) + b       # (N,M)
+    # 缓存值，反向传播时使用
+    cache = (x, w, b)
+    return out,cache
+```
+affine_forward函数，用于计算公式：`H=X*W1+b1`，输入参数就是公式中的矩阵X，W1和b1，对应到程序中就是x，w和b。
+#### 输入参数处理
+程序中的输入参数x，其形状可以是（n，d_1，...，d_k）.在我们这个例子中，输入参数x是：
+```
+[[2,1],
+[-1,1],
+[-1,-1],
+[1,-1]]
+```
+它是一个4行2列的二维数组，那么x的形状就是(4,2)，对应的参数n=4，d_1=2。这是我们用来做训练的坐标数据，分别对应了I、II、III、IV象限。
 
+在某些应用场景中，x的维度可能更高。比如对于一个20*20像素的4张灰度图，x的形状将是(4,20,20)，对应的参数就是n=4，d_1=20，d_2=20。n代表的是同时用于计算前向传播的数据有几组，后边的参数d_1~d_k代表的是数据本身的形状。
 
+为了方便计算，对于这种维度大于2的x来说，需要对其进行重新塑形，也就是将(4,20,20)的高维数组变化为(4,20*20)这样的二位数组。
+这样变换之后高维的向量被“拍扁”成一维向量（长度为20*20的一维向量），对应的W和b也都是一维的，既统一了参数形式，又不会影响数据的正常使用。
+
+`x.reshape(n,-1)`是对x重新塑形，即保留第0维，其他维度排列成1维。
+
+#### 矩阵的线性运算
+`.dot`就是numpy中的函数，可以实现x_row与w的矩阵相乘。x_row的形状为(N,D)，w的形状为(D,M)，得到的out的形状是(N,M)
+
+### 反向传播函数
+```
+def affine_backward(dout, cache): 
+  # 读取缓存
+  x, w, b = cache
+  # 返回值初始化
+  dx, dw, db = None, None, None
+  # 仿射变换反向传播：更新参数w的值-计算流向下一个节点的数值-更新参数b的值
+  dx = np.dot(dout, w.T)                       # (N,D)    
+  dx = np.reshape(dx, x.shape)                 # (N,d1,...,d_k)   
+  x_row = x.reshape(x.shape[0], -1)            # (N,D)    
+  dw = np.dot(x_row.T, dout)                   # (D,M)    
+  db = np.sum(dout, axis=0, keepdims=True)     # (1,M)    
+  return dx, dw, db
+```
+### 学习参数初始化
+```
+# 用于训练的坐标，对应的是I、II、III、IV象限
+X = np.array([[2,1], [-1,1], [-1,-1], [1,-1]])
+# 标签，对应的是I、II、III、IV象限
+t = np.array([0,1,2,3])
+# 生成随机数保持一致
+np.random.seed(1)
+
+# 输入参数的维度，此处为2，即每个坐标用两个数表示
+input_dim = X.shape[1]
+# 输出参数的维度，此处为4，即最终分为四个象限
+num_classes = t.shape[0]
+# 隐藏层维度，为可调参数
+hidden_dim = 50
+# 正则化强度，为可调参数
+reg = 0.001
+# 梯度下降的学习率，为可调参数
+epsilon = 0.001
+# 初始化W1，W2，b1，b2
+W1 = np.random.randn(input_dim, hidden_dim)     # (2,50)
+W2 = np.random.randn(hidden_dim, num_classes)   # (50,4)
+b1 = np.zeros((1, hidden_dim))                  # (1,50)
+b2 = np.zeros((1, num_classes))                 # (1,4)
+```
+对一些必要的参数进行了初始化。对于训练数据以及训练模型已经确定的网络来说，为了得到更好的训练效果需要调节的参数就是上述的隐藏层维度、正则化强度和梯度下降的学习率，以及下一节中的训练循环次数。
+
+### 训练与迭代
+```
+#训练的循环次数为10000
+for j in range(10000):
+
+  # 前向传播
+  # 第一层前向传播。调用了之前写的前向传播的函数，完成了第一层网络的矩阵线性代数运算
+  H,fc_cache = affine_forward(X,W1,b1)
+  # 激活函数。从0和H中选择较大的值赋给H，也就是实现了ReLU激活层函数。
+  H = np.maximum(0, H)
+  # 缓存第一层激活后的结果
+  relu_cache = H
+  # 第二层网络的矩阵线性代数运算
+  Y,cachey = affine_forward(H,W2,b2)     
+
+  # 输出的正规化：Softmax层计算。之前我们说过的Softmax的计算公式在实际应用中会存在一个问题，比如i的值等于1000时，e^1000在计算机中会变成无穷大的inf，后续计算将无法完成，所以程序中会对计算公式做一些修改。修改见下文说明。
+  probs = np.exp(Y - np.max(Y, axis=1, keepdims=True))    
+  probs /= np.sum(probs, axis=1, keepdims=True)
+
+  # 计算loss值
+  # 取了最终输出的维度，这个例子中为4，即四个象限
+  N = Y.shape[0]
+  # 打印各个数据的正确解标签对应的神经网络的输出
+  print(probs[np.arange(N), t])
+  # 先求了N维数据中的交叉熵损失，然后对这N个交叉熵损失求平均值，作为最终loss值
+  loss = -np.sum(np.log(probs[np.arange(N), t])) / N
+  print(loss)
+
+  # 反向传播
+  # 以Softmax输出结果作为反向输出的起点
+  dx = probs.copy()
+  # 反向传播到softmax前
+  dx[np.arange(N), t] -= 1
+  dx /= N
+  # 反向传播至第二层前
+  dh1, dW2, db2 = affine_backward(dx, cachey)
+  # 反向传播至激活层前
+  dh1[relu_cache <= 0] = 0
+  # 反向传播至第一层前
+  dX, dW1, db1 = affine_backward(dh1, fc_cache)
+
+  # 参数更新
+  dW2 += reg * W2
+  dW1 += reg * W1
+  W2 += -epsilon * dW2
+  b2 += -epsilon * db2
+  W1 += -epsilon * dW1
+  b1 += -epsilon * db1
+```
+修改说明：
+原公式为![](v2-3ad93ae576918ff385485dab6a2e6b87_1440w.png)
+在指数上减去常数C不影响最终结果，而这个常数C通常取i中的最大值。
+![](v2-7e7f127681085bfd26ae59511ab2c8fd_1440w.png)
+第一句probs = np.exp(Y - np.max(Y, axis=1, keepdims=True)) 就是求输出各个行的指数值，举个例子，Y的值如果是：
+```
+[[-4,17,20,-4],
+[10,-2,5,3],
+[-5,3,4,10],
+[-5,5,5,2]]
+```
+np.max(Y, axis=1, keepdims=True)计算得到的是`[[20],[10],[10],[5]]`，后边括号里的参数axis代表以竖轴为基准 ，在同行中取值； keepdims=True代表保持矩阵的二维特性。
+所以`np.exp(Y - np.max(Y, axis=1, keepdims=True))`代表：Y矩阵中每个值减掉改行最大值后再取对数。
+
+这段程序是网络训练的核心。
 # 参考资料
 https://zhuanlan.zhihu.com/p/65472471
 https://zhuanlan.zhihu.com/p/67682601
