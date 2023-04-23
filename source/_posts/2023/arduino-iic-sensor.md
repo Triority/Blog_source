@@ -97,10 +97,48 @@ void loop() {
 
 ```
 ## 使用arduino的pid库计算电机pwm输出
+#### 初始化
+```
+#include <PID_v1.h>
+PID myPID(&Input, &Output, &Setpoint, Kp, Ki, Kd, Direction)
 ```
 
-```
+> `Direction`参数：`DIRECT` 或 `REVERSE`，指的是当输入与目标值出现偏差时，向哪个方向控制
 
+#### pid对象方法：
+```
+//设置输出范围
+myPID.SetOutputLimits(min, max)
+//执行计算(循环执行)
+myPID.Compute()
+//启用pid控制
+myPID.SetMode(AUTOMATIC);
+//动态调参
+myPID.SetTunings(Kp, Ki, Kd);
+//采样时间，默认采样时间为200ms，单位ms
+myPID.SetSampleTime()
+//输出参数
+myPID.GetKp()
+myPID.GetKi()
+myPID.GetKd()
+myPID.GetMode()
+myPID.GetDirection()
+```
+#### pid控制代码
+```
+#include <PID_v1.h>
+double DegGoal = 0.0, DegIn, DegOut;
+double Degkp = 20.0,Degki = 0.5,Degkd = 1.0;
+PID DegPID(&DegIn, &DegOut, &DegGoal, Degkp, Degki, Degkd, DIRECT);
+DegPID.SetOutputLimits(-127, 127);
+DegPID.SetSampleTime(100);
+DegPID.SetMode(AUTOMATIC);
+while (true){
+  mpu6050.update();
+  DegIn = mpu6050.getAngleY();
+  DegPID.Compute();
+}
+```
 ## 同轴麦轮速度分量计算(当然做个已经用不到了)
 
 ![大半夜乱涂乱画](photo_2023-02-26_06-19-33.jpg)
