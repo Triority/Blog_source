@@ -5,13 +5,11 @@ tags:
 - python
 - opencv
 - 神经网络
-- root
 excerpt: 改进了之前的自动标注算法，增加一些自定义功能使其适应更多情况
 index_img: /img/auto-marking.png
 categories: 
 - [计算机, 源码分享]
 - 值得一提的文章
-permalink: root/图片数据集自动生成与标注算法/
 ---
 ## 前言
 之前写过一篇文章，讲的是自动标注，今天对这个程序做了一些改进，使其适应更多情况，并且重写了注释和部分函数，增加一些自定义功能

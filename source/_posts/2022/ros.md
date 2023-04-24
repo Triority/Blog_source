@@ -6,12 +6,10 @@ tags:
 - linux
 - python
 - ROS
-- root
 categories: 
 - [计算机, 知识整理]
 index_img: /img/ros.png
 excerpt: ros学习知识整理和过程记录
-permalink: root/ros学习笔记/
 ---
 
 ## 工作空间和功能包

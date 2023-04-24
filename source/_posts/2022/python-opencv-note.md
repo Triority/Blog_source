@@ -11,8 +11,6 @@ tags:
 - python
 - opencv
 - 笔记
-- root
-permalink: root/python-opencv学习笔记/
 ---
 ## 基本方法
 #### 读取图片

@@ -1,7 +1,6 @@
 ---
 title: ros-nav
 tags:
-  - root
   - ROS
   - python
   - linux
@@ -11,7 +10,6 @@ index_img: /img/ros.png
 categories:
 - [计算机, 知识整理]
 notshow: false
-permalink: root/ros-nav/
 date: 2023-02-21 23:30:49
 ---
 # 前言
