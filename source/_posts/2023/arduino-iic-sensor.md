@@ -146,7 +146,174 @@ while (true){
 其中x和y为平移速度，w为旋转角速度，d和D为轮子与中心距离。
 PID平衡控制的值直接加上去就好。
 
-### PID
+## PID
 ![PID流程图](7528d75d2ff7922206c42b53b15c26e.png)
 
 使用速度和角度的串级PID控制。
+
+## 直流电机两轮自平衡小车源码
+写了串口调参，由于电机没有编码器使用电机pwm代替速度输入。直立问题不大，不过还是很抖，又不是不能用hhh更多改进等用无刷电机foc控制的
+```
+#include <MPU6050_tockn.h>
+#include <Wire.h>
+#include <WiFi.h>
+#include <PID_v1.h>
+
+const char *ssid = "BJZQ";
+const char *password = "12345678";
+MPU6050 mpu6050(Wire);
+WiFiServer server(80);
+
+double OutPutA, OutPutB;
+//角度环
+double DegGoal = 1.5, DegIn, DegOut, Degkp = 50.0,Degki = 1.0,Degkd = 0.5;
+PID DegPID(&DegIn, &DegOut, &DegGoal, Degkp, Degki, Degkd, DIRECT);
+//转向控制
+double DirIn, DirOut, DirGoal = 0.0, Dirkp = 3.0, Dirki = 0.0, Dirkd = 0.3;
+PID DirPID(&DirIn, &DirOut, &DirGoal, Dirkp, Dirki, Dirkd, DIRECT);
+//速度环
+double SpdIn, SpdOut, SpdGoal = 0.0, Spdkp = 0.0001, Spdki = 0.0001, Spdkd = 0.00005;
+PID SpdPID(&SpdIn, &SpdOut, &SpdGoal, Spdkp, Spdki, Spdkd, DIRECT);
+
+void setup() {
+  pinMode(27, OUTPUT);
+  pinMode(14, OUTPUT);
+  pinMode(32, OUTPUT);
+  pinMode(33, OUTPUT);
+  pinMode(25, OUTPUT);
+  pinMode(26, OUTPUT);
+  digitalWrite(32, HIGH);
+  digitalWrite(33, HIGH);
+  digitalWrite(25, HIGH);
+  digitalWrite(26, HIGH);
+  ledcSetup(8, 100, 8);
+  ledcAttachPin(27, 8);
+  ledcWrite(8, 120);
+  ledcSetup(6, 100, 8);
+  ledcAttachPin(14, 6);
+  ledcWrite(6, 120);
+  Serial.begin(115200);
+  Wire.begin();
+  mpu6050.begin();
+  mpu6050.calcGyroOffsets(true);
+  xTaskCreatePinnedToCore(Task1code, "pid_output", 10000, NULL, 1, NULL,  0);
+}
+
+void Task1code( void * parameter) {
+
+  DirPID.SetOutputLimits(-63, 63);
+  DirPID.SetSampleTime(20);
+  DirPID.SetMode(AUTOMATIC);
+
+  DegPID.SetOutputLimits(-127, 127);
+  DegPID.SetSampleTime(20);
+  DegPID.SetMode(AUTOMATIC);
+
+  SpdPID.SetOutputLimits(-1, 1);
+  SpdPID.SetSampleTime(15);
+  SpdPID.SetMode(AUTOMATIC);
+  
+  while (true){
+    mpu6050.update();
+    DegIn = mpu6050.getAngleY();
+    DirIn = mpu6050.getAngleZ();
+    DegPID.Compute();
+    DirPID.Compute();
+    if (DegOut<100&&DegOut>-100){
+      DegGoal = DegGoal - SpdOut;
+      SpdIn = DegOut;
+      SpdPID.Compute();
+    }
+    OutPutA = DegOut - DirOut;
+    OutPutB = DegOut + DirOut;
+    if (OutPutA>=0){
+      digitalWrite(32, LOW);
+      digitalWrite(33, HIGH);
+      ledcWrite(6, OutPutA);
+    }else{
+      digitalWrite(32, HIGH);
+      digitalWrite(33, LOW);
+      ledcWrite(6, -OutPutA);
+    }
+    if (OutPutB>=0){
+      digitalWrite(25, LOW);
+      digitalWrite(26, HIGH);
+      ledcWrite(8, OutPutB);
+    }else{
+      digitalWrite(25, HIGH);
+      digitalWrite(26, LOW);
+      ledcWrite(8, -OutPutB);
+    }
+  }
+}
+
+
+void loop() {
+  mpu6050.update();
+  Serial.print(mpu6050.getAngleX());
+  Serial.print(',');
+  Serial.print(mpu6050.getAngleY());
+  Serial.print(',');
+  Serial.print(mpu6050.getAngleZ());
+  Serial.print(',');
+  Serial.print(DegOut);
+  Serial.print(',');
+  Serial.print(DegGoal);
+  Serial.print(',');
+  Serial.print(Degkp);
+  Serial.print(',');
+  Serial.print(Degki);
+  Serial.print(',');
+  Serial.print(Degkd);
+  Serial.print('\n');
+  if (Serial.available()){
+    char c = Serial.read();
+    if (c=='p'){
+      String readBuff;
+      unsigned long start_time = millis();
+      while(true){
+        char c = Serial.read();
+        if (c=='\n'||millis()-start_time>100)break;
+        readBuff += c;
+      }
+      Degkp = readBuff.toDouble();
+      readBuff = "";
+    }
+    if (c=='i'){
+      String readBuff;
+      unsigned long start_time = millis();
+      while(true){
+        char c = Serial.read();
+        if (c=='\n'||millis()-start_time>100)break;
+        readBuff += c;
+      }
+      Degki = readBuff.toDouble();
+      readBuff = "";
+    }
+    if (c=='d'){
+      String readBuff;
+      unsigned long start_time = millis();
+      while(true){
+        char c = Serial.read();
+        if (c=='\n'||millis()-start_time>100)break;
+        readBuff += c;
+      }
+      Degkd = readBuff.toDouble();
+      readBuff = "";
+    }
+    DegPID.SetTunings(Degkp,Degki,Degkd);
+    if (c=='D'){
+      String readBuff;
+      unsigned long start_time = millis();
+      while(true){
+        char c = Serial.read();
+        if (c=='\n'||millis()-start_time>100)break;
+        readBuff += c;
+      }
+      DirGoal = readBuff.toDouble();
+      readBuff = "";
+    }
+  }
+}
+
+```
