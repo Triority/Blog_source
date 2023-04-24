@@ -181,8 +181,9 @@ for j in range(10000):
   # 反向传播
   # 以Softmax输出结果作为反向输出的起点
   dx = probs.copy()
-  # 反向传播到softmax前
+  # 将Softmax的输出值赋给dx， 这里dx代表反向传播的主线值
   dx[np.arange(N), t] -= 1
+  # 反向传播到softmax前
   dx /= N
   # 反向传播至第二层前
   dh1, dW2, db2 = affine_backward(dx, cachey)
@@ -192,8 +193,10 @@ for j in range(10000):
   dX, dW1, db1 = affine_backward(dh1, fc_cache)
 
   # 参数更新
+  # 引入正则化惩罚项更新dW
   dW2 += reg * W2
   dW1 += reg * W1
+  # 引入学习率更新W和b
   W2 += -epsilon * dW2
   b2 += -epsilon * db2
   W1 += -epsilon * dW1
@@ -213,7 +216,25 @@ for j in range(10000):
 np.max(Y, axis=1, keepdims=True)计算得到的是`[[20],[10],[10],[5]]`，后边括号里的参数axis代表以竖轴为基准 ，在同行中取值； keepdims=True代表保持矩阵的二维特性。
 所以`np.exp(Y - np.max(Y, axis=1, keepdims=True))`代表：Y矩阵中每个值减掉改行最大值后再取对数。
 
-这段程序是网络训练的核心。
+### 验证
+```
+test = np.array([[2,2],[-2,2],[-2,-2],[2,-2]])
+#仿射
+H,fc_cache = affine_forward(test,W1,b1)
+# 激活
+H = np.maximum(0, H)
+relu_cache = H
+# 仿射
+Y,cachey = affine_forward(H,W2,b2)
+# Softmax
+probs = np.exp(Y - np.max(Y, axis=1, keepdims=True))    
+probs /= np.sum(probs, axis=1, keepdims=True)  # Softmax
+print(probs)
+for k in range(4):
+  print(test[k,:],"所在的象限为",np.argmax(probs[k,:])+1)
+```
+其实验证的方法和训练时的正向传播的过程基本一致，即第一层网络线性计算→激活→第二层网络线性计算→Softmax→得到分类结果.
+
 # 参考资料
 https://zhuanlan.zhihu.com/p/65472471
 https://zhuanlan.zhihu.com/p/67682601
