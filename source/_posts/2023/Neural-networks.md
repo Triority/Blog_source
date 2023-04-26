@@ -136,17 +136,17 @@ np.random.seed(1)
 input_dim = X.shape[1]
 # 输出参数的维度，此处为4，即最终分为四个象限
 num_classes = t.shape[0]
-# 隐藏层维度，为可调参数
+# 隐藏层维度，可调参数
 hidden_dim = 50
-# 正则化强度，为可调参数
+# 正则化强度，可调参数
 reg = 0.001
 # 梯度下降的学习率，为可调参数
 epsilon = 0.001
 # 初始化W1，W2，b1，b2
-W1 = np.random.randn(input_dim, hidden_dim)     # (2,50)
-W2 = np.random.randn(hidden_dim, num_classes)   # (50,4)
-b1 = np.zeros((1, hidden_dim))                  # (1,50)
-b2 = np.zeros((1, num_classes))                 # (1,4)
+W1 = np.random.randn(input_dim, hidden_dim) # 生成随机矩阵
+W2 = np.random.randn(hidden_dim, num_classes)
+b1 = np.zeros((1, hidden_dim))  # 生成以0填充的矩阵
+b2 = np.zeros((1, num_classes))
 ```
 对一些必要的参数进行了初始化。对于训练数据以及训练模型已经确定的网络来说，为了得到更好的训练效果需要调节的参数就是上述的隐藏层维度、正则化强度和梯度下降的学习率，以及下一节中的训练循环次数。
 
