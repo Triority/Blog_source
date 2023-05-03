@@ -359,6 +359,11 @@ cv2.imshow('name', dataset)
 if cv2.waitKey(0) == 27:
     cv2.destroyAllWindows()
 ```
+# 使用pytorch
+该说不说，前面写的都是原理解释，实际上写的很麻烦(而且很屎)，而使用pytorch可以极大简化细节。
+
+pytorch的安装就不说了，不过可以安装使用cuda的版本加速计算。
+
 
 # 参考资料
 https://zhuanlan.zhihu.com/p/65472471
