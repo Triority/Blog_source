@@ -31,18 +31,5 @@ HTTP及HTTPS协议(subdomain_host = frp.triority.cn)：
 + HTTP协议穿透(端口800)
 + HTTPS协议穿透(端口440)
 
-### <center> 图书馆
-**Triority`s Web Library：https://cr.triority.cn/s/MKcw**
-
-**备用链接：http://lib.triority.cn/**
-
-所有用户：
-+ 预览/下载平台书籍
-
-联系我获取会员用户：
-+ 注册用户的全部权限
-+ 上传分享书籍
-+ 建立书架分类书籍
-
 ### <center> jsdelivr反代
 **cdn.jsdelivr.net**近期因被注销访问稳定性受限，搭建此反代服务器以提高访问网站稳定性：**jsdelivr.triority.cn**
