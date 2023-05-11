@@ -119,6 +119,7 @@ typedef struct
 + `GPIOSpeed_TypeDef GPIO_Speed`：GPIO的速度配置，此项的取值参见stm32f10x_gpio.h头文件GPIOSpeed_TypeDef枚举的定义，其中对应3个速度：10MHz、2MHz、50MHz；
 
 + `GPIOMode_TypeDef GPIO_Mode`：为GPIO的工作模式配置，其取值参见`stm32f10x_gpio`头文件`GPIOMode_TypeDef`枚举的定义，即GPIO的8种工作模式
+
 ##### 使能GPIO的时钟
 不用外设的时候，如IO口、ADC、定时器等等，都是禁止时钟的，以达到节能的目的，只有要用到的外设，才开启它的时钟
 ```
