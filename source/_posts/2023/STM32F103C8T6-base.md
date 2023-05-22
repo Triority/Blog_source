@@ -88,109 +88,80 @@ http://dan.drown.org/stm32duino/package_STM32duino_index.json
 
 ## 编程
 ### GPIO操作(点灯)
-#### GPIO模式
-GPI0分为八种模式（输入4种+输出4种）。八种模式分别为：
-+ 输入浮空 `GPIO_Mode_IN_FLOATING`
-+ 输入上拉 `GPIO_Mode_IPU`
-+ 输入下拉 `GPIO_Mode_IPD`
-+ 模拟输入 `GPIO_Mode_AIN`
-+ 具有上拉或下拉功能的开漏输出 `GPIO_Mode_Out_OD`
-+ 具有上拉或下拉功能的推挽输出 `GPIO_Mode_Out_PP`
-+ 具有上拉或下拉功能的复用功能推挽 `GPIO_Mode_AF_PP`
-+ 具有上拉或下拉功能的复用功能开漏 `GPIO_Mode_AF_OD`
-
 #### GPIO配置
-在GPIO输出之前要先对要操作的GPIO进行配置：
-##### 定义GPIO的初始化结构体类型
-```
-GPIO_InitTypeDef GPIO_InitStructure;
-```
-此结构体的定义是在`stm32f10x_gpio.h`文件中，其中包括3个成员
-```
-typedef struct
-{
-  uint16_t GPIO_Pin;       
-  GPIOSpeed_TypeDef GPIO_Speed;  
-  GPIOMode_TypeDef GPIO_Mode;   
-}GPIO_InitTypeDef;
-```
-+ `uint16_t GPIO_Pin`：来指定GPIO的哪个或哪些引脚，取值参见`stm32f10x_gpio.h`头文件的宏定义。
 
-+ `GPIOSpeed_TypeDef GPIO_Speed`：GPIO的速度配置，此项的取值参见stm32f10x_gpio.h头文件GPIOSpeed_TypeDef枚举的定义，其中对应3个速度：10MHz、2MHz、50MHz；
+在GPIO输出之前要先对要操作的GPIO进行配置，下面这个程序可以连续将PC13这个引脚拉低拉高:
 
-+ `GPIOMode_TypeDef GPIO_Mode`：为GPIO的工作模式配置，其取值参见`stm32f10x_gpio`头文件`GPIOMode_TypeDef`枚举的定义，即GPIO的8种工作模式
-
-##### 使能GPIO的时钟
-不用外设的时候，如IO口、ADC、定时器等等，都是禁止时钟的，以达到节能的目的，只有要用到的外设，才开启它的时钟
-```
-void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
-```
-此函数是在`stm32f10x_rcc.c`文件中定义的。其中第一个参数指要打开哪一组GPIO的时钟，取值参见`stm32f10x_rcc.h`文件中的宏定义，第二个参数为打开或关闭使能，取值参见`stm32f10x.h`文件中的定义，其中`ENABLE`代表开启使能，`DISABLE`代表关闭使能。
-
-##### 配置GPIO的引脚
-这里包括引脚、速度和工作模式，设置`GPIO_InitTypeDef`结构体三个成员的值
-
-##### 初始化GPIO(初始化相应的寄存器)
-```
-void GPIO_Init(GPIO_TypeDef* GPIOx, GPIO_InitTypeDef*  GPIO_InitStruct);
-```
-函数配置GPIO，此函数是在`stm32f10x_gpio.c`文件中定义的，其中第一个参数代表要配置哪组GPIO，取值参见`stm32f10x.h`文件中的定义，第二个参数是第1步定义的GPIO的初始化类型结构体
-##### GPIO电平输出
-官方让GPIO输出高低电平的函数：
-```
-GPIO_SetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin);
-```
-函数就是置位GPIO，即让相应的GPIO输出高电平
-```
-void GPIO_ResetBits(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
-```
-##### 综上
-```
-// 定义结构体变量
-GPIO_InitTypeDef GPIO_InitStructure;
-//打开PB口时钟
-RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-//打开PE口时钟
-RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOE, ENABLE);
-//PB5,PE5引脚设置
-GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-//设置输出速率50MHz
-GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-//推挽输出模式
-GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-//初始化外设GPIOx寄存器
-GPIO_Init(GPIOB, &GPIO_InitStructure);
-GPIO_Init(GPIOE, &GPIO_InitStructure);
-```
-##### 程序编写
 ```
 # include "stm32f10x.h"
-
-#define LED3_OFF GPIO_SetBits(GPIOB,GPIO_Pin_5)
-#define LED3_ON GPIO_ResetBits(GPIOB,GPIO_Pin_5)
-
 void LED_Init(void){
-    GPIO_InitTypeDef GPIO_InitStructure;  // 定义结构体变量
-    //打开PB口时钟
-    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
-    //PB5引脚设置
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5;
-    //端口速度
+    //A
+    GPIO_InitTypeDef GPIO_InitStructure;
+    //B
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+    //C
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    //端口模式，此为输出推挽模式
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
-    //初始化对应的端口
-    GPIO_Init(GPIOB, &GPIO_InitStructure);
+    //D
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
 }
+
 int main(){
     LED_Init();
     while(1){
-        LED3_ON;
+      //E
+      GPIO_ResetBits(GPIOC,GPIO_Pin_13);
+			GPIO_SetBits(GPIOC,GPIO_Pin_13);
     }
 }
+```
+下面来解释一下这个程序:
+
+> A:定义GPIO的初始化类型结构体
 
 ```
-#### 闪烁LED
+GPIO_InitTypeDef GPIO_InitStructure;
+```
+此结构体的定义是在`stm32f10x_gpio.h`文件中，其中包括3个成员：
++ `uint16_t GPIO_Pin;`来指定GPIO的哪个或哪些引脚
++ `GPIOSpeed_TypeDef GPIO_Speed;`GPIO的速度配置,对应3个速度：10MHz、2MHz、50MHz
++ `GPIOMode_TypeDef GPIO_Mode;`为GPIO的工作模式配置，即GPIO的8种工作模式。
+  + 输入浮空 `GPIO_Mode_IN_FLOATING`
+  + 输入上拉 `GPIO_Mode_IPU`
+  + 输入下拉 `GPIO_Mode_IPD`
+  + 模拟输入 `GPIO_Mode_AIN`
+  + 具有上拉或下拉功能的开漏输出 `GPIO_Mode_Out_OD`
+  + 具有上拉或下拉功能的推挽输出 `GPIO_Mode_Out_PP`
+  + 具有上拉或下拉功能的复用功能推挽 `GPIO_Mode_AF_PP`
+  + 具有上拉或下拉功能的复用功能开漏 `GPIO_Mode_AF_OD`
+
+> B:使能GPIO时钟
+
+```
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+```
+此函数是在`stm32f10x_rcc.c`文件中定义的。其中第一个参数指要打开哪一组GPIO的时钟，取值参见`stm32f10x_rcc.h`文件中的宏定义，第二个参数为打开或关闭使能，取值参见`stm32f10x.h`文件中的定义，其中`ENABLE`代表开启使能，`DISABLE`代表关闭使能。
+```
+void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
+```
+> C:设置GPIO_InitTypeDef结构体三个成员的值
+```
+GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+```
+> D:初始化GPIO
+```
+GPIO_Init(GPIOC, &GPIO_InitStructure);
+```
+> E:GPIO电平输出
+
+函数就是置位GPIO，即让相应的GPIO输出高电平
+```
+GPIO_ResetBits(GPIOC,GPIO_Pin_13);
+GPIO_SetBits(GPIOC,GPIO_Pin_13);
+```
 
 
 # 参考资料
