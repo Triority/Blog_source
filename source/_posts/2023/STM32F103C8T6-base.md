@@ -87,9 +87,8 @@ http://dan.drown.org/stm32duino/package_STM32duino_index.json
 刚开始学还用不到调试功能，挖大坑，以后来填
 
 ## 编程
-### GPIO操作(点灯)
-#### GPIO配置
-
+### GPIO操作(各种点灯)
+#### 点亮
 在GPIO输出之前要先对要操作的GPIO进行配置，下面这个程序可以连续将PC13这个引脚拉低拉高:
 
 ```
@@ -112,7 +111,7 @@ int main(){
     while(1){
       //E
       GPIO_ResetBits(GPIOC,GPIO_Pin_13);
-			GPIO_SetBits(GPIOC,GPIO_Pin_13);
+      GPIO_SetBits(GPIOC,GPIO_Pin_13);
     }
 }
 ```
@@ -163,6 +162,17 @@ GPIO_ResetBits(GPIOC,GPIO_Pin_13);
 GPIO_SetBits(GPIOC,GPIO_Pin_13);
 ```
 
+很多网上找到的程序也会这样做，在文件开头写
+```
+#define LED3_OFF GPIO_SetBits(GPIOB,GPIO_Pin_5)
+#define LED3_ON GPIO_ResetBits(GPIOB,GPIO_Pin_5)
+```
+然后在调用时候就可以直接写
+```
+LED3_ON;
+LED3_OFF;
+```
+#### PWM信号输出
 
 # 参考资料
 https://blog.csdn.net/xiaoshihd/article/details/110039281
