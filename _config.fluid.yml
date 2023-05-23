@@ -955,6 +955,12 @@ links:
       link: "http://qwqpap.xyz",
       avatar: "http://qwqpap.xyz/wp-content/uploads/2022/12/cropped-illust_81099592_20220908_100803-1.jpg"
     }
+    - {
+      title: "我的社团网站",
+      intro: "北矿3D打印社",
+      link: "https://cumtb.club",
+      avatar: "https://cumtb.club"
+    }
 
   # 当成员头像加载失败时，替换为指定图片
   # When the member avatar fails to load, replace the specified image
