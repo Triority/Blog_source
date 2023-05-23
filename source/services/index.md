@@ -16,6 +16,8 @@ layout: true
 + 离线下载
 + 外链分享(图床视频床)
 
+此外顺便做了一个小[图书分享页](https://cr.triority.cn/s/zPtz)
+
 ### <center> Frps内网穿透
 **Frp文档：https://gofrp.org/docs/**
 
