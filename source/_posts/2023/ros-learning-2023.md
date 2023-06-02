@@ -12,9 +12,11 @@ notshow: false
 date: 2023-02-21 16:37:19
 excerpt: 重写一篇笔记
 ---
-## 前言
+# 前言
 之前写过一篇关于[ROS学习笔记](https://triority.cn/root/ros学习笔记/)，那时候刚开始学感觉不适合现在使用所以重写一篇。
 
+这篇文章缩减了一部分不需要的内容，并且加入了实操应用的记录
+# 基础知识
 ## 工作空间和功能包的基本操作
 ### 创建工作空间目录和代码空间
 ```
@@ -433,3 +435,118 @@ rosbag paly <复现文件名>
 计算图可视化工具`rqt_graph`
 数据绘图工具`rqt_plot`
 图像渲染工具`rqt_image_view`
+
+# 实际应用记录
+这部分记录2023年的人工智能竞赛学习开发过程
+## 前置任务
+新建工作空间这部分就不说了，首先按照资料给出的内容测试一下车载传感器。
+
+> IMU
+
+首先查看一下IMU的地址
+```
+ros-autocar@ros-autocar:~$ ls /dev/ttyUSB*
+/dev/ttyUSB1  /dev/ttyUSB2  /dev/ttyUSB3
+ros-autocar@ros-autocar:~$ ls /dev/ttyUSB*
+/dev/ttyUSB0  /dev/ttyUSB1  /dev/ttyUSB2  /dev/ttyUSB3
+```
+有四个设备，拔掉imu之后再次查看少了那个就知道imu的地址了。给IMU的设备添加读写权限：
+```
+sudo chmod  +777 /dev/ttyUSB0
+```
+然后使用资料给的命令就可以读取imu的数值了
+```
+roslaunch imu_launch  imu_msg.launch
+```
+```
+header: 
+  seq: 18691
+  stamp: 
+    secs: 1685621438
+    nsecs: 130887727
+  frame_id: "base_link"
+orientation: 
+  x: 0.03581126779317856
+  y: -0.006689701694995165
+  z: -0.002406603889539838
+  w: 0.999333381652832
+orientation_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+angular_velocity: 
+  x: 5.624821674786508e-05
+  y: -0.0020166519167128206
+  z: -0.001579628805375099
+angular_velocity_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+linear_acceleration: 
+  x: 0.19336825460195542
+  y: 0.6750088781118393
+  z: 9.727661895751954
+linear_acceleration_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+---
+```
+
+> 激光雷达
+
+资料给了驱动雷达的功能包，启动雷达的launch命令：
+这个launch文件有一个地方需要改动就是雷达串口设备号，我这一次改成是`/dev/ttyUSB2`如果启动文件之后雷达不转可以考虑是这个问题
+```
+roslaunch ls01b_v2 ls01b_v2.launch
+```
+然后在另外一个终端查看雷达数据：应该会看到满屏的数字hhh都是雷达扫描到的距离信息
+```
+rostopic echo /scan
+```
+
+> 编码器
+
+同样，使用资料的驱动功能包：
+
+```
+roscore
+rosrun encoder_driver Encoder_vel.py
+rostopic echo /encoder
+```
+输出：
+```
+header: 
+  seq: 11316
+  stamp: 
+    secs: 1685623435
+    nsecs: 710257768
+  frame_id: "odom"
+child_frame_id: "base_footprint"
+pose: 
+  pose: 
+    position: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    orientation: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+      w: 0.0
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+twist: 
+  twist: 
+    linear: 
+      x: 0.05552978515624999
+      y: 0.0
+      z: 0.0
+    angular: 
+      x: 0.0
+      y: 0.0
+      z: 0.0
+  covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+---
+```
+其中`x: 0.05552978515624999`表示前进速度
+
+> 整合及运动控制
+
+```
+roslaunch racecar Run_car.launch 
+rosrun racecar racecar_teleop.py
+rviz rviz
+```
+第一个启动了上述传感器的程序，第二个用于使用键盘发布信息控制底盘，最后是rviz用于显示雷达等信息。
+
