@@ -141,8 +141,8 @@ feed:
   limit: 20
 
 lazyload:
-  enable: false
-  onlypost: true
+  enable: true
+  onlypost: false
   loadingImg: /img/loading.gif
 
 # Ice Kano Plus_in
