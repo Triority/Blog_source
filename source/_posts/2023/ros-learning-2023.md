@@ -431,14 +431,21 @@ rosbag record -a -O <压缩数据包名>
 rosbag paly <复现文件名>
 ```
 ##### rqt可视化
+显示tf坐标变换关系：
+```
+rosrun rqt_tf_tree rqt_tf_tree
+```
+
 日志输出工具`rqt_console`
 计算图可视化工具`rqt_graph`
 数据绘图工具`rqt_plot`
 图像渲染工具`rqt_image_view`
 
+
+
 # 实际应用记录
 这部分记录2023年的人工智能竞赛学习开发过程
-## 前置任务
+## 前置任务[获取传感器信息]
 新建工作空间这部分就不说了，首先按照资料给出的内容测试一下车载传感器。
 
 > IMU
@@ -550,4 +557,70 @@ rviz rviz
 ```
 第一个启动了上述传感器的程序，第二个用于使用键盘发布信息控制底盘，最后是rviz用于显示雷达等信息。
 
-其中雷达需要设置坐标系才能显示，雷达发布信息的坐标系是
+其中雷达需要设置坐标变换，雷达的坐标是相对于底盘坐标定义的，rviz默认使用map坐标系显示，需要定义底盘坐标系和map坐标系的相对关系。
+```
+<node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
+
+```
+其实临时也可以把rviz的frame改为雷达坐标系解决。
+
+## 激光里程计：rf2o_laser_odometry
+这个功能包可以根据激光雷达两帧之间的位置差距计算车子实际走的距离。
+
+[github链接](https://github.com/MAPIRlab/rf2o_laser_odometry)
+
+下载的功能包放在src文件夹内，需要做一些配置和修改一些bug：
+
+首先是修改launch文件的话题节点等名称，这里我是改成这样
+
+`rf2o_laser_odometry.launch`
+```
+<launch>
+ 
+  <node pkg="rf2o_laser_odometry" type="rf2o_laser_odometry_node" name="rf2o_laser_odometry" output="screen">
+    <param name="laser_scan_topic" value="/scan"/>                         # 雷达发布数据的话题
+    <param name="odom_topic" value="/odom" />                         # topic where tu publish the odometry estimations
+    <param name="publish_tf" value="true" />                              # wheter or not to publish the tf::transform (base->odom)
+    <param name="base_frame_id" value="/base_footprint"/>                       # frame_id (tf) of the mobile robot base. A tf transform      from the laser_frame to the base_frame is mandatory
+    <param name="odom_frame_id" value="/odom" />                           # frame_id (tf) to publish the odometry estimations
+    <param name="init_pose_from_topic" value="" />  # (Odom topic) Leave empty to start at point (0,0)
+    <param name="freq" value="10.0"/>                                       # Execution frequency.
+    <param name="verbose" value="true"/>                                  # verbose
+  </node>
+</launch>
+```
+
+接下来改一些bug：修改`src/CLaserOdometry2D.cpp`
+
+292-298行修改:
+```
+//Inner pixels
+if ((u>1)&&(u<cols_i-2))
+{
+if (dcenter > 0.f)
+if (std::isfinite(dcenter) && dcenter > 0.f)
+{
+float sum = 0.f;
+float weight = 0.f;
+
+```
+316-322行修改:
+```
+//Boundary
+else
+{
+if (dcenter > 0.f)
+if (std::isfinite(dcenter) && dcenter > 0.f)
+{
+float sum = 0.f;
+float weight = 0.f;
+
+```
+
+打开底盘lanunch文件，并启动rf2o：
+```
+roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch 
+```
+就可以看见终端输出的里程数据。这个方法得到的数据有些缺陷，就是在车子发生旋转时候是不准确的，因为雷达和车子都在旋转相对位置不准确。
+
+## 激光雷达建图：gmapping
