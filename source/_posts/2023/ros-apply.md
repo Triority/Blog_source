@@ -157,14 +157,14 @@ rviz rviz
 <launch>
  
   <node pkg="rf2o_laser_odometry" type="rf2o_laser_odometry_node" name="rf2o_laser_odometry" output="screen">
-    <param name="laser_scan_topic" value="/scan"/>                         # 雷达发布数据的话题
-    <param name="odom_topic" value="/odom" />                         # topic where tu publish the odometry estimations
-    <param name="publish_tf" value="true" />                              # wheter or not to publish the tf::transform (base->odom)
-    <param name="base_frame_id" value="/base_footprint"/>                       # frame_id (tf) of the mobile robot base. A tf transform      from the laser_frame to the base_frame is mandatory
-    <param name="odom_frame_id" value="/odom" />                           # frame_id (tf) to publish the odometry estimations
-    <param name="init_pose_from_topic" value="" />  # (Odom topic) Leave empty to start at point (0,0)
-    <param name="freq" value="10.0"/>                                       # Execution frequency.
-    <param name="verbose" value="true"/>                                  # verbose
+    <param name="laser_scan_topic" value="/scan"/>        # 雷达发布数据的话题
+    <param name="odom_topic" value="/odom" />             # 发布测程估计的topic
+    <param name="publish_tf" value="true" />              # 是否发布tf变换(base->odom)
+    <param name="base_frame_id" value="/base_footprint"/> # 底盘的frame_id (tf) 必须要雷达laser_frame到base_frame的tf变换
+    <param name="odom_frame_id" value="/odom" />          # 发布测程估计的frame_id (tf) 
+    <param name="init_pose_from_topic" value="" />        # Odom 话题初始点，留空从(0,0)开始
+    <param name="freq" value="10.0"/>                     # 执行频率
+    <param name="verbose" value="true"/>                  # verbose
   </node>
 </launch>
 ```
@@ -205,6 +205,7 @@ roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch
 ## 传感器数据融合：robot localization/ekf
 
 ## 激光雷达建图：gmapping/cartographer
+[gmapping的github](https://github.com/ros-perception/slam_gmapping)
 
 ## 重定位：amcl
 
