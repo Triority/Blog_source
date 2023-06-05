@@ -133,7 +133,9 @@ roslaunch racecar Run_car.launch
 rosrun racecar racecar_teleop.py
 rviz rviz
 ```
-第一个启动了上述传感器的程序，第二个用于使用键盘发布信息控制底盘，最后是rviz用于显示雷达等信息。
+第一个启动了上述传感器的程序：
+![](微信截图_20230605212637.png)
+第二个用于使用键盘发布信息控制底盘，最后是rviz用于显示雷达等信息。
 
 其中雷达需要设置坐标变换，雷达的坐标是相对于底盘坐标定义的，rviz默认使用map坐标系显示，需要定义底盘坐标系和map坐标系的相对关系。
 ```
@@ -202,12 +204,90 @@ roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch
 ```
 就可以看见终端输出的里程数据。这个方法得到的数据有些缺陷，就是在车子发生旋转时候是不准确的，因为雷达和车子都在旋转相对位置不准确。
 
+![](rf2o.png)
+
+还有一个bug，如果你把车子往前推，结果rf2o输出为负方向，那么需要改一下代码：
+`CLaserOdometry2D.cpp`：
+```
+Line 923:
+  pose_aux_2D.translation()(0) = -acu_trans(0,2);
+ pose_aux_2D.translation()(1) = -acu_trans(1,2);
+Line 956:
+ lin_speed = -acu_trans(0,2) / time_inc_sec;
+```
+
 ## 传感器数据融合：robot localization/ekf
+
+
 
 ## 激光雷达建图：gmapping/cartographer
 [gmapping的github](https://github.com/ros-perception/slam_gmapping)
 
+gmapping安装：
+```
+sudo apt-get install ros-noetic-slam-gmapping
+```
+编写一个新的launch文件：
+```
+<launch>
+    <arg name="scan_topic" default="scan" />                  <!-- 发布scan名称 -->
+    <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" clear_params="true">
+        <param name="base_frame" value="base_link"/>     <!-- 基座标系名称 -->
+        <param name="odom_frame" value="odom"/>               <!-- 里程计坐标系名称 -->
+        <param name="map_update_interval" value="4.0"/>
+        <!-- Set maxUrange < actual maximum range of the Laser -->
+        <param name="maxRange" value="5.0"/>
+        <param name="maxUrange" value="4.5"/>
+        <param name="sigma" value="0.05"/>
+        <param name="kernelSize" value="1"/>
+        <param name="lstep" value="0.05"/>
+        <param name="astep" value="0.05"/>
+        <param name="iterations" value="5"/>
+        <param name="lsigma" value="0.075"/>
+        <param name="ogain" value="3.0"/>
+        <param name="lskip" value="0"/>
+        <param name="srr" value="0.01"/>
+        <param name="srt" value="0.02"/>
+        <param name="str" value="0.01"/>
+        <param name="stt" value="0.02"/>
+        <param name="linearUpdate" value="0.5"/>
+        <param name="angularUpdate" value="0.436"/>
+        <param name="temporalUpdate" value="-1.0"/>
+        <param name="resampleThreshold" value="0.5"/>
+        <param name="particles" value="80"/>
+        <param name="xmin" value="-1.0"/>
+        <param name="ymin" value="-1.0"/>
+        <param name="xmax" value="1.0"/>
+        <param name="ymax" value="1.0"/>
+        <param name="delta" value="0.05"/>
+        <param name="llsamplerange" value="0.01"/>
+        <param name="llsamplestep" value="0.01"/>
+        <param name="lasamplerange" value="0.005"/>
+        <param name="lasamplestep" value="0.005"/>
+        <remap from="scan" to="$(arg scan_topic)"/>
+    </node>
+</launch>
+```
+启动launch文件：
+```
+roslaunch test gmapping.launch
+```
+![](gmapping.png)
+
+建图后，在想要保存的路径打开终端并输入使用mapserver保存命令：
+```
+ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
+[ INFO] [1685971241.710265601]: Waiting for the map
+[ INFO] [1685971241.931482169]: Received a 480 X 544 map @ 0.050 m/pix
+[ INFO] [1685971241.931548164]: Writing map occupancy data to 233.pgm
+[ INFO] [1685971241.942866551]: Writing map occupancy data to 233.yaml
+[ INFO] [1685971241.943307197]: Done
+```
+`233`为保存地图的文件名
+
+
 ## 重定位：amcl
+与rf2o的雷达两帧之间比较不同，amcl是雷达数据和地图之间比较计算里程计误差。
 
 ## 路径规划：全局/局部
 

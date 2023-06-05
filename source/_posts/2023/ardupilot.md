@@ -16,6 +16,9 @@ excerpt: 晚上心血来潮随手搓个四轴玩
 [地面站下载](https://cr.triority.cn/f/J0PsK/MP1.3.28.msi)
 [飞控固件下载](https://cr.triority.cn/f/p5KIk/ardupilot.rar)
 
+# 硬件连接
+![](20190107165026890.jpg)
+
 # 机械结构
 ## 电机和桨叶方向
 ![](f9e979ae8c0ee89fe689f15214c04bd.jpg)
@@ -27,5 +30,5 @@ excerpt: 晚上心血来潮随手搓个四轴玩
 
 ![目前装配体长这样](QQ截图20230605143807.png)
 
-![solidworks文件下载链接](apm2.8机架.rar)
+[solidworks文件下载链接](apm2.8机架.rar)
 
