@@ -1,8 +1,10 @@
+/*
 const ap = new APlayer({
     container: document.getElementById('aplayer'),
     order: "random", 
 	volume: 0.3,
-    // fixed: true,
+    fixed: true,
+    //mini: true,
 	autoplay: false,
     listFolded: false,
     lrcType: 10,
@@ -44,3 +46,4 @@ const ap = new APlayer({
     }
 	]
 });
+*/
