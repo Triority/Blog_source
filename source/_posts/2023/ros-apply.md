@@ -23,21 +23,21 @@ excerpt: 这部分文章是从最基础那篇文章分离出来的，不然那�
 > IMU
 
 首先查看一下IMU的地址
-```
+```sh
 ros-autocar@ros-autocar:~$ ls /dev/ttyUSB*
 /dev/ttyUSB1  /dev/ttyUSB2  /dev/ttyUSB3
 ros-autocar@ros-autocar:~$ ls /dev/ttyUSB*
 /dev/ttyUSB0  /dev/ttyUSB1  /dev/ttyUSB2  /dev/ttyUSB3
 ```
 有四个设备，拔掉imu之后再次查看少了那个就知道imu的地址了。给IMU的设备添加读写权限：
-```
+```sh
 sudo chmod  +777 /dev/ttyUSB0
 ```
 然后使用资料给的命令就可以读取imu的数值了
-```
+```sh
 roslaunch imu_launch  imu_msg.launch
 ```
-```
+```sh
 header: 
   seq: 18691
   stamp: 
@@ -69,11 +69,11 @@ linear_acceleration_covariance: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
 资料给了驱动雷达的功能包，启动雷达的launch命令：
 这个launch文件有一个地方需要改动就是雷达串口设备号，我这一次改成是`/dev/ttyUSB2`如果启动文件之后雷达不转可以考虑是这个问题
-```
+```sh
 roslaunch ls01b_v2 ls01b_v2.launch
 ```
 然后在另外一个终端查看雷达数据：应该会看到满屏的数字hhh都是雷达扫描到的距离信息
-```
+```sh
 rostopic echo /scan
 ```
 
@@ -83,13 +83,13 @@ rostopic echo /scan
 
 同样，使用资料的驱动功能包：
 
-```
+```sh
 roscore
 rosrun encoder_driver Encoder_vel.py
 rostopic echo /encoder
 ```
 输出：
-```
+```sh
 header: 
   seq: 11316
   stamp: 
@@ -128,7 +128,7 @@ twist:
 
 > 整合及运动控制
 
-```
+```sh
 roslaunch racecar Run_car.launch 
 rosrun racecar racecar_teleop.py
 rviz rviz
@@ -138,7 +138,7 @@ rviz rviz
 第二个用于使用键盘发布信息控制底盘，最后是rviz用于显示雷达等信息。
 
 其中雷达需要设置坐标变换，雷达的坐标是相对于底盘坐标定义的，rviz默认使用map坐标系显示，需要定义底盘坐标系和map坐标系的相对关系。
-```
+```xml
 <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster" args="0 0 0 0 0 0 /map /odom 100" />
 
 ```
@@ -155,7 +155,7 @@ rviz rviz
 首先是修改launch文件的话题节点等名称，这里我是改成这样
 
 `rf2o_laser_odometry.launch`
-```
+```xml
 <launch>
  
   <node pkg="rf2o_laser_odometry" type="rf2o_laser_odometry_node" name="rf2o_laser_odometry" output="screen">
@@ -174,7 +174,7 @@ rviz rviz
 接下来改一些bug：修改`src/CLaserOdometry2D.cpp`
 
 292-298行修改:
-```
+```cpp
 //Inner pixels
 if ((u>1)&&(u<cols_i-2))
 {
@@ -186,7 +186,7 @@ float weight = 0.f;
 
 ```
 316-322行修改:
-```
+```cpp
 //Boundary
 else
 {
@@ -199,7 +199,7 @@ float weight = 0.f;
 ```
 
 打开底盘lanunch文件，并启动rf2o：
-```
+```sh
 roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch 
 ```
 就可以看见终端输出的里程数据。这个方法得到的数据有些缺陷，就是在车子发生旋转时候是不准确的，因为雷达和车子都在旋转相对位置不准确。
@@ -211,10 +211,113 @@ roslaunch rf2o_laser_odometry rf2o_laser_odometry.launch
 ```
 Line 923:
   pose_aux_2D.translation()(0) = -acu_trans(0,2);
- pose_aux_2D.translation()(1) = -acu_trans(1,2);
+  pose_aux_2D.translation()(1) = -acu_trans(1,2);
 Line 956:
- lin_speed = -acu_trans(0,2) / time_inc_sec;
+  lin_speed = -acu_trans(0,2) / time_inc_sec;
 ```
+## 使用编码器和imu定位
+这段代码是志伟学长写的，我就一边学习理解一边写写注释吧
+```python
+import rospy
+from nav_msgs.msg import Odometry
+from sensor_msgs.msg import Imu
+from scipy.spatial.transform import Rotation
+import numpy as np
+import time
+import tf2_ros
+from geometry_msgs.msg import Pose, Point, Quaternion, TransformStamped, PoseArray
+import tf_conversions
+import message_filters
+from math import sin, cos, pi,sqrt,fabs
+
+last_angle = None
+last_vel = None
+last_time = None
+pos_x = 0
+pos_y = 0
+br = tf2_ros.TransformBroadcaster()
+encoder_dx = 27.7/1000.0
+
+def callback(imu_data, encoder_data):
+    global last_angle, last_vel, last_time, pos_x, pos_y
+
+    r = Rotation.from_quat([imu_data.orientation.x, 
+                            imu_data.orientation.y, 
+                            imu_data.orientation.z, 
+                            imu_data.orientation.w])
+    angle = r.as_euler('xyz')[2]
+    if angle<0:
+        angle = 2*np.pi + angle
+
+    if encoder_data.twist.twist.linear.x>10 or encoder_data.twist.twist.linear.x<-10:
+        return
+    
+    if last_time is None:
+        last_time = encoder_data.header.stamp
+        last_angle = angle
+        last_vel = encoder_data.twist.twist.linear.x
+        return
+    
+    dt = (encoder_data.header.stamp - last_time).to_sec()
+    last_time = encoder_data.header.stamp
+
+
+    d = (encoder_data.twist.twist.linear.x+last_vel)/2.0*dt
+    last_vel = encoder_data.twist.twist.linear.x
+
+    d_angle = np.fabs(angle - last_angle)
+    if angle - last_angle>0.00001:
+        l = d / d_angle+encoder_dx
+        d = l * np.sqrt(2*(1-np.cos(d_angle)))
+    elif angle - last_angle<-0.00001:
+        l = d / d_angle-encoder_dx
+        d = l * np.sqrt(2*(1-np.cos(d_angle)))
+    
+    last_angle = angle
+    
+    d_x = d * np.cos(angle)
+    d_y = d * np.sin(angle)
+    pos_x += d_x
+    pos_y += d_y
+
+    t = TransformStamped()
+    t.header.stamp = rospy.Time.now()
+    t.header.frame_id = "odom"
+    t.child_frame_id = "base_link"
+    t.transform.translation.x = pos_x
+    t.transform.translation.y = pos_y
+    t.transform.translation.z = 0.0
+
+    q = tf_conversions.transformations.quaternion_from_euler(0, 0, angle)
+    t.transform.rotation.x = q[0]
+    t.transform.rotation.y = q[1]
+    t.transform.rotation.z = q[2]
+    t.transform.rotation.w = q[3]
+
+    br.sendTransform(t)
+    odom_data = Odometry()
+    odom_data.header.stamp = rospy.Time.now()
+    odom_data.header.frame_id = "odom"
+    odom_data.child_frame_id = "base_link"
+    odom_data.pose.pose.position.x = pos_x
+    odom_data.pose.pose.position.y = pos_y
+    odom_data.pose.pose.position.z = 0.0
+    odom_data.pose.pose.orientation.x = q[0]
+    odom_data.pose.pose.orientation.y = q[1]
+    odom_data.pose.pose.orientation.z = q[2]
+    odom_data.pose.pose.orientation.w = q[3]
+    odom_pub.publish(odom_data)
+    
+# 初始化encoder_mix节点
+rospy.init_node('encoder_mix')
+imu_sub = message_filters.Subscriber('/imu_data', Imu)
+encoder_sub = message_filters.Subscriber('/encoder', Odometry)
+ts = message_filters.ApproximateTimeSynchronizer([imu_sub, encoder_sub], 20, 0.1)
+ts.registerCallback(callback)
+odom_pub = rospy.Publisher('/odom', Odometry, queue_size=10)
+rospy.spin()
+```
+
 
 ## 传感器数据融合：robot localization/ekf
 
@@ -228,7 +331,7 @@ gmapping安装：
 sudo apt-get install ros-noetic-slam-gmapping
 ```
 编写一个新的launch文件：
-```
+```xml
 <launch>
     <arg name="scan_topic" default="scan" />                  <!-- 发布scan名称 -->
     <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen" clear_params="true">
@@ -275,7 +378,7 @@ roslaunch test gmapping.launch
 ![](gmapping.png)
 
 建图后，在想要保存的路径打开终端并输入使用mapserver保存命令：
-```
+```sh
 ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
 [ INFO] [1685971241.710265601]: Waiting for the map
 [ INFO] [1685971241.931482169]: Received a 480 X 544 map @ 0.050 m/pix
@@ -285,7 +388,12 @@ ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
 ```
 `233`为保存地图的文件名
 
-
+补充一个launch文件启动rviz的代码：
+```xml
+    <!-- rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d /home/ros-autocar/Ros-autocar/rviz.rviz" required="true" />
+```
+其中`/home/ros-autocar/Ros-autocar/rviz.rviz`是rviz配置文件的路径
 ## 重定位：amcl
 与rf2o的雷达两帧之间比较不同，amcl是雷达数据和地图之间比较计算里程计误差。
 
