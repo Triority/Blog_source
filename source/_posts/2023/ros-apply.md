@@ -310,10 +310,13 @@ def callback(imu_data, encoder_data):
     
 # 初始化encoder_mix节点
 rospy.init_node('encoder_mix')
+# 创建Subscriber，订阅imu和编码器的topic
 imu_sub = message_filters.Subscriber('/imu_data', Imu)
 encoder_sub = message_filters.Subscriber('/encoder', Odometry)
+# 使用自适应算法来匹配基于其时间戳的消息并执行回调函数，详见https://blog.csdn.net/chishuideyu/article/details/77479758
 ts = message_filters.ApproximateTimeSynchronizer([imu_sub, encoder_sub], 20, 0.1)
 ts.registerCallback(callback)
+# 
 odom_pub = rospy.Publisher('/odom', Odometry, queue_size=10)
 rospy.spin()
 ```
@@ -372,7 +375,7 @@ sudo apt-get install ros-noetic-slam-gmapping
 </launch>
 ```
 启动launch文件：
-```
+```sh
 roslaunch test gmapping.launch
 ```
 ![](gmapping.png)
