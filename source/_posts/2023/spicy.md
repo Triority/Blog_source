@@ -3,7 +3,7 @@ title: 重庆（全原图文章！移动网络环境慎入！）
 tags:
   - travel
   - 全原图文章
-cover: /img/
+cover: /img/3cb471f9c32bbe95fec7ec3acadd550.jpg
 categories:
 - [生活, 游览记录]
 notshow: true

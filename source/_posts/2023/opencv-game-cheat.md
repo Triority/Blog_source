@@ -3,7 +3,7 @@ title: 使用opencv在小游戏作弊
 tags:
   - opencv
   - python
-cover: /img/
+cover: /img/微信截图_20230607003814.png
 categories:
 - [计算机, 源码分享]
 notshow: false
