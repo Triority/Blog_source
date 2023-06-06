@@ -4,7 +4,7 @@ date: 2022-09-29 02:17:30
 tags:
 - linux
 excerpt: 日常重建环境...之frpc...
-index_img: /img/frp.png
+cover: /img/frp.png
 categories: 
 - [计算机, CV工程师]
 ---

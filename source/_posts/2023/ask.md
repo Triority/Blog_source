@@ -4,7 +4,7 @@ date: 2023-01-01 20:24:14
 tags:
 - 文档
 excerpt: 提问的智慧
-index_img: /img/ask.png
+cover: /img/ask.png
 categories: 
 - [计算机, 源码分享]
 ---

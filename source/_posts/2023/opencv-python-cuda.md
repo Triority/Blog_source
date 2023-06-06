@@ -3,7 +3,7 @@ title: opencv-python库使用cuda加速
 tags:
   - opencv
   - python
-index_img: /img/
+cover: /img/
 categories:
 - [计算机, 折腾记录]
 notshow: true

@@ -6,7 +6,7 @@ tags:
 - QQ机器人
 - mySQL
 excerpt: 基于nonebot2+cqhttp的QQ机器人以及使用mySQL的记分系统
-index_img: /img/nonebot.png
+cover: /img/nonebot.png
 categories: 
 - [计算机, 折腾记录]
 - [计算机, 源码分享]

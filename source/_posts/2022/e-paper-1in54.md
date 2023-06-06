@@ -6,7 +6,7 @@ tags:
 - python
 - 显示屏
 excerpt: 一个1.54寸双色墨水屏的折腾日记
-index_img: /img/e-paper-1in54.png
+cover: /img/e-paper-1in54.png
 categories: 
 - [计算机, 折腾记录]
 - [计算机, 源码分享]

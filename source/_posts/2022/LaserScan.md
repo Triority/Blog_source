@@ -7,7 +7,7 @@ tags:
 - 笔记
 - opencv
 excerpt: 用于使用激光雷达识别目标
-index_img: /img/LaserScan.png
+cover: /img/LaserScan.png
 categories: 
 - [计算机, 源码分享]
 ---

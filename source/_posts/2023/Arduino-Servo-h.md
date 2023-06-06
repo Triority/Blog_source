@@ -2,7 +2,7 @@
 title: Arduino舵机库控制舵机和无刷电调
 tags:
   - arduino
-index_img: /img/ff589b65d94461294ee7c69f4bd4eef.jpg
+cover: /img/ff589b65d94461294ee7c69f4bd4eef.jpg
 categories:
 - [计算机, 源码分享]
 - [计算机, 知识整理]

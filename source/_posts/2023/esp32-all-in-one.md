@@ -3,7 +3,7 @@ title: ESP 32 —— ALL IN ONE
 tags:
   - arduino
   - esp32
-index_img: /img/esp32-pinout-chip-ESP-WROOM-32.webp
+cover: /img/esp32-pinout-chip-ESP-WROOM-32.webp
 categories:
 - [计算机, 知识整理]
 - [计算机, 文档教程]

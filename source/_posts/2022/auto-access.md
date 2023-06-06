@@ -5,7 +5,7 @@ tags:
 - python
 - web
 excerpt: esp32连接web服务器获取命令实现远程控制
-index_img: /img/auto-access.jpg
+cover: /img/auto-access.jpg
 categories: 
 - [计算机, 源码分享]
 ---

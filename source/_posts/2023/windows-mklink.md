@@ -2,7 +2,7 @@
 title: windows创建文件软连接
 tags:
   - windows
-index_img: /img/QQ截图20230204020745.png
+cover: /img/QQ截图20230204020745.png
 categories:
 - [计算机, CV工程师]
 notshow: false

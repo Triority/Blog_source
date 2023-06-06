@@ -4,7 +4,7 @@ date: 2023-01-07 11:15:27
 tags:
 - python
 excerpt: 人脸识别图像分类
-index_img: /img/syk3.jpg
+cover: /img/syk3.jpg
 categories: 
 - [计算机, 知识整理]
 ---

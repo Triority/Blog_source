@@ -1,7 +1,7 @@
 ---
 title: C语言学习笔记
 excerpt: 学校教材内容的摘要
-index_img: /img/c语言.webp
+cover: /img/c语言.webp
 date: 2022-04-02 09:33:04
 categories: 
 - [计算机, 知识整理]

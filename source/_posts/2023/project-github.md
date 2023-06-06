@@ -1,6 +1,6 @@
 ---
 title: 在工程中将代码提交至github
-index_img: /img/v2-4dccef85028e88d0d69f082d03dc2d09_1440w.jpg
+cover: /img/v2-4dccef85028e88d0d69f082d03dc2d09_1440w.jpg
 categories:
 - [计算机, 知识整理]
 - [计算机, 文档教程]

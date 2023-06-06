@@ -6,7 +6,7 @@ tags:
 - linux
 - python
 excerpt: 香橙派GPIO的简单用法
-index_img: /img/香橙派zero2.png
+cover: /img/香橙派zero2.png
 categories: 
 - [计算机, 源码分享]
 ---

@@ -6,7 +6,7 @@ tags:
 - 神经网络
 - 教程
 excerpt: 由于这次需要使用CPU进行识别，同时要求较高帧率，因此使用nanodet而非yolo进行目标识别，同时这也是我第一次尝试模型训练，如有错误欢迎指出
-index_img: /img/nanodet-plus.jpg
+cover: /img/nanodet-plus.jpg
 categories: 
 - [计算机, 折腾记录]
 ---

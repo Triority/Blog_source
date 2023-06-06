@@ -3,7 +3,7 @@ title: 摆矿校园网
 tags:
   - CUMTB
   - 整活
-index_img: /img/QQ截图20230125233832(1).png
+cover: /img/QQ截图20230125233832(1).png
 categories:
   - 整活
 notshow: false

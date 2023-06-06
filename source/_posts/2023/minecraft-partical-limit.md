@@ -2,7 +2,7 @@
 title: Minecraft编辑源码方式修改partical数量限制
 tags:
   - minecraft
-index_img: /img/villager_particle.jpg
+cover: /img/villager_particle.jpg
 categories:
 - [计算机, 折腾记录]
 - minecraft

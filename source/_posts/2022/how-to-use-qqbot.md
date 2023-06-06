@@ -1,7 +1,7 @@
 ---
 title: 丁仪QQ机器人使用说明
 excerpt: MPG的成员经常发生变化,此时就需要一个文档来告诉管理们如何使用管理员的道具:群机器人
-index_img: /img/aboutqqbot.png
+cover: /img/aboutqqbot.png
 date: 2022-06-16 22:43:01
 categories: 
 - [计算机, 文档教程]

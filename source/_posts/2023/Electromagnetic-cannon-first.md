@@ -2,7 +2,7 @@
 title: 电磁炉设计实践记录
 tags:
   - 电磁炉
-index_img: /img/fbq.png
+cover: /img/fbq.png
 categories:
 - [计算机, 知识整理]
 - [计算机, 折腾记录]

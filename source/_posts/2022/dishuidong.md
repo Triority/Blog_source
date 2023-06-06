@@ -7,7 +7,7 @@ tags:
 categories: 
 - [生活, 游览摄影]
 excerpt: 今日游览拍摄记录
-index_img: /img/dishuidong.jpg
+cover: /img/dishuidong.jpg
 ---
 # 多图预警!
 

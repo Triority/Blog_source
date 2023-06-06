@@ -7,7 +7,7 @@ tags:
 - ROS
 - 笔记
 excerpt: 根据激光雷达的数据特点对DBSCAN聚类算法进行修改
-index_img: /img/LaserScan-DBSCAN-PolarCoordinates.png
+cover: /img/LaserScan-DBSCAN-PolarCoordinates.png
 categories: 
 - [计算机, 源码分享]
 ---

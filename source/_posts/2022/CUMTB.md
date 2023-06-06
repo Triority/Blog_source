@@ -5,7 +5,7 @@ tags:
 - 整活
 - CUMTB
 excerpt: 希望疫情早日结束哦~
-index_img: /img/牢房.png
+cover: /img/牢房.png
 categories: 
 - 整活
 ---

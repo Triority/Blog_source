@@ -5,7 +5,7 @@ tags:
 - python
 - 笔记
 excerpt: 在使用python进行自动标注过程中，一直使用一个进程，因此运行速度较慢，标注几万张图片需要耗费几个小时，于是想利用多CPU运行自动标注程序...
-index_img: /img/Multiprocessing.png
+cover: /img/Multiprocessing.png
 categories: 
 - [计算机, 源码分享]
 ---

@@ -2,7 +2,7 @@
 title: 使用ardupilot的四轴飞行器
 tags:
   - arduino
-index_img: /img/slides_01_Ardupilot42.webp
+cover: /img/slides_01_Ardupilot42.webp
 categories:
   - [计算机, 知识整理]
 notshow: false

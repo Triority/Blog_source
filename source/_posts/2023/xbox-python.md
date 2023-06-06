@@ -5,7 +5,7 @@ tags:
   - python
   - esp32
   - opencv
-index_img: /img/QQ截图20230227164056.png
+cover: /img/QQ截图20230227164056.png
 categories:
 - [计算机, 源码分享]
 notshow: false

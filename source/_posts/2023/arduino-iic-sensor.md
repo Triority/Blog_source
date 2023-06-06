@@ -2,7 +2,7 @@
 title: 使用arduino的两轮自平衡车
 tags:
   - arduino
-index_img: /img/
+cover: /img/
 categories:
 - [计算机, 源码分享]
 - [计算机, 折腾记录]

@@ -3,7 +3,7 @@ title: 一个iic通道控制多个相同地址的从设备
 tags:
   - arduino
   - esp32
-index_img: /img/d5bd564e82238fa871150c9b3fe22c8.jpg
+cover: /img/d5bd564e82238fa871150c9b3fe22c8.jpg
 categories:
 - [计算机, 折腾记录]
 notshow: false

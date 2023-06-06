@@ -4,7 +4,7 @@ date: 2022-08-31 22:49:36
 tags:
 - 3D打印
 excerpt: 一切开始于fluidd页面真的帅啊hhhhhhhc
-index_img: /img/klipper.png
+cover: /img/klipper.png
 categories: 
 - [计算机, 折腾记录]
 - [计算机, CV工程师]

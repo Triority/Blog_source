@@ -4,7 +4,7 @@ date: 2022-12-12 21:59:04
 tags:
 - python
 excerpt: python使用selenium操作edge浏览器
-index_img: /img/selenium.webp
+cover: /img/selenium.webp
 categories: 
 - [计算机, 折腾记录]
 ---

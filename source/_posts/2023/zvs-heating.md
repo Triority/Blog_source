@@ -2,7 +2,7 @@
 title: 无抽头zvs感应加热
 tags:
   - 电磁炉
-index_img: /img/
+cover: /img/
 categories:
 - [计算机, 知识整理]
 - [计算机, 折腾记录]

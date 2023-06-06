@@ -5,7 +5,7 @@ tags:
 - arduino
 - C语言
 excerpt: 之前浅学了一下做巡线车，代码很烂仅供参考
-index_img: /img/arduino_line_follower.jpg
+cover: /img/arduino_line_follower.jpg
 categories: 
 - [计算机, 源码分享]
 ---

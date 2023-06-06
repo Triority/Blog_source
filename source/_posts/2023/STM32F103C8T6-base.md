@@ -2,7 +2,7 @@
 title: STM32基础：以STM32F103C8T6核心板为例
 tags:
   - stm32
-index_img: /img/STM32F103C8T6.png
+cover: /img/STM32F103C8T6.png
 categories:
 - [计算机, 知识整理]
 notshow: false

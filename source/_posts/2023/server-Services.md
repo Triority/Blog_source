@@ -2,7 +2,7 @@
 title: server-Services
 tags:
   - linux
-index_img: /img/
+cover: /img/
 notshow: true
 date: 2023-01-31 18:29:21
 excerpt: 服务器服务记录，用于在服务器重启后启动(毕竟不是经常重启懒得写成服务了)

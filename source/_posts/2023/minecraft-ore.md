@@ -2,7 +2,7 @@
 title: minecraft矿石生成概率机制
 tags:
   - minecraft
-index_img: /img/Ore_Layout.webp
+cover: /img/Ore_Layout.webp
 categories:
 - minecraft
 notshow: false

@@ -4,7 +4,7 @@ date: 2023-01-07 21:56:50
 tags:
 - hexo
 excerpt: hexo的fluidd主题设置文章首页隐藏
-index_img: /img/lyk2.jpg
+cover: /img/lyk2.jpg
 categories: 
 - [计算机, 折腾记录]
 ---
@@ -37,15 +37,15 @@ page.banner_mask_alpha = theme.index.banner_mask_alpha
 
 <% page.posts.each(function (post) { %>
   <div class="row mx-auto index-card">
-    <% var post_url = url_for(post.path), index_img = post.index_img || theme.post.default_index_img %>
-    <% if(index_img) { %>
+    <% var post_url = url_for(post.path), cover = post.cover || theme.post.default_cover %>
+    <% if(cover) { %>
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="<%= post_url %>" target="<%- theme.index.post_url_target %>">
-          <img src="<%= url_for(index_img) %>" alt="<%= post.title %>">
+          <img src="<%= url_for(cover) %>" alt="<%= post.title %>">
         </a>
       </div>
     <% } %>
-    <article class="col-12 col-md-<%= index_img ? '8' : '12' %> mx-auto index-info">
+    <article class="col-12 col-md-<%= cover ? '8' : '12' %> mx-auto index-info">
       <h1 class="index-header">
         <% if (theme.index.post_sticky && theme.index.post_sticky.enable && post.sticky > 0) { %>
           <i class="index-pin <%= theme.index.post_sticky && theme.index.post_sticky.icon %>" title="Pin on top"></i>
@@ -120,15 +120,15 @@ page.banner_mask_alpha = theme.index.banner_mask_alpha
 <% page.posts.each(function (post) { %>
   <% if(post.notshow != true) { %>
   <div class="row mx-auto index-card">
-    <% var post_url = url_for(post.path), index_img = post.index_img || theme.post.default_index_img %>
-    <% if(index_img) { %>
+    <% var post_url = url_for(post.path), cover = post.cover || theme.post.default_cover %>
+    <% if(cover) { %>
       <div class="col-12 col-md-4 m-auto index-img">
         <a href="<%= post_url %>" target="<%- theme.index.post_url_target %>">
-          <img src="<%= url_for(index_img) %>" alt="<%= post.title %>">
+          <img src="<%= url_for(cover) %>" alt="<%= post.title %>">
         </a>
       </div>
     <% } %>
-    <article class="col-12 col-md-<%= index_img ? '8' : '12' %> mx-auto index-info">
+    <article class="col-12 col-md-<%= cover ? '8' : '12' %> mx-auto index-info">
       <h1 class="index-header">
         <% if (theme.index.post_sticky && theme.index.post_sticky.enable && post.sticky > 0) { %>
           <i class="index-pin <%= theme.index.post_sticky && theme.index.post_sticky.icon %>" title="Pin on top"></i>

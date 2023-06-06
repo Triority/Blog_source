@@ -2,7 +2,7 @@
 title: 电磁炉理论
 tags:
   - 电磁炉
-index_img: /img/
+cover: /img/
 categories:
 - [计算机, 知识整理]
 notshow: true

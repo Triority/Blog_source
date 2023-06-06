@@ -1,7 +1,7 @@
 ---
 title: arduino中解析串口字符串
 excerpt: 很久很久以前我想做arduino从蓝牙串口接受手机信息调节RGB灯颜色,但是由于字符串处理的困难被迫放弃,上次写了arduino串口函数的文章,有了新的思路...
-index_img: /img/arduino-serial-rgb.png
+cover: /img/arduino-serial-rgb.png
 date: 2022-05-15 12:24:04
 categories: 
 - [计算机, 知识整理]

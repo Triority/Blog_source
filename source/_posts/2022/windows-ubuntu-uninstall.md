@@ -5,7 +5,7 @@ tags:
 - linux
 - 教程
 excerpt: 卸载ubuntu系统
-index_img: /img/win_ubuntu_uninstall.png
+cover: /img/win_ubuntu_uninstall.png
 categories: 
 - [计算机, 折腾记录]
 ---

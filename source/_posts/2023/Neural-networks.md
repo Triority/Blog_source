@@ -3,7 +3,7 @@ title: 神经网络学习：从尝试识别手写数字开始
 tags:
   - 神经网络
   - python
-index_img: /img/v2-777808fc5b00e7727df4dc835c1fc44f_1440w.jpg
+cover: /img/v2-777808fc5b00e7727df4dc835c1fc44f_1440w.jpg
 categories:
 - [计算机, 知识整理]
 - 值得一提的文章

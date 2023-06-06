@@ -2,7 +2,7 @@
 title: 跨年快乐！
 tags:
   - web
-index_img: /img/QQ截图20230126133459.png
+cover: /img/QQ截图20230126133459.png
 categories:
 - 整活
 notshow: false

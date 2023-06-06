@@ -1,7 +1,7 @@
 ---
 title: python-opencv学习笔记
 excerpt: 在参加智能车竞赛航天物流组线上赛过程中,采用opencv的方式来做赛道识别,所以有了这篇笔记
-index_img: /img/opencv.png
+cover: /img/opencv.png
 date: 2022-01-16 17:23:58
 categories: 
 - [计算机, CV工程师]

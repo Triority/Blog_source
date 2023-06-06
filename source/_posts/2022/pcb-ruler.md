@@ -1,7 +1,7 @@
 ---
 title: 一个PCB格尺
 excerpt: 如果想要可以来找我哦哈哈目前定价10r一个!!!定价10r一个!!!定价10r一个!!!
-index_img: /img/pcb-ruler.png
+cover: /img/pcb-ruler.png
 date: 2022-05-14 17:39:18
 categories: 
 - 做点好玩的

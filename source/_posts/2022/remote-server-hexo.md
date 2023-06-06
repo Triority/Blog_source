@@ -4,7 +4,7 @@ date: 2022-12-26 22:52:37
 tags:
 - hexo
 excerpt: 换了新的但是配置差一些的服务器，主要是内存只有1G，如果继续在服务器本地hexo g会爆内存，所以改成在本地hexo g然后直接git push
-index_img: /img/hexo.png
+cover: /img/hexo.png
 categories: 
 - [计算机, 折腾记录]
 ---

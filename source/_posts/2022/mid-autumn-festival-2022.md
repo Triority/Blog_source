@@ -5,7 +5,7 @@ tags:
 - 摄影
 - 日常
 excerpt: 想买个800mm镜头hhhhhhhhhc
-index_img: /img/mid-moon-festival.jpg
+cover: /img/mid-moon-festival.jpg
 categories: 
 - [生活, 天文摄影]
 ---

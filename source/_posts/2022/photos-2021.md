@@ -2,7 +2,7 @@
 title: 2021拍摄作品合辑
 excerpt: 把感觉比较好看的照片做个合辑吧
 date: 2022-07-02 23:56:51
-index_img: /img/photos.jpg
+cover: /img/photos.jpg
 tags:
 - 摄影
 - 日常

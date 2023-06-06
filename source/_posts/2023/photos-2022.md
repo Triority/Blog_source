@@ -1,7 +1,7 @@
 ---
 title: 2022拍摄作品合辑
 excerpt: 把感觉比较好看的照片做个合辑吧
-index_img: /img/SMHC.jpg
+cover: /img/SMHC.jpg
 date: 2023-01-07 16:59:43
 tags:
 - 摄影

@@ -2,7 +2,7 @@
 title: 喇叭沟第二弹
 tags:
   - 摄影
-index_img: /img/DSC03695(1).png
+cover: /img/DSC03695(1).png
 categories:
 - [生活, 天文摄影]
 notshow: false

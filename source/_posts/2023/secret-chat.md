@@ -2,7 +2,7 @@
 title: 用python写个聊天室
 tags:
   - python
-index_img: /img/aboutqqbot.png
+cover: /img/aboutqqbot.png
 categories:
 - [计算机, 源码分享]
 notshow: false

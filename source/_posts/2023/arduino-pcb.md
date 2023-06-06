@@ -2,7 +2,7 @@
 title: 使用全新atmega328p芯片自制arduino开发板
 tags:
   - arduino
-index_img: /img/QQ截图20230426223142.png
+cover: /img/QQ截图20230426223142.png
 categories:
 - [计算机, 折腾记录]
 notshow: false

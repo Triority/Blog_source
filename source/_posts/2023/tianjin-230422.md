@@ -2,7 +2,7 @@
 title: 天津24h游
 tags:
   - travel
-index_img: /img/
+cover: /img/
 categories:
 - [生活, 游览记录]
 notshow: true

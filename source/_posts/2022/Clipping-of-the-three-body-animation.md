@@ -4,7 +4,7 @@ date: 2022-12-29 12:01:58
 tags:
 - 整活
 excerpt: 艺画三体高燃混剪
-index_img: /img/艺画三体高燃混剪.jpg
+cover: /img/艺画三体高燃混剪.jpg
 categories: 
 - 整活
 ---

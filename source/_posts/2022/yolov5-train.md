@@ -5,7 +5,7 @@ tags:
 - python
 - 神经网络
 excerpt: yolov5数据集训练
-index_img: /img/yolov5.png
+cover: /img/yolov5.png
 categories: 
 - [计算机, 知识整理]
 - [计算机, 折腾记录]

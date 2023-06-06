@@ -5,7 +5,7 @@ tags:
 - hexo
 - 笔记
 excerpt: 编写博客过程中需要的特殊代码永远记不住...用一次查一次...于是：
-index_img: /img/hexo-post-code.webp
+cover: /img/hexo-post-code.webp
 categories: 
 - [计算机, CV工程师]
 ---

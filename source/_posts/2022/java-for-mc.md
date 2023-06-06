@@ -1,7 +1,7 @@
 ---
 title: MC关于Java等配置的详细说明
 excerpt: 总是有人MC关于Java配置的问题,在这里详细说明一下,一劳永逸解决问题,所以按照惯例,谁再来问罚谁去西伯利亚钟玉米!!
-index_img: /img/java-for-mc.png
+cover: /img/java-for-mc.png
 date: 2022-05-21 17:31:24
 tags:
 - 教程

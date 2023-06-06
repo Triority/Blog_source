@@ -5,7 +5,7 @@ tags:
 - python
 - 命令
 excerpt: conda常用命令
-index_img: /img/conda.png
+cover: /img/conda.png
 categories: 
 - [计算机, 知识整理]
 ---

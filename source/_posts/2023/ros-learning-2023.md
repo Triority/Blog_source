@@ -5,7 +5,7 @@ tags:
   - linux
   - python
   - ROS
-index_img: /img/ros.png
+cover: /img/ros.png
 categories:
 - [计算机, 知识整理]
 notshow: false

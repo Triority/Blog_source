@@ -5,7 +5,7 @@ tags:
 - 树莓派
 - 教程
 excerpt: 今天拿出树莓派来烧一烧……
-index_img: /img/raspberry_overclocking.png
+cover: /img/raspberry_overclocking.png
 categories: 
 - [计算机, 折腾记录]
 ---

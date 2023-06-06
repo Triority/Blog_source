@@ -4,7 +4,7 @@ date: 2023-01-01 13:50:48
 tags:
 - 整活
 excerpt: 两千响礼炮送上，祝大家元旦快乐！
-index_img: /img/要多想.png
+cover: /img/要多想.png
 categories: 
 - 整活
 ---

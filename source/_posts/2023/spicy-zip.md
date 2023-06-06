@@ -2,7 +2,7 @@
 title: 重庆
 tags:
   - travel
-index_img: /img/3cb471f9c32bbe95fec7ec3acadd550.jpg
+cover: /img/3cb471f9c32bbe95fec7ec3acadd550.jpg
 categories:
 - [生活, 游览记录]
 notshow: false
