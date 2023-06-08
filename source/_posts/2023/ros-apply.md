@@ -239,7 +239,7 @@ encoder_dx = 27.7/1000.0
 
 def callback(imu_data, encoder_data):
     global last_angle, last_vel, last_time, pos_x, pos_y
-
+    # 获取imu数据
     r = Rotation.from_quat([imu_data.orientation.x, 
                             imu_data.orientation.y, 
                             imu_data.orientation.z, 
@@ -247,7 +247,7 @@ def callback(imu_data, encoder_data):
     angle = r.as_euler('xyz')[2]
     if angle<0:
         angle = 2*np.pi + angle
-
+    # 忽略错误数据
     if encoder_data.twist.twist.linear.x>10 or encoder_data.twist.twist.linear.x<-10:
         return
     
@@ -256,7 +256,7 @@ def callback(imu_data, encoder_data):
         last_angle = angle
         last_vel = encoder_data.twist.twist.linear.x
         return
-    
+    # 位置计算
     dt = (encoder_data.header.stamp - last_time).to_sec()
     last_time = encoder_data.header.stamp
 
@@ -278,7 +278,7 @@ def callback(imu_data, encoder_data):
     d_y = d * np.sin(angle)
     pos_x += d_x
     pos_y += d_y
-
+    # 发布位置坐标变换信息
     t = TransformStamped()
     t.header.stamp = rospy.Time.now()
     t.header.frame_id = "odom"
@@ -396,19 +396,86 @@ ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
     <node pkg="rviz" type="rviz" name="rviz" args="-d /home/ros-autocar/Ros-autocar/rviz.rviz" required="true" />
 ```
 其中`/home/ros-autocar/Ros-autocar/rviz.rviz`是rviz配置文件的路径
+
+## 读取建立的地图：map_server
+只要把这一段放在启动rviz的launch文件里就好啦
+```xml
+<node pkg="map_server" type="map_server" name="map_server" args="/home/ros-autocar/Ros-manualcar/map.yaml"/>
+```
+`args`要改成你的地图的路径
+
 ## 重定位：amcl
-与rf2o的雷达两帧之间比较不同，amcl是雷达数据和地图之间比较计算里程计误差。
+与rf2o的雷达两帧之间比较不同，amcl是根据雷达数据和地图之间比较计算里程计误差，也就是计算/odom和/map之间的坐标变换关系
+
+在launch文件加入这一大部分即可启动amcl
+```xml
+<!-- amcl -->
+    <arg name="init_x" default="0" />
+    <arg name="init_y" default="0" />
+    <arg name="init_a" default="1.57" />
+    <node pkg="amcl" type="amcl" name="amcl" output="screen">
+        <!-- Publish scans from best pose at a max of 10 Hz -->
+        <param name="transform_tolerance" value="0.2" />
+        <param name="gui_publish_rate" value="10.0"/>
+        <param name="laser_max_beams" value="30"/>
+        <param name="min_particles" value="100"/>
+        <param name="max_particles" value="5000"/>
+        <param name="kld_err" value="0.01"/>
+        <param name="kld_z" value="0.99"/>
+        <!-- translation std dev, m -->
+        <param name="odom_alpha1" value="0.2"/>
+        <param name="odom_alpha2" value="0.2"/>
+        <param name="odom_alpha3" value="0.8"/>
+        <param name="odom_alpha4" value="0.2"/>
+        <param name="laser_z_hit" value="0.5"/>
+        <param name="laser_z_short" value="0.05"/>
+        <param name="laser_z_max" value="0.05"/>
+        <param name="laser_z_rand" value="0.5"/>
+        <param name="laser_sigma_hit" value="0.2"/>
+        <param name="laser_lambda_short" value="0.1"/>
+        <param name="laser_lambda_short" value="0.1"/>
+        <param name="laser_model_type" value="likelihood_field"/>
+
+        <!-- <param name="laser_model_type" value="beam"/> -->
+        <param name="laser_likelihood_max_dist" value="2.0"/>
+        <param name="update_min_d" value="0.1"/>
+        <param name="update_min_a" value="0.1"/>
+        <param name="resample_interval" value="2"/>
+        <param name="transform_tolerance" value="0.1"/>
+        <param name="recovery_alpha_slow" value="0.0"/>
+        <param name="recovery_alpha_fast" value="0.1"/>
+
+        <param name="use_map_topic" value="true"/>
+        <param name="first_map_only" value="true"/>
+        <param name="tf_broadcast" value="true"/>
+
+        <param name="odom_frame_id" value="odom"/>
+        <param name="global_frame_id" value="map"/>
+        <param name="base_frame_id" value="base_link"/>
+        <param name="odom_model_type" value="diff"/>
+
+        <param name="initial_pose_x" value="$(arg init_x)"/>
+        <param name="initial_pose_y" value="$(arg init_y)"/>
+        <param name="initial_pose_a" value="$(arg init_a)"/>
+        <param name="initial_cov_xx" value="0.25" />
+        <param name="initial_cov_yy" value="0.25" />
+        <param name="initial_cov_aa" value="0.5" />
+    </node>
+```
+里面有很多的参数，如果需要调试在[amcl的网页](http://wiki.ros.org/amcl)有详细信息
 
 ## 路径规划：全局/局部
-
 ### 全局：A*
 
-### 局部：DWA，teb
 
+
+### 局部：DWA，teb
 #### 动态窗口法：DWA
 > 全称为`dynamic window approach`，其原理主要是在速度空间（v,w）中采样多组速度，并模拟出这些速度在一定时间内的运动轨迹，并通过评价函数对这些轨迹进行评价，选取最优轨迹对应的速度驱动机器人运动
 
 优缺点：考虑到速度和加速度的限制只有安全的轨迹会被考虑；可以实时避障但是避障效果一般；不适用于阿克曼模型车模；每次都选择下一步的最佳路径而非全局最优路径
+
+这个可能暂时先不写，因为我现在实验用的车子是阿克曼结构hhh
 
 #### 时间弹性带：teb
 > 全称为`Time Elastic Band`，连接起始、目标点，并让这个路径可以变形，变形的条件就是将所有约束当做橡皮筋的外力。起始点、目标点状态由用户/全局规划器指定，中间插入N个控制橡皮筋形状的控制点（机器人姿态），当然，为了显示轨迹的运动学信息，我们在点与点之间定义运动时间Time，即为`Timed-Elastic-Band`算法
