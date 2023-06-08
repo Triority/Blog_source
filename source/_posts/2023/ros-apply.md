@@ -493,7 +493,7 @@ rospack plugins --attrib=plugin nav_core
 ![我也不觉得这张图有什么必要，但是突然就是想放一张图hhh](QQ截图20230608143529.png)
 
 看见有一个包含teb_local_planner教程补充材料和示例的项目[teb_local_planner_tutorials](https://github.com/rst-tu-dortmund/teb_local_planner_tutorials)，我的是阿克曼结构车子，参考里面的`robot_carlike_in_stage.launch`，其中里面有一部分我们已经在之前完成了，例如amcl等，所以用得到的地方就是这一段(加入了launch标签)：
-```
+```xml
 <launch>
 <!--  ************** Navigation ***************  -->
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
@@ -1125,6 +1125,8 @@ rostopic echo /move_base/TebLocalPlannerROS/local_plan
 
 run.py：
 ```python
+
+
 
 ```
 

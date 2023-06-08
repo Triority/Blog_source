@@ -169,9 +169,9 @@ reward:
     - img: /img/wx.png
       link:
       text: wechat
-    - img: /img/zfb.jpg
+    - img: /img/XMR.jpg
       link:
-      text: alipay
+      text: XMR
 
 # Post edit
 # Easily browse and edit blog source code online.
@@ -368,7 +368,7 @@ local_search:
   # Show top n results per article, show all results by setting to -1
   top_n_per_article: 5
   # Unescape html strings to the readable one.
-  unescape: false
+  unescape: true
   CDN:
 
 # Docsearch
