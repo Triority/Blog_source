@@ -1116,7 +1116,7 @@ int main(int argc, char **argv)
 ![规划的路径点](微信截图_20230608201239.png)
 ![teb发布的其他话题](微信截图_20230608201807.png)
 或者直接用命令查看话题内容：
-```
+```sh
 rostopic echo /move_base/TebLocalPlannerROS/local_plan
 ```
 ![一大串坐标点和四元数方向](微信截图_20230608203032.png)
@@ -1124,7 +1124,7 @@ rostopic echo /move_base/TebLocalPlannerROS/local_plan
 好了差不多了开始写
 
 run.py：
-```
+```python
 
 ```
 
