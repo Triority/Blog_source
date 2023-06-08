@@ -478,6 +478,7 @@ ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
 这个可能暂时先不写，因为我现在实验用的车子是阿克曼结构hhh
 
 #### 时间弹性带：teb
+##### TEB!启动！
 > 全称为`Time Elastic Band`，连接起始、目标点，并让这个路径可以变形，变形的条件就是将所有约束当做橡皮筋的外力。起始点、目标点状态由用户/全局规划器指定，中间插入N个控制橡皮筋形状的控制点（机器人姿态），当然，为了显示轨迹的运动学信息，我们在点与点之间定义运动时间Time，即为`Timed-Elastic-Band`算法
 
 优缺点：适用于各种常见车模；有很强的前瞻性；对动态障碍有较好的避障效果；计算复杂度较大但是可通过牺牲预测距离来降低；速度和角度波动较大控制不稳定但是提高控制频率可以改善
@@ -492,9 +493,34 @@ rospack plugins --attrib=plugin nav_core
 ```
 ![我也不觉得这张图有什么必要，但是突然就是想放一张图hhh](QQ截图20230608143529.png)
 
-看见有人说到一个包[teb_local_planner_tutorials](https://github.com/rst-tu-dortmund/teb_local_planner_tutorials)，about写的`This package contains supplementary material and examples for teb_local_planner tutorials.(此软件包包含teb_local_planner教程的补充材料和示例)`也许以后有空看看也没有用
+看见有一个包含teb_local_planner教程补充材料和示例的项目[teb_local_planner_tutorials](https://github.com/rst-tu-dortmund/teb_local_planner_tutorials)，我的是阿克曼结构车子，参考里面的`robot_carlike_in_stage.launch`，其中里面有一部分我们已经在之前完成了，例如amcl等，所以用得到的地方就是这一段(加入了launch标签)：
+```
+<launch>
+<!--  ************** Navigation ***************  -->
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+  	  	<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="global_costmap" />
+  	 	<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/costmap_common_params.yaml" command="load" ns="local_costmap" />
+  		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/local_costmap_params.yaml" command="load" />
+  		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/global_costmap_params.yaml" command="load" />
+  		<rosparam file="$(find teb_local_planner_tutorials)/cfg/carlike/teb_local_planner_params.yaml" command="load" />
 
+		<param name="base_global_planner" value="global_planner/GlobalPlanner" />
+		<param name="planner_frequency" value="1.0" />
+		<param name="planner_patience" value="5.0" />
 
+		<param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+		<param name="controller_frequency" value="5.0" />
+		<param name="controller_patience" value="15.0" />
 
+                <param name="clearing_rotation_allowed" value="false" /> <!-- Our carlike robot is not able to rotate in place -->
+	</node>
+</launch>
+```
+启动之前的launch文件和这一部分之后就能看见规划的路径了：
+![The Green Path](微信截图_20230608180121.png)
+##### 参数配置
+
+##### GOGOGO！
+路线规划之后还得让车跟着规划的路线走起来
 
 ## 区域搜索：RRT
