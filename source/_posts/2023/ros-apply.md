@@ -482,4 +482,19 @@ ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
 
 优缺点：适用于各种常见车模；有很强的前瞻性；对动态障碍有较好的避障效果；计算复杂度较大但是可通过牺牲预测距离来降低；速度和角度波动较大控制不稳定但是提高控制频率可以改善
 
+首先下载功能包然后`catkin_make`
+```sh
+git clone https://github.com/rst-tu-dortmund/teb_local_planner
+```
+查看是否安装完成，找到`teb_local_planner`的话就表示安装成功了：
+```sh
+rospack plugins --attrib=plugin nav_core
+```
+![我也不觉得这张图有什么必要，但是突然就是想放一张图hhh](QQ截图20230608143529.png)
+
+看见有人说到一个包[teb_local_planner_tutorials](https://github.com/rst-tu-dortmund/teb_local_planner_tutorials)，about写的`This package contains supplementary material and examples for teb_local_planner tutorials.(此软件包包含teb_local_planner教程的补充材料和示例)`也许以后有空看看也没有用
+
+
+
+
 ## 区域搜索：RRT
