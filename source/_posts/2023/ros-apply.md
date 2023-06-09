@@ -515,8 +515,11 @@ rospack plugins --attrib=plugin nav_core
 	</node>
 </launch>
 ```
+
 启动之前的launch文件和这一部分之后就能看见规划的路径了：
 ![The Green Path](微信截图_20230608180121.png)
+
+launch文件里也给出了几个配置文件的路径，包括代价地图的配置，路径规划器的参数配置，这个后面再说
 
 路线规划之后就是让车子跟着规划走下来了，我刚准备手搓一个程序，发现示例代码给了...
 
@@ -1110,9 +1113,9 @@ int main(int argc, char **argv)
   return 0;
 }
 ```
-这个程序放上来纯粹是为了以后万万一有空想起来了看一眼，下面说我自己的
+这个程序放上来纯粹是为了以后万万一有空想起来了看一眼
 
-首先是路线规划到底是什么，在rviz打开`poseArray`然后选择`/move_base/TebLocalPlannerROS/teb_poses`这个topic，可以看到很多向量，这就是车子要走过的每一个点，我们可以根据这个点来规划车子行进
+下面说我自己的。首先是路线规划到底是什么，在rviz打开`poseArray`然后选择`/move_base/TebLocalPlannerROS/teb_poses`这个topic，可以看到很多向量，这就是车子要走过的每一个点，我们可以根据这个点来规划车子行进
 ![规划的路径点](微信截图_20230608201239.png)
 ![teb发布的其他话题](微信截图_20230608201807.png)
 或者直接用命令查看话题内容：
@@ -1123,10 +1126,192 @@ rostopic echo /move_base/TebLocalPlannerROS/local_plan
 
 好了差不多了开始写
 
+这个程序问题还是很大的，比如显然反正切值和舵机角度之间关系不是线性的，甚至没有正负判断，仅用于举例体现如何实现，以后用到务必修改
+
 run.py：
 ```python
+import rospy
+from geometry_msgs.msg import PoseArray, Twist
+from scipy.spatial.transform import Rotation as R
+import tf
+import math
 
 
+def get_dir(PoseArray):
+    global tf_listener, cmd_pub
+    # 获取teb规划的下一个点的位置
+    if len(PoseArray.poses) > 5:
+        pose_next = PoseArray.poses[5]
+    else:
+        pose_next = PoseArray.poses[-1]
+    print("next_pose:", pose_next.position)
+    print("-------------------------------------")
+    # rospy_Time(0)指最近时刻,从 /map 到 /base_link 的变换，也就是车目前的坐标
+    (trans, rot) = tf_listener.lookupTransform('/map', '/base_link', rospy.Time(0))
+    # 四元数转欧拉角转弧度
+    r = R.from_quat(rot)
+    euler_z = math.radians(r.as_euler('xyz', degrees=True)[2])
+    print("now_pose:", trans[0], trans[1], euler_z)
+    print("-------------------------------------")
+    # 比较arctan值计算舵机方向，差为负则左转
+    arg_next = math.atan2(pose_next.position.y, pose_next.position.x)
+    arg_now = math.atan2(trans[1], trans[0])
+    arg_d = arg_now - arg_next
+    print("arg:", arg_d)
+    print("-------------------------------------")
+    # 向底盘控制节点发送信息
+    twist = Twist()
+    twist.linear.x = 1500 + 200
+    twist.linear.y = 0
+    twist.linear.z = 0
+    twist.angular.x = 0
+    twist.angular.y = 0
+    twist.angular.z = 90 - 10000*arg_d
+    cmd_pub.publish(twist)
+    print(90 - 10000*arg_d)
+
+
+if __name__ == '__main__':
+    # 订阅teb的坐标话题，回调函数get_dir
+    rospy.init_node('teb_pos_subscriber', anonymous=True)
+    tf_listener = tf.TransformListener()
+    cmd_pub = rospy.Publisher('~/car/cmd_vel', Twist, queue_size=5)
+    rospy.Subscriber("/move_base/TebLocalPlannerROS/teb_poses", PoseArray, get_dir)
+    rospy.spin()
+
+```
+
+没有继续完善上面程序的原因就是......志伟哥已经写好了路径点纯追踪的程序，如果想要实现导航功能，把路径点读取改成获取导航坐标点就可以了
+
+pp.py:
+```python
+from geometry_msgs.msg import PoseArray
+from sklearn.metrics import pairwise_distances
+import rospy
+import tf2_ros
+import numpy as np
+import math
+import time
+from geometry_msgs.msg import Twist
+import json
+from scipy.interpolate import splprep, splev
+
+class PurePursuit:
+    def __init__(self):
+        self.path_list = []
+        self.final_point = None
+        self.load_path()
+
+        self.speed_mid = 1500
+        self.speed_max = 350
+        self.speed_max_final = 280
+        self.pp_k = 0.9
+
+
+        self.tf_buffer = tf2_ros.Buffer()
+        listener = tf2_ros.TransformListener(self.tf_buffer)
+        self.cmd_pub = rospy.Publisher('~/car/cmd_vel', Twist, queue_size=5)
+        self.start_time = rospy.Time.now()
+
+    def load_path(self):
+        x = [0]
+        y = [0]
+        with open('/home/ros-autocar/Ros-manualcar/src/autopilot/scripts/waypoint.json', 'r') as f:
+            data = json.load(f)
+            f.close()
+        waypoint = data["waypoint"]
+        for point in waypoint:
+            x.append(point[0])
+            y.append(point[1])
+        tck, u = splprep([x, y], s=0)
+        u_new = np.linspace(u.min(), u.max(), 200)
+        x_new, y_new = splev(u_new, tck)
+        for i in range(len(x_new)):
+            self.path_list.append([x_new[i], y_new[i]])
+        self.final_point = self.path_list[-1]
+
+    def run(self):
+        while not rospy.is_shutdown():
+            time.sleep(0.01)
+
+
+            try:
+                trans = self.tf_buffer.lookup_transform("map", 'base_link', rospy.Time())
+            except:
+                print("missing tf2 trans")
+                continue
+            x = trans.transform.translation.x
+            y = trans.transform.translation.y
+
+            if len(self.path_list) < 10:
+                dis_final = math.sqrt((self.final_point[0] - x) ** 2 + (self.final_point[1] - y) ** 2)
+                self.speed_max = self.speed_max_final
+                print(f"final distance: {dis_final}")
+                if dis_final < 0.7:
+                    twist = Twist()
+                    twist.linear.x = 1500
+                    twist.linear.y = 0
+                    twist.linear.z = 0
+                    twist.angular.x = 0
+                    twist.angular.y = 0
+                    twist.angular.z = 90
+                    self.cmd_pub.publish(twist)
+                    print("arrive")
+                    break
+            
+            if len(self.path_list) == 0:
+                continue
+
+            degree = self.quaternion_to_euler_angle(trans.transform.rotation.w,
+                                                    trans.transform.rotation.x,
+                                                    trans.transform.rotation.y,
+                                                    trans.transform.rotation.z,)
+            degree = degree / 180 * math.pi
+
+            for i in range(len(self.path_list)):
+                distance = math.sqrt((self.path_list[i][0] - x) ** 2 + (self.path_list[i][1] - y) ** 2)
+                if distance > self.pp_k:
+                    self.path_list = self.path_list[i:]
+                    break
+
+            forward_point = [self.path_list[0]]
+
+            a = forward_point[0][0]-x
+            b = forward_point[0][1]-y
+
+            theta = math.acos(a / math.sqrt(a * a + b * b))
+            if b < 0:
+                theta = - theta
+            theta -= degree
+
+            wheel_angle = 0.9*math.atan(2 * 0.3 * math.sin(theta) / self.pp_k * 2.15) / math.pi * 180
+            speed = self.speed_mid + self.speed_max
+
+            print(f"angle: {wheel_angle},speed:{speed},points:{len(self.path_list)}")
+
+            twist = Twist()
+            twist.linear.x = speed
+            twist.linear.y = 0
+            twist.linear.z = 0
+            twist.angular.x = 0
+            twist.angular.y = 0
+            twist.angular.z = 90+wheel_angle
+
+            self.cmd_pub.publish(twist)
+
+
+    def quaternion_to_euler_angle(self,w, x, y, z):
+        ysqr = y * y
+        t3 = +2.0 * (w * z + x * y)
+        t4 = +1.0 - 2.0 * (ysqr + z * z)
+        Z = np.degrees(np.arctan2(t3, t4))
+
+        return Z
+
+
+rospy.init_node('pp')
+pp = PurePursuit()
+pp.run()
 
 ```
 

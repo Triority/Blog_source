@@ -4,7 +4,7 @@ tags:
   - hexo
 cover: https://file.crazywong.com/gh/jerryc127/butterfly_cdn@2.1.0/top_img/index.jpg
 categories:
-  - CV工程师
+  - [计算机, CV工程师]
   - [计算机, 折腾记录]
 notshow: false
 date: 2023-06-07 09:35:07
