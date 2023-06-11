@@ -412,7 +412,7 @@ ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
 <!-- amcl -->
     <arg name="init_x" default="0" />
     <arg name="init_y" default="0" />
-    <arg name="init_a" default="1.57" />
+    <arg name="init_a" default="0" />
     <node pkg="amcl" type="amcl" name="amcl" output="screen">
         <!-- Publish scans from best pose at a max of 10 Hz -->
         <param name="transform_tolerance" value="0.2" />
