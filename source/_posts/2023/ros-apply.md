@@ -467,7 +467,7 @@ ros-autocar@ros-autocar:~/Ros-autocar$ rosrun map_server map_saver -f 233
 ## 路径规划：全局/局部
 ### 全局：A*
 
-
+具体原理文章太多了直接去搜吧，不想写了，至于导航的实操详见下面局部路径规划
 
 ### 局部：DWA，teb
 #### 动态窗口法：DWA
