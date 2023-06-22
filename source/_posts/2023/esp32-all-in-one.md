@@ -659,8 +659,8 @@ GPIO 39 (VN)
 #### GPIO电流
 根据 ESP32 数据表中的“推荐操作条件”部分，每个 GPIO 的绝对最大电流消耗为 40mA。
 
-# 实践应用
-## 技术树
+# 软件应用
+## 技术栈
 ### 按钮消抖
 上面的代码经常用于读取按钮是否被按下，但是实际上机械按钮在开关时总会因为各种原因导致的抖动，导致多次触发中断。
 
@@ -1529,7 +1529,7 @@ void loop() {
   command.run();
 }
 ```
-## 软件综合应用
+## 复杂应用
 ### 无线配网
 这个其实工作量挺大的，直接抄[别人抄的了](https://blog.csdn.net/qq_41650023/article/details/124674493)
 
@@ -1996,6 +1996,29 @@ void checkDNS_HTTP()
 ```
 </details>
 
+# 硬件设计
+## 自制开发板
+### 基础外围电路
+模组所需外围电路如下：
+![](530d52944eee4c589c6579eabfbe5054.png)
+
+### 自动下载电路
+![自动下载电路](a3170b9105f349c8a7aa473aa2c68382.png)
+
+一般只有自动下载电路是不能在下载模式和运行模式来回变化的，自动下载电路只能调整boot和en脚的电平变化来满足下载时序
+
+esp32和esp8266下载模式和正常运行模式（SPI启动模式）所需的引脚配置:
+![](4fefe86e7eff4265ae7310bb73ff40d5.png)
+GPIO2没有被配置，为了能启动下载模式，GPIO2要常态为低电平（因为SPI启动模式与GPIO2无关），所以GPIO2要下拉（虽然默认下拉，但外接下拉更保险），同理GPIO0要常态高电平才能进入SPI启动模式，要上拉。因为GPIO0接入自动下载电路，其在进入下载模式时的电平切换是自动的
+
+### 开发板原理图
+这是嘉立创的esp32开发板的[方案验证板](https://oshwhub.com/li-chuang-zhi-neng-ying-jian-bu/esp32-zui-xiao-ji-tong-ban-yan-zheng-ban)：
+![](Schematic_C2979602_ESP32模块方案验证板_2023-06-22.png)
+
+我在下面做出了一些修改，针脚改为类似uno一样的向上的母座，减少很多麻烦，不过板子面积也变得更大了，以及usb转串口改为更便宜的ch340等：
+
+
+
 # 参考资料
 https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
 https://deepbluembedded.com/esp32-pwm-tutorial-examples-analogwrite-arduino/
@@ -2012,3 +2035,4 @@ https://blog.csdn.net/qq_41868901/article/details/106203642
 https://blog.csdn.net/qq_27114397/category_7917392.html
 https://blog.csdn.net/weixin_43353164/article/details/105060630
 https://www.yiboard.com/thread-1344-1-1.html
+https://blog.csdn.net/qq_62361151/article/details/130102202
