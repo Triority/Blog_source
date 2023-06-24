@@ -42,7 +42,7 @@ void loop(){}
 ## 不建议使用或限制使用的引脚
 不建议使用 `Strapping引脚` ，`SPI flash 引脚` 以及 `仅输入的引脚`
 
-#### Strapping引脚
+### Strapping引脚
 ```
 GPIO 0
 GPIO 2
@@ -53,7 +53,7 @@ GPIO 15 (启动时必须为高电平)
 ```
 在硬件上要注意使用外接模块时不能将GPIO12拉高，否则将导致ESP32启动异常。还有一些GPIO在启动或重置时其状态更改为高或者输出PWM信号，在使用时需要注意。
 
-#### 集成在ESP-WROOM-32的SPI flash引脚
+### 集成在ESP-WROOM-32的SPI flash引脚
 GPIO 6 到 GPIO 11 在一些 ESP32 开发板中公开。但是，这些引脚连接到 ESP-WROOM-32 芯片上的集成 SPI 闪存，不推荐用于其他用途。所以，不要在你的项目中使用这些引脚：
 ```
 GPIO 6 (SCK/CLK)
@@ -63,7 +63,7 @@ GPIO 9 (SHD/SD2)
 GPIO 10 (SWP/SD3)
 GPIO 11 (CSC/CMD)
 ```
-#### 仅输入引脚
+### 仅输入引脚
 GPIO 34 到 39 是 GPI – 仅输入引脚。这些引脚没有内部上拉或下拉电阻。它们不能用作输出，因此只能将这些引脚用作输入：
 ```
 GPIO 34
@@ -72,11 +72,11 @@ GPIO 36
 GPIO 39
 ```
 
-#### 限制
+### 限制使用引脚
 这些引脚都是ESP32用于引导加载程序或者烧录模式/在大多数内置USB/Serial的开发板上，不需要担心这些引脚的状态，开发板会把这些引脚设置为正确的状态，以便使用烧录或启动模式。
 
 但是，如果你有外设连接到这些引脚上，当你在尝试上传新代码、用新固件烧写ESP32或重置电路板时可能会遇到麻烦，例如不明原因的错误和失败。可能是因为这些外设阻止ESP32进入正确的模式。
-## 周边设备
+## 外设资源
 ### 18个ADC通道
 #### 简介
 ESP32 有 18 x 12 位 ADC 输入通道(而ESP8266 只有 1x 10 位 ADC)。这些是可用作 ADC 和相应通道的 GPIO。
@@ -1997,9 +1997,17 @@ void checkDNS_HTTP()
 </details>
 
 # 硬件设计(开发板制作)
-首先放上官方文档：
-{% pdf https://atta.szlcsc.com/upload/public/pdf/source/20200730/C701341_95E089979D39CD8D2471FDC7C7AF29A1.pdf?Expires=4070880000&OSSAccessKeyId=LTAIJDIkh7KmGS1H&Signature=BPaEYnCOQ8GUguVEnyVucTt2nng%3D&response-content-disposition=attachment%3Bfilename%3DC701343_WIFI%25E6%25A8%25A1%25E5%259D%2597_ESP32-WROOM-32E-N16_%25E8%25A7%2584%25E6%25A0%25BC%25E4%25B9%25A6_ESPRESSIF%2528%25E4%25B9%2590%25E9%2591%25AB%2529WIFI%25E6%25A8%25A1%25E5%259D%2597%25E8%25A7%2584%25E6%25A0%25BC%25E4%25B9%25A6.PDF %}
+## 官方文档
 
+> ESP32 ­WROOM ­32E 技术规格书
+
+{% pdf https://www.espressif.com.cn/sites/default/files/documentation/esp32-wroom-32e_esp32-wroom-32ue_datasheet_cn.pdf %}
+
+> ESP32 硬件设计指南
+
+{% pdf https://www.espressif.com.cn/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf %}
+
+## 注意事项和启动配置
 模块电源电压为3.3V，一般使用`AMS1117-3.3`为其供电，其中要注意EN引脚要使用RC电路延迟启动。使用引脚 GPIO0 和 GPIO2 配置启动方式：
 
 ![](4fefe86e7eff4265ae7310bb73ff40d5.png)
@@ -2012,16 +2020,11 @@ GPIO2要常态为低电平。当EN引脚处于上升沿时，GPIO0高电平进�
 
 因为自动下载电路不能工作，我自己设计的电路都是直接手动按按钮来配置引脚电平设置芯片启动方式。开发板默认EN拉高，IO2拉低，IO0拉高。直接上电即可进入spi启动模式运行flash的程序，如果上电使用按钮将EN拉低和IO0拉低，IO2依然默认拉低，然后停止下拉EN启动芯片即可进入下载模式。
 
-
-芯片手册关于启动配置描述在28页:
-{% pdf https://www.espressif.com.cn/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf %}
-
-
-### 开发板原理图
+## 示例原理图
 这是嘉立创的esp32开发板的[方案验证板](https://oshwhub.com/li-chuang-zhi-neng-ying-jian-bu/esp32-zui-xiao-ji-tong-ban-yan-zheng-ban)：
 ![](Schematic_C2979602_ESP32模块方案验证板_2023-06-22.png)
 
-我在下面做出了一些修改，针脚改为类似uno一样的向上的母座，减少很多麻烦，不过板子面积也变得更大了，以及usb转串口改为更便宜的ch340等：
+对于常见的esp32开发板我做出了一些修改，针脚改为类似uno一样的向上的母座，减少很多接线的麻烦，以及usb转串口改为更便宜的ch340等(由于没有自动下载电路使用的ch340n)：
 
 
 
