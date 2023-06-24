@@ -2028,8 +2028,30 @@ GPIO2要常态为低电平。当EN引脚处于上升沿时，GPIO0高电平进�
 
 对于常见的esp32开发板我做出了一些修改，针脚改为类似uno一样的向上的母座，减少很多接线的麻烦，以及usb转串口改为更便宜的ch340等(由于没有自动下载电路使用的ch340n)：
 
+# 可能遇到的错误
+## 烧录报错 MD5 of file does not match data in flash
+> MD5 of file does not match data in flash
 
++ 安装`esptool.py`:`python -m pip install esptool`
++ 运行`python -m esptool --port COM5 write_flash_status --non-volatile 0` //COM5替换成ESP32连接端口
 
+出现以下输出即表示成功
+```
+esptool.py v2.4.0
+Connecting........_
+Detecting chip type... ESP8266
+Chip is ESP8266EX
+Features: WiFi
+MAC: b4:e6:2d:68:3b:96
+Uploading stub...
+Running stub...
+Stub running...
+Initial flash status: 0x0200
+Setting flash status: 0x0000
+After flash status: 0x0000
+Hard resetting via RTS pin...
+```
+> 注意事项：这个命令在进入烧录模式的时候才可以使用，在linux和mac下，一定要使用sudo
 # 参考资料
 https://randomnerdtutorials.com/esp32-pinout-reference-gpios/
 https://deepbluembedded.com/esp32-pwm-tutorial-examples-analogwrite-arduino/
@@ -2048,3 +2070,4 @@ https://blog.csdn.net/weixin_43353164/article/details/105060630
 https://www.yiboard.com/thread-1344-1-1.html
 https://blog.csdn.net/qq_62361151/article/details/130102202
 https://zhuanlan.zhihu.com/p/145369083
+https://blog.csdn.net/z755924843/article/details/82704020
