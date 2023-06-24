@@ -1996,26 +1996,26 @@ void checkDNS_HTTP()
 ```
 </details>
 
-# 硬件设计
+# 硬件设计(开发板制作)
 首先放上官方文档：
 {% pdf https://atta.szlcsc.com/upload/public/pdf/source/20200730/C701341_95E089979D39CD8D2471FDC7C7AF29A1.pdf?Expires=4070880000&OSSAccessKeyId=LTAIJDIkh7KmGS1H&Signature=BPaEYnCOQ8GUguVEnyVucTt2nng%3D&response-content-disposition=attachment%3Bfilename%3DC701343_WIFI%25E6%25A8%25A1%25E5%259D%2597_ESP32-WROOM-32E-N16_%25E8%25A7%2584%25E6%25A0%25BC%25E4%25B9%25A6_ESPRESSIF%2528%25E4%25B9%2590%25E9%2591%25AB%2529WIFI%25E6%25A8%25A1%25E5%259D%2597%25E8%25A7%2584%25E6%25A0%25BC%25E4%25B9%25A6.PDF %}
-## 自制开发板
-### 基础外围电路
-模组所需外围电路如下：
-![](530d52944eee4c589c6579eabfbe5054.png)
 
-### 下载电路
-自动下载电路能调整boot和en脚的电平变化来满足下载时序
-![自动下载电路](a3170b9105f349c8a7aa473aa2c68382.png)
+模块电源电压为3.3V，一般使用`AMS1117-3.3`为其供电，其中要注意EN引脚要使用RC电路延迟启动。使用引脚 GPIO0 和 GPIO2 配置启动方式：
 
-关于其工作原理网络上众说纷纭，基本都不太一样，就说一下esp32使用spi启动和进入串口下载模式的方式，看芯片手册大概整理一下是esp32和esp8266下载模式和正常运行模式（SPI启动模式）所需的引脚配置
 ![](4fefe86e7eff4265ae7310bb73ff40d5.png)
-GPIO2要常态为低电平。当EN引脚处于上升沿时，GPIO0要高电平才能进入SPI启动模式，低电平进入下载模式。此外注意EN上升沿需要配置延迟启动，详见下面芯片手册第11页
+
+GPIO2要常态为低电平。当EN引脚处于上升沿时，GPIO0高电平进入SPI启动模式，低电平进入串口下载模式。
+
+自动下载电路能调整boot和en脚的电平变化来满足下载时序，这是一个常用的自动下载电路原理图：
+![自动下载电路](微信截图_20230624230937.png)
+关于其工作原理众说纷纭，基本都不太一样，我也不是很清楚，实际自己做之后并不能工作，也没能找到原因。
+
+因为自动下载电路不能工作，我自己设计的电路都是直接手动按按钮来配置引脚电平设置芯片启动方式。开发板默认EN拉高，IO2拉低，IO0拉高。直接上电即可进入spi启动模式运行flash的程序，如果上电使用按钮将EN拉低和IO0拉低，IO2依然默认拉低，然后停止下拉EN启动芯片即可进入下载模式。
+
 
 芯片手册关于启动配置描述在28页:
 {% pdf https://www.espressif.com.cn/sites/default/files/documentation/esp32_hardware_design_guidelines_cn.pdf %}
 
-虽然但是因为用的串口芯片是ch340n没法做自动下载电路，后面应该是手动操作引脚的
 
 ### 开发板原理图
 这是嘉立创的esp32开发板的[方案验证板](https://oshwhub.com/li-chuang-zhi-neng-ying-jian-bu/esp32-zui-xiao-ji-tong-ban-yan-zheng-ban)：
