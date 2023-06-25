@@ -6,8 +6,8 @@ date: 2022-05-14 17:39:18
 categories: 
 - 做点好玩的
 tags:
-- PCB
-- 日常
+  - PCB设计
+  - 日常
 ---
 ## 关于PCB
 

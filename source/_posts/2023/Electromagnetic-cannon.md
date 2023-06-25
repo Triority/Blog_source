@@ -2,6 +2,7 @@
 title: 电磁炉理论
 tags:
   - 电磁炉
+  - PCB设计
 cover: /img/
 categories:
 - [计算机, 知识整理]

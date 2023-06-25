@@ -2,6 +2,7 @@
 title: 电磁炉设计实践记录
 tags:
   - 电磁炉
+  - PCB设计
 cover: /img/fbq.png
 categories:
 - [计算机, 知识整理]
