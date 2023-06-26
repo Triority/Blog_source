@@ -8,7 +8,7 @@ categories:
   - [计算机, 折腾记录]
 notshow: false
 date: 2023-06-07 09:35:07
-excerpt: butterfly配置
+description: butterfly配置
 ---
 # 前言
 之前用的fluid主题，心血来潮换成了butterfly，感觉还不错，不过可配置项就会多出很多，官方文档虽然全面但是顺序有点乱七八糟不好找，所以按自己的顺序写一些经常用到的配置项

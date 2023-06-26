@@ -8,7 +8,7 @@ categories:
 - minecraft
 notshow: false
 date: 2023-01-22 13:12:32
-excerpt: 新年快乐！
+description: 新年快乐！
 ---
 ## 修改partical数量限制
 今天是大年初一。昨天晚上用replay这个mod在1.12.2的服务器里录制了一段烟花表演，但是烟花生成的粒子数量实在是过于庞大，以至于烟花刚爆炸，生成的粒子就因为达到了数量上限而小时，只剩下爆炸产生的黑色球状粒子，巨丑hhh

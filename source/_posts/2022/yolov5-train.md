@@ -4,7 +4,7 @@ date: 2022-12-10 17:52:20
 tags:
 - python
 - 神经网络
-excerpt: yolov5数据集训练
+description: yolov5数据集训练
 cover: /img/yolov5.png
 categories: 
 - [计算机, 知识整理]

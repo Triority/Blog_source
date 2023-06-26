@@ -3,7 +3,7 @@ title: CUMTB论坛
 date: 2022-12-31 20:01:54
 tags:
 - CUMTB
-excerpt: 某位帅气学弟(@ztn)建立了一个论坛，欢迎各位校友来聊天啊
+description: 某位帅气学弟(@ztn)建立了一个论坛，欢迎各位校友来聊天啊
 cover: /img/lyk.jpg
 categories: 
 - 整活

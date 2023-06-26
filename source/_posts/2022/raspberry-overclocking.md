@@ -4,7 +4,7 @@ date: 2022-07-14 01:06:58
 tags:
 - 树莓派
 - 教程
-excerpt: 今天拿出树莓派来烧一烧……
+description: 今天拿出树莓派来烧一烧……
 cover: /img/raspberry_overclocking.png
 categories: 
 - [计算机, 折腾记录]

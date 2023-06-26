@@ -1,6 +1,6 @@
 ---
 title: Arduino笔记:serial相关操作
-excerpt: 记录了Arduino串口通讯相关的函数
+description: 记录了Arduino串口通讯相关的函数
 cover: /img/arduino.png
 date: 2022-05-09 22:04:53
 categories: 

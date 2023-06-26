@@ -4,7 +4,7 @@ date: 2022-11-12 02:03:25
 tags:
 - python
 - web
-excerpt: esp32连接web服务器获取命令实现远程控制
+description: esp32连接web服务器获取命令实现远程控制
 cover: /img/auto-access.jpg
 categories: 
 - [计算机, 源码分享]

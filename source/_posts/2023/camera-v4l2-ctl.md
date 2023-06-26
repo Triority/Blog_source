@@ -2,7 +2,7 @@
 title: 使用v4l2-ctl获取和设置摄像头参数
 tags:
   - linux
-index_img: /img/微信截图_20230626103717.png
+cover: /img/微信截图_20230626103717.png
 categories:
   - [计算机, CV工程师]
 date: 2023-06-26 10:11:05

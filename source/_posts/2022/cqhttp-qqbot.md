@@ -6,7 +6,7 @@ tags:
 - QQ机器人
 - mySQL
 - web
-excerpt: 看了go-cqhttp的文档之后，深感我要框架做何用，直接python写个后端和cqhttp用http通讯多简单啊hhh
+description: 看了go-cqhttp的文档之后，深感我要框架做何用，直接python写个后端和cqhttp用http通讯多简单啊hhh
 cover: /img/go-cqhttp.png
 categories: 
 - [计算机, 知识整理]

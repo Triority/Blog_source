@@ -8,7 +8,7 @@ categories:
 - [计算机, 知识整理]
 notshow: false
 date: 2023-02-24 21:56:43
-excerpt: arduino舵机库的使用
+description: arduino舵机库的使用
 ---
 # 注意事项
 当在UNO使用`<Servo.h>`时，由于占用的9和10号数字引脚的PWM定时器，因此它们无法使用`analogWrite()`语句。但是可以接作为舵机控制信号引脚。其他型号详见各自文档。

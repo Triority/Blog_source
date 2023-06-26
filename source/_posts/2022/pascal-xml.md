@@ -1,6 +1,6 @@
 ---
 title: 数据集pascal-xml格式转xml格式
-excerpt: 把pascal格式的数据集输出改为xml格式
+description: 把pascal格式的数据集输出改为xml格式
 cover: /img/pascal-xml.png
 date: 2022-06-28 21:45:44
 tags:

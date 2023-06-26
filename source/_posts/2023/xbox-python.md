@@ -10,7 +10,7 @@ categories:
 - [计算机, 源码分享]
 notshow: false
 date: 2023-02-27 16:38:34
-excerpt: 使用python控制车模
+description: 使用python控制车模
 ---
 ## 手柄信息读取
 使用python读取xbox手柄数据例程：

@@ -7,7 +7,7 @@ categories:
 - [计算机, 知识整理]
 notshow: false
 date: 2023-04-17 15:25:47
-excerpt: stm32基础学习笔记
+description: stm32基础学习笔记
 ---
 # 简介
 ![STM32F103C8T6是一款由意法半导体公司(ST)推出的基于Cortex-M3内核的32位微控制器，采用`LQFP48`封装](STM32F103C8T6.png)

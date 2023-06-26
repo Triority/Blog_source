@@ -1,6 +1,6 @@
 ---
 title: 2021拍摄作品合辑
-excerpt: 把感觉比较好看的照片做个合辑吧
+description: 把感觉比较好看的照片做个合辑吧
 date: 2022-07-02 23:56:51
 cover: /img/photos.jpg
 tags:

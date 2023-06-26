@@ -5,7 +5,7 @@ tags:
 - python
 - opencv
 - 3D打印
-excerpt: 重写了之前用的程序...
+description: 重写了之前用的程序...
 cover: /img/photos2video.png
 categories: 
 - [计算机, 源码分享]

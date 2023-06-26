@@ -7,7 +7,7 @@ categories:
 - [计算机, CV工程师]
 notshow: false
 date: 2023-02-04 02:08:32
-excerpt: mklink
+description: mklink
 ---
 想利用onedrive同步文件夹。但是onedrive的同步只能选择桌面等指定的几个文件夹。于是采用直接创建软连接到onedrive目录的方法：
 ```

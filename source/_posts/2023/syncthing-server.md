@@ -3,7 +3,7 @@ title: syncthing发现和中继服务器的搭建
 date: 2023-01-06 22:39:17
 tags:
 - 教程
-excerpt: 搭建自己的syncthing发现和中继服务器以加快速度和提高稳定性
+description: 搭建自己的syncthing发现和中继服务器以加快速度和提高稳定性
 cover: /img/syncthing.png
 categories: 
 - [计算机, 折腾记录]

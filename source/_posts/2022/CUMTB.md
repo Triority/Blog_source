@@ -4,7 +4,7 @@ date: 2022-10-08 23:59:13
 tags:
 - 整活
 - CUMTB
-excerpt: 希望疫情早日结束哦~
+description: 希望疫情早日结束哦~
 cover: /img/牢房.png
 categories: 
 - 整活

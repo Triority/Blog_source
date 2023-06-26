@@ -3,7 +3,7 @@ title: 天气预报
 date: 2022-4-29 02:13:28
 tags:
 - python
-excerpt: 使用和风天气api获取天气并发送邮件
+description: 使用和风天气api获取天气并发送邮件
 cover: /img/hp-feat-data.png
 categories: 
 - [计算机, 源码分享]

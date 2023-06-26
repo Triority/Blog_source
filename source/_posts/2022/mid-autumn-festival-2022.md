@@ -4,7 +4,7 @@ date: 2022-09-10 23:41:26
 tags:
 - 摄影
 - 日常
-excerpt: 想买个800mm镜头hhhhhhhhhc
+description: 想买个800mm镜头hhhhhhhhhc
 cover: /img/mid-moon-festival.jpg
 categories: 
 - [生活, 天文摄影]

@@ -3,7 +3,7 @@ title: python使用selenium操作edge浏览器
 date: 2022-12-12 21:59:04
 tags:
 - python
-excerpt: python使用selenium操作edge浏览器
+description: python使用selenium操作edge浏览器
 cover: /img/selenium.webp
 categories: 
 - [计算机, 折腾记录]

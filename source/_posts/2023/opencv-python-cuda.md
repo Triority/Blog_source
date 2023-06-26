@@ -8,7 +8,7 @@ categories:
 - [计算机, 折腾记录]
 notshow: true
 date: 2023-04-16 20:44:17
-excerpt: 使用cuda加速opencv
+description: 使用cuda加速opencv
 ---
 # 安装环境
 ## CUDA Toolkit

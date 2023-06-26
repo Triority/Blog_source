@@ -5,7 +5,7 @@ tags:
 - python
 - QQ机器人
 - mySQL
-excerpt: 基于nonebot2+cqhttp的QQ机器人以及使用mySQL的记分系统
+description: 基于nonebot2+cqhttp的QQ机器人以及使用mySQL的记分系统
 cover: /img/nonebot.png
 categories: 
 - [计算机, 折腾记录]

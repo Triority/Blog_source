@@ -4,7 +4,7 @@ date: 2022-07-11 16:36:14
 tags:
 - arduino
 - C语言
-excerpt: 之前浅学了一下做巡线车，代码很烂仅供参考
+description: 之前浅学了一下做巡线车，代码很烂仅供参考
 cover: /img/arduino_line_follower.jpg
 categories: 
 - [计算机, 源码分享]

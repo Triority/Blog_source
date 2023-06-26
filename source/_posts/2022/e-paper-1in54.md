@@ -5,7 +5,7 @@ tags:
 - arduino
 - python
 - 显示屏
-excerpt: 一个1.54寸双色墨水屏的折腾日记
+description: 一个1.54寸双色墨水屏的折腾日记
 cover: /img/e-paper-1in54.png
 categories: 
 - [计算机, 折腾记录]

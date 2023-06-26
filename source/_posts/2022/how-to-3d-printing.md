@@ -4,7 +4,7 @@ date: 2022-09-22 23:48:53
 tags:
 - 3D打印
 - 教程
-excerpt: 一篇给刚入坑3D打印朋友们的入门指导......
+description: 一篇给刚入坑3D打印朋友们的入门指导......
 cover: /img/3D打印艺术品.png
 categories: 
 - [计算机, 文档教程]

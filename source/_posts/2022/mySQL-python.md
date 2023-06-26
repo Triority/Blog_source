@@ -6,7 +6,7 @@ tags:
 - QQ机器人
 - 笔记
 - mySQL
-excerpt: 以制作一个QQ机器人记分系统为主要任务，记录数据库学习过程
+description: 以制作一个QQ机器人记分系统为主要任务，记录数据库学习过程
 cover: /img/mySQL.png
 categories: 
 - [计算机, 知识整理]

@@ -3,7 +3,7 @@ title: 春节礼炮两千响！
 date: 2023-01-01 13:50:48
 tags:
 - 整活
-excerpt: 两千响礼炮送上，祝大家元旦快乐！
+description: 两千响礼炮送上，祝大家元旦快乐！
 cover: /img/要多想.png
 categories: 
 - 整活

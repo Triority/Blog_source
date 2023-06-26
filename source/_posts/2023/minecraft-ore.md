@@ -7,7 +7,7 @@ categories:
 - minecraft
 notshow: false
 date: 2023-04-04 6:54:12
-excerpt: minecraft矿石生成概率机制
+description: minecraft矿石生成概率机制
 ---
 ## 主世界
 ### 概率测算

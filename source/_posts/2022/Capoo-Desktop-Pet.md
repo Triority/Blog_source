@@ -4,7 +4,7 @@ date: 2022-12-07 15:38:24
 tags:
 - python
 - Qt
-excerpt: 使用PyQT开发桌宠程序并打包为windows软件
+description: 使用PyQT开发桌宠程序并打包为windows软件
 cover: /img/Capoo.jpg
 categories: 
 - [计算机, 知识整理]

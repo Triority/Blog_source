@@ -4,7 +4,7 @@ date: 2022-07-15 23:58:42
 tags:
 - linux
 - 教程
-excerpt: 卸载ubuntu系统
+description: 卸载ubuntu系统
 cover: /img/win_ubuntu_uninstall.png
 categories: 
 - [计算机, 折腾记录]

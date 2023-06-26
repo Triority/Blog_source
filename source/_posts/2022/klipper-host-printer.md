@@ -3,7 +3,7 @@ title: klipper做上位机diy的3D打印机
 date: 2022-08-31 22:49:36
 tags:
 - 3D打印
-excerpt: 一切开始于fluidd页面真的帅啊hhhhhhhc
+description: 一切开始于fluidd页面真的帅啊hhhhhhhc
 cover: /img/klipper.png
 categories: 
 - [计算机, 折腾记录]

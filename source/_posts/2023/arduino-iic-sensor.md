@@ -8,7 +8,7 @@ categories:
 - [计算机, 折腾记录]
 notshow: false
 date: 2023-02-25 23:28:44
-excerpt: 使用arduino的同轴麦轮自平衡车
+description: 使用arduino的同轴麦轮自平衡车
 ---
 ## 前言
 原计划这个是用在rm里的麦轮平衡车，但是后来rm鸽子了也就懒得做麦轮了，但是刚好校赛剩下的零件可以做个两轮的车子于是就有了做个

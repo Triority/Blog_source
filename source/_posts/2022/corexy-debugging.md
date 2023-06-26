@@ -3,7 +3,7 @@ title: corexy结构方向调整
 date: 2022-10-25 10:10:23
 tags:
 - 3D打印
-excerpt: corexy结构方向调整
+description: corexy结构方向调整
 cover: /img/corexy-debugging.png
 categories: 
 - [计算机, 知识整理]

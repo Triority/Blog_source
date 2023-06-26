@@ -1,6 +1,6 @@
 ---
 title: C语言学习笔记
-excerpt: 学校教材内容的摘要
+description: 学校教材内容的摘要
 cover: /img/c语言.webp
 date: 2022-04-02 09:33:04
 categories: 

@@ -6,7 +6,7 @@ tags:
 - 摄影
 categories: 
 - [生活, 游览摄影]
-excerpt: 今日游览拍摄记录
+description: 今日游览拍摄记录
 cover: /img/dishuidong.jpg
 ---
 # 多图预警!

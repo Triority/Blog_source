@@ -8,7 +8,7 @@ categories:
   - 整活
 notshow: false
 date: 2023-01-25 23:36:03
-excerpt: 此视频只是浅浅吐槽一下校园网，毫无恶意，手动狗头保命hhh
+description: 此视频只是浅浅吐槽一下校园网，毫无恶意，手动狗头保命hhh
 ---
 此视频只是浅浅吐槽一下校园网，毫无恶意，手动狗头保命hhh
 

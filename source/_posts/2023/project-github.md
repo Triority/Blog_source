@@ -6,7 +6,7 @@ categories:
 - [计算机, 文档教程]
 notshow: false
 date: 2023-04-16 19:26:10
-excerpt: 将自己的工程记录到github
+description: 将自己的工程记录到github
 ---
 # 创建github仓库
 这部分不详细说了十分简单，在github仓库创建完成后还会给你显示常用命令

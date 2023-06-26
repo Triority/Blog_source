@@ -9,7 +9,7 @@ tags:
 categories: 
 - [计算机, 知识整理]
 cover: /img/ros.png
-excerpt: ros学习知识整理和过程记录
+description: ros学习知识整理和过程记录
 ---
 
 ## 工作空间和功能包

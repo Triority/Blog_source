@@ -6,7 +6,7 @@ tags:
 - opencv
 - ROS
 - 笔记
-excerpt: 根据激光雷达的数据特点对DBSCAN聚类算法进行修改
+description: 根据激光雷达的数据特点对DBSCAN聚类算法进行修改
 cover: /img/LaserScan-DBSCAN-PolarCoordinates.png
 categories: 
 - [计算机, 源码分享]

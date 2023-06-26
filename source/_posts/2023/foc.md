@@ -10,7 +10,7 @@ categories:
 - 值得一提的文章
 notshow: false
 date: 2023-02-26 21:27:06
-excerpt: cool!
+description: cool!
 ---
 ## 硬件装置
 ### 电机

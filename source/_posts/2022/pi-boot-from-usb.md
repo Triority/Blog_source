@@ -5,7 +5,7 @@ tags:
 - 笔记
 - 树莓派
 - linux
-excerpt: 树莓派目前最大的性能瓶颈莫过于sd卡读取速度，pi4支持usb3.0后就可以用外置usb启动来提高性能[于是瓶颈就成了cpu......]
+description: 树莓派目前最大的性能瓶颈莫过于sd卡读取速度，pi4支持usb3.0后就可以用外置usb启动来提高性能[于是瓶颈就成了cpu......]
 cover: /img/raspberry_overclocking.png
 categories: 
 - [计算机, 折腾记录]

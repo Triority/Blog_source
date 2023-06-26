@@ -7,7 +7,7 @@ categories:
 - [生活, 游览记录]
 notshow: false
 date: 2023-02-04 01:00:01
-excerpt: SPICY！
+description: SPICY！
 ---
 ## 图片压缩
 本文内图片为压缩图片流量消耗较小，如果希望查看原图请访问[原图页](https://triority.cn/2023/spicy/)

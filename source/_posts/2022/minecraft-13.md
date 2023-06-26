@@ -1,6 +1,6 @@
 ---
 title: 庆祝Minecraft的13周年纪念日!
-excerpt: 今天是minecraft的13周年哦~
+description: 今天是minecraft的13周年哦~
 cover: /img/minecraft-13.png
 tags:
 - minecraft

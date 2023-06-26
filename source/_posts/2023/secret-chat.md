@@ -7,7 +7,7 @@ categories:
 - [计算机, 源码分享]
 notshow: false
 date: 2023-01-24 13:40:42
-excerpt: 别问，问就是闲的
+description: 别问，问就是闲的
 ---
 ## 别问，问就是闲的
 python用了一年半了，我说这是我第一次自己写class你信吗hhh

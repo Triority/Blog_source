@@ -1,6 +1,6 @@
 ---
 title: 2020拍摄作品合辑
-excerpt: 把感觉比较好看的照片做个合辑吧
+description: 把感觉比较好看的照片做个合辑吧
 date: 2022-07-03 23:25:17
 cover: /img/photos.jpg
 tags:

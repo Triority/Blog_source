@@ -3,7 +3,7 @@ title: 人脸识别图像分类
 date: 2023-01-07 11:15:27
 tags:
 - python
-excerpt: 人脸识别图像分类
+description: 人脸识别图像分类
 cover: /img/syk3.jpg
 categories: 
 - [计算机, 知识整理]

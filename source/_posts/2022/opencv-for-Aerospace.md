@@ -4,7 +4,7 @@ date: 2022-1-28 21:33:39
 tags:
 - python
 - opencv
-excerpt: 在智能车航天组中的视觉识别赛道并拟合数据
+description: 在智能车航天组中的视觉识别赛道并拟合数据
 cover: /img/opencv-for-Aerospace.png
 categories: 
 - [计算机, 源码分享]

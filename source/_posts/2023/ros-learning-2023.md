@@ -10,7 +10,7 @@ categories:
 - [计算机, 知识整理]
 notshow: false
 date: 2023-02-21 16:37:19
-excerpt: 重写一篇笔记
+description: 重写一篇笔记
 ---
 # 前言
 之前写过一篇关于[ROS学习笔记](https://triority.cn/root/ros学习笔记/)，那时候刚开始学感觉不适合现在使用所以重写一篇。

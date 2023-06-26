@@ -3,7 +3,7 @@ title: hexo的fluid主题设置文章首页隐藏
 date: 2023-01-07 21:56:50
 tags:
 - hexo
-excerpt: hexo的fluidd主题设置文章首页隐藏
+description: hexo的fluidd主题设置文章首页隐藏
 cover: /img/lyk2.jpg
 categories: 
 - [计算机, 折腾记录]

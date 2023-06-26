@@ -3,7 +3,7 @@ title: frpc-systemctl
 date: 2022-09-29 02:17:30
 tags:
 - linux
-excerpt: 日常重建环境...之frpc...
+description: 日常重建环境...之frpc...
 cover: /img/frp.png
 categories: 
 - [计算机, CV工程师]

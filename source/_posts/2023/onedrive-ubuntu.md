@@ -7,7 +7,7 @@ categories:
 - [计算机, 折腾记录]
 notshow: false
 date: 2023-01-20 15:41:17
-excerpt: ubuntu下使用rclone将onedrive挂载
+description: ubuntu下使用rclone将onedrive挂载
 ---
 ## 前言
 最近买了`onedrive`5T的容量，挂载给服务器岂不是巨香
