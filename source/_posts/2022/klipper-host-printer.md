@@ -25,9 +25,10 @@ klipper使用芯片的引脚名称，与marlin不同，mks的github仓库虽然�
 ![PIN](PIN.png)
 
 ### 我的配置文件
-printer.cfg
+`printer.cfg`
 ```
 # MKS Gen l V2.1
+[include timelapse.cfg]
 
 [stepper_x]
 step_pin: PF0
@@ -58,7 +59,7 @@ enable_pin: !PK0
 microsteps: 16
 rotation_distance: 8
 endstop_pin: probe:z_virtual_endstop  #Z-Min, PD2:Z-Max
-position_max: 280
+position_max: 260
 position_min: -3
 
 [extruder]
@@ -66,7 +67,7 @@ step_pin: PA4
 dir_pin: PA6
 enable_pin: !PA2
 microsteps: 16
-rotation_distance: 7
+rotation_distance: 7.85
 nozzle_diameter: 0.4
 filament_diameter: 1.750
 heater_pin: PB4
@@ -74,11 +75,11 @@ sensor_type: ATC Semitec 104GT-2
 sensor_pin: PK5
 min_temp: 0
 max_temp: 270
-control: pid
-pid_Kp: 21.438
-pid_Ki: 0.888
-pid_Kd: 129.435
-max_extrude_only_distance: 500.0
+#control: pid
+#pid_Kp: 21.438
+#pid_Ki: 0.888
+#pid_Kd: 129.435
+max_extrude_only_distance: 50000.0
 
 [verify_heater extruder]
 max_error: 1200
@@ -102,12 +103,12 @@ heating_gain: 1
 heater_pin: PH5
 sensor_type: ATC Semitec 104GT-2
 sensor_pin: PK6
-min_temp: 0
-max_temp: 130
-control: pid
-pid_kp = 74.551
-pid_ki = 1.053
-pid_kd = 1319.559
+min_temp: -100
+max_temp: 180
+#control: pid
+#pid_kp = 74.551
+#pid_ki = 1.053
+#pid_kd = 1319.559
 
 [verify_heater heater_bed]
 max_error: 12000
@@ -125,23 +126,25 @@ serial:/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
 
 [printer]
 kinematics: corexy
-max_velocity: 1000
+max_velocity: 3000
 max_accel: 3000
-max_z_velocity: 10
-max_z_accel: 500
-square_corner_velocity: 10.0
+max_z_velocity: 20
+max_z_accel: 300
+square_corner_velocity: 300.0
 
+[output_pin Camera_control]
+pin: PC4
 
 [fan_generic LED]
 pin: PL0
 shutdown_speed: 1.0
 
-[fan_generic X舵机]
+[fan_generic Camera_X]
 pin: PG5
 max_power: 0.125
 cycle_time: 0.02
 
-[fan_generic Y舵机]
+[fan_generic Camera_Y]
 pin: PE3
 max_power: 0.125
 cycle_time: 0.02
@@ -166,7 +169,7 @@ sensor_pin: ^PD2
 control_pin: PB5
 x_offset: 36
 y_offset: 0
-z_offset: 3.550
+z_offset: 3.150
 speed: 5.0
 samples: 2
 samples_result: median
@@ -203,9 +206,9 @@ probe_count: 3,3
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  -0.001250, -0.028750, 0.018750
-#*# 	  0.003750, 0.007500, 0.065000
-#*# 	  -0.077500, -0.108750, -0.005000
+#*# 	-0.025000, -0.148750, -0.075000
+#*# 	-0.010000, -0.156250, -0.062500
+#*# 	-0.040000, -0.137500, -0.046250
 #*# tension = 0.2
 #*# min_x = 60.0
 #*# algo = lagrange
@@ -216,7 +219,79 @@ probe_count: 3,3
 #*# max_y = 160.0
 #*# mesh_x_pps = 2
 #*# max_x = 260.0
+#*#
+#*# [extruder]
+#*# control = pid
+#*# pid_kp = 19.454
+#*# pid_ki = 0.675
+#*# pid_kd = 140.071
+#*#
+#*# [heater_bed]
+#*# control = pid
+#*# pid_kp = 1000
+#*# pid_ki = 0.0
+#*# pid_kd = 0.0
 
+```
+
+`moonraker.conf`
+```
+[server]
+host: 0.0.0.0
+port: 7125
+enable_debug_logging: False
+klippy_uds_address: /tmp/klippy_uds
+
+[authorization]
+trusted_clients:
+    10.0.0.0/8
+    127.0.0.0/8
+    169.254.0.0/16
+    172.16.0.0/12
+    192.168.0.0/16
+    FE80::/10
+    ::1/128
+cors_domains:
+    http://*.lan
+    http://*.local
+    https://my.mainsail.xyz
+    http://my.mainsail.xyz
+    https://app.fluidd.xyz
+    http://app.fluidd.xyz
+
+[database]
+database_path: /home/orangepi/.moonraker_database
+
+[file_manager]
+config_path: /home/orangepi/klipper_config
+log_path: /home/orangepi/klipper_logs
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel: dev
+refresh_interval: 168
+
+[update_manager fluidd]
+type: web
+channel: stable
+repo: fluidd-core/fluidd
+path: ~/fluidd
+
+[timelapse]
+##   Following basic configuration is default to most images and don't need
+##   to be changed in most scenarios. Only uncomment and change it if your
+##   Image differ from standart installations. In most common scenarios
+##   a User only need [timelapse] in there configuration.
+#output_path: ~/timelapse/      #文件输出路径 
+##   Directory where the generated video will be saved
+#frame_path: /tmp/timelapse/   #项目临时存放路径 
+##   Directory where the temporary frames are saved
+#ffmpeg_binary_path: /usr/bin/ffmpeg
+##   Directory where ffmpeg is installed #编译器路径
+snapshoturl: http://localhost:8080/?action=snapshot
 ```
 
 ## 打印参数优化
