@@ -260,4 +260,53 @@ void loop(void)
 ```
 看完注释的内容差不多也就基本会用sprite这个神奇的东西了，可以做下一步工作了
 
+简单尝试一下做个根据电位器移动的字符串
+
+电位器是连接在VP引脚上的，也就是GPIO39，屏幕接线不变
+
+里面有一些魔法数字，是适配我这个240*240的屏幕的，如果是其他分辨率的屏幕可能需要做些修改
+
+```
+// 设置sprite的宽高
+#define WIDTH  120
+#define HEIGHT 120
+#include <TFT_eSPI.h>
+TFT_eSPI    tft = TFT_eSPI();
+TFT_eSprite spr = TFT_eSprite(&tft);
+
+void setup(){
+  Serial.begin(115200);
+  tft.init();
+  spr.setColorDepth(8);
+  // 创建一个sprite
+  spr.createSprite(WIDTH, HEIGHT);
+
+  tft.fillScreen(TFT_BLACK);
+}
+
+void loop(void){
+  // 填充整个sprite为黑色 (Sprite 还在内存中所以不可见)
+  spr.fillSprite(TFT_BLACK);
+
+  spr.setTextDatum(MC_DATUM);
+  spr.drawString("Sprite", WIDTH/2, HEIGHT/2, 4);
+  spr.pushSprite(tft.width()/2 - WIDTH/2, tft.height()/2 - HEIGHT/2);
+
+  tft.fillScreen(TFT_BLACK);
+
+  int x = tft.width() / 2  -  WIDTH / 2;
+  int y = tft.height() / 2 - HEIGHT / 2;
+  while (true){
+  int analogValueX=analogReadMilliVolts(39);
+  int x_goal = analogValueX*240/3300;
+
+  x+=(x_goal-x)/10;
+
+  spr.pushSprite(x-60, 60);
+  }
+}
+```
+
+效果很棒，非常丝滑舒适
+{% dplayer "url=edcc5dd7253720d2441f86f45a76d544.mp4" %}
 # Sprite方法
