@@ -12,6 +12,7 @@ notshow: false
 date: 2023-02-26 21:27:06
 description: cool!
 ---
+# 前面的
 ## 硬件装置
 ### 电机
 买了两种，都是320kV的，一个是小云台电机，一个是来自咸鱼的5008植保电机[卖家说单机拉力三公斤hhh实测相电阻0.15电流恐怖]。
@@ -406,3 +407,135 @@ BLDCMotor motor = BLDCMotor(7);
 BLDCDriver6PWM driver = BLDCDriver6PWM(5,6, 9,10, 3,11);
 ```
 
+# 后面的
+分个前后面是因为这两段间隔时间太久了，学习的方向也发生很大变化
+## 硬件
+之前的5008已经卖掉了，小电机倒是还在，还买了几个4010云台电机和118mm定子的微型电机
+## 电路(PCB)
+电路是基于自己设计的4010驱动板：
+
+| {% pdf Schematic_esp32-drv8313-4010_2023-07-06.pdf %}  | ![](QQ截图20230706031048.png)  |
+| :------------: | :------------: |
+|  原理图 |  PCB-3D |
+
+## simplefoc程序
+主控还是esp32，esp32跟atmega328p相比多了个步骤就是配置iic引脚，永远记不住怎么写，在这备份一份以后过来抄
+### esp32+as5600位置闭环
+```
+/**
+ * ESP32 position motion control example with magnetic sensor
+ */
+#include <SimpleFOC.h>
+
+// SPI Magnetic sensor instance (AS5047U example)
+// MISO 12
+// MOSI 9
+// SCK 14
+// magnetic sensor instance - SPI
+//MagneticSensorSPI sensor = MagneticSensorSPI(AS5147_SPI, 15);
+
+// I2C Magnetic sensor instance (AS5600 example)
+// make sure to use the pull-ups!!
+// SDA 21
+// SCL 22
+// magnetic sensor instance - I2C
+MagneticSensorI2C sensor = MagneticSensorI2C(AS5600_I2C);
+
+// Analog output Magnetic sensor instance (AS5600)
+// MagneticSensorAnalog sensor = MagneticSensorAnalog(A1, 14, 1020);
+
+// Motor instance
+BLDCMotor motor = BLDCMotor(11);
+BLDCDriver3PWM driver = BLDCDriver3PWM(25, 26, 27, 14);
+
+
+// angle set point variable
+float target_angle = 0;
+// instantiate the commander
+Commander command = Commander(Serial);
+void doTarget(char* cmd) { command.scalar(&target_angle, cmd); }
+
+void setup() {
+
+  // initialise magnetic sensor hardware
+  Wire.setPins(33,32);
+  Wire.begin();
+  sensor.init(&Wire);
+  // link the motor to the sensor
+  motor.linkSensor(&sensor);
+
+  // driver config
+  // power supply voltage [V]
+  driver.voltage_power_supply = 12;
+  driver.init();
+  // link the motor and the driver
+  motor.linkDriver(&driver);
+
+  // choose FOC modulation (optional)
+  motor.foc_modulation = FOCModulationType::SpaceVectorPWM;
+
+  // set motion control loop to be used
+  motor.controller = MotionControlType::angle;
+
+  // contoller configuration
+  // default parameters in defaults.h
+
+  // velocity PI controller parameters
+  motor.PID_velocity.P = 0.2f;
+  motor.PID_velocity.I = 20;
+  // maximal voltage to be set to the motor
+  motor.voltage_limit = 6;
+
+  // velocity low pass filtering time constant
+  // the lower the less filtered
+  motor.LPF_velocity.Tf = 0.01f;
+
+  // angle P controller
+  motor.P_angle.P = 20;
+  // maximal velocity of the position control
+  motor.velocity_limit = 40;
+
+  // use monitoring with serial
+  Serial.begin(115200);
+  // comment out if not needed
+  motor.useMonitoring(Serial);
+
+
+  // initialize motor
+  motor.init();
+  // align sensor and start FOC
+  motor.initFOC();
+
+  // add target command T
+  command.add('T', doTarget, "target angle");
+
+  Serial.println(F("Motor ready."));
+  Serial.println(F("Set the target angle using serial terminal:"));
+  _delay(1000);
+}
+
+void loop() {
+
+  // main FOC algorithm function
+  // the faster you run this function the better
+  // Arduino UNO loop  ~1kHz
+  // Bluepill loop ~10kHz
+  motor.loopFOC();
+
+  // Motion control function
+  // velocity, position or voltage (defined in motor.controller)
+  // this function can be run at much lower frequency than loopFOC() function
+  // You can also use motor.move() and set the motor.target in the code
+  motor.move(target_angle);
+
+
+  // function intended to be used with serial plotter to monitor motor variables
+  // significantly slowing the execution down!!!!
+  // motor.monitor();
+
+  // user communication
+  command.run();
+}
+```
+### esp32+LM324力矩闭环
+我在LM324周围实际焊接的电阻是1K和100K，所以实际上电压会放大101倍，就按100倍算，也就是1A时电阻产生电压为0.01V，ADC电压为1V，esp32默认ADC范围是3.3V，也就是电流可以达到3.3A已经超过驱动芯片drv8313最大值2.5A了，量程刚刚好。三相线都有电流检测功能。
