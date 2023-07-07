@@ -405,6 +405,110 @@ GPIO 22 (SCL)
 Wire.begin(SDA, SCL);
 ```
 #### 实例
+##### 主从设备传输
+###### 方法
+
+###### 示例
+> 主发从收
+
+主机：
+```
+// 直接在Arduino IDE选择“文件”→“示例”→Wire→master_writer可以打开该文件
+#include <Wire.h>
+
+void setup() {
+  Wire.begin(); 					// Wire初始化，作为主机加入到IIC总线
+}
+
+byte x = 0;							// 定义一个byte变量以便串口调试
+void loop() {
+  Wire.beginTransmission(8); 		// 向地址为8的从机传送数据
+  Wire.write("x is ");        		// 发送5B的字符串
+  Wire.write(x);              		// 发送1B的数据
+  Wire.endTransmission();    		// 结束传送
+  
+  x++;
+  delay(500);
+}
+
+```
+从机：
+```
+// 直接在Arduino IDE选择“文件”→“示例”→Wire→slave_receiver，可以打开该文件
+#include <Wire.h>
+
+void setup() {
+  Wire.begin(8);                // Wire初始化, 并以从设备地址8的身份加入IIc总线
+  Wire.onReceive(receiveEvent); // 注册一个IIC事件，用于响应主机的数据发送
+  Serial.begin(9600);           // 初始化串口并设置波特率为9600
+}
+
+void loop() {
+  delay(100);
+}
+
+// 当主机发送的数据被收到时，将触发 receiveEvent() 事件
+void receiveEvent(int howMany) {
+// 循环读取收到的数据，最后一个数据单独读取
+  while (1 < Wire.available()) { 
+    char c = Wire.read(); 			// 以字符形式接收数据
+    Serial.print(c);         		// 串口输出该字符串
+  }
+  int x = Wire.read();    			// 以整型形式接收数据
+  Serial.println(x);         		// 串口输出该整型变量
+}
+
+```
+
+> 主收从发
+
+主机：
+```
+// 直接在Arduino IDE选择“文件”→“示例”→Wire→master_reader，可以打开该文件
+#include <Wire.h>
+
+void setup() {
+  Wire.begin();        // Wire初始化，作为主机加入到IIC总线
+  Serial.begin(9600);  // 初始化串口并设置波特率为9600
+}
+
+void loop() {
+  Wire.requestFrom(8, 6);    // 向8号机请求6B的数据
+	// 等待从机发送数据
+  while (Wire.available()) { 
+    char c = Wire.read(); 		// 以字符形式接受并读取从机发来的一个字节的数据
+    Serial.print(c);         	// 串口输出该字符
+  }
+  Serial.println();				// 换行
+  delay(500);
+}
+
+```
+从机：
+```
+// 直接在Arduino IDE选择“文件”→“示例”→Wire→slave_sender，可以打开该文件
+#include <Wire.h>
+
+void setup() {
+  Wire.begin(8);                // Wire初始化, 并以从设备地址#8的身份加入i2c总线
+  Wire.onRequest(requestEvent); // 注册一个IIC事件，用于响应主机的数据请求
+}
+
+void loop() {
+  delay(100);
+}
+
+//每当主机请求数据时,该函数便会执行
+//在setup()中,该函数被注册为一个事件
+void requestEvent() {
+  Wire.write("hello "); // 用6B的信息回应主机的请求，hello后带一个空格
+}
+
+```
+> 应答交互通讯
+```
+
+```
 ##### as5600编码器
 此程序为读取`as5600`磁编码器的i2c数据，其中SDA为D22，SCL为D23：
 ```
@@ -2088,3 +2192,4 @@ https://www.yiboard.com/thread-1344-1-1.html
 https://blog.csdn.net/qq_62361151/article/details/130102202
 https://zhuanlan.zhihu.com/p/145369083
 https://blog.csdn.net/z755924843/article/details/82704020
+https://blog.csdn.net/xq151750111/article/details/115142727

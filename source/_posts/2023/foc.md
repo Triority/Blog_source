@@ -414,9 +414,9 @@ BLDCDriver6PWM driver = BLDCDriver6PWM(5,6, 9,10, 3,11);
 ## 电路(PCB)
 电路是基于自己设计的4010驱动板：
 
-| {% pdf Schematic_esp32-drv8313-4010_2023-07-06.pdf %}  | ![](QQ截图20230706031048.png)  |
+| {% pdf Schematic_esp32-drv8313-4010_2023-07-06.pdf %}  |  原理图 |
 | :------------: | :------------: |
-|  原理图 |  PCB-3D |
+|  ![](QQ截图20230706031048.png) |  PCB-3D |
 
 ## simplefoc程序
 主控还是esp32，esp32跟atmega328p相比多了个步骤就是配置iic引脚，永远记不住怎么写，在这备份一份以后过来抄
@@ -539,3 +539,75 @@ void loop() {
 ```
 ### esp32+LM324力矩闭环
 我在LM324周围实际焊接的电阻是1K和100K，所以实际上电压会放大101倍，就按100倍算，也就是1A时电阻产生电压为0.01V，ADC电压为1V，esp32默认ADC范围是3.3V，也就是电流可以达到3.3A已经超过驱动芯片drv8313最大值2.5A了，量程刚刚好。三相线都有电流检测功能。
+```
+#include <SimpleFOC.h>
+
+MagneticSensorI2C sensor = MagneticSensorI2C(AS5600_I2C);
+
+BLDCMotor motor = BLDCMotor(11);
+BLDCDriver3PWM driver = BLDCDriver3PWM(25, 26, 27, 14);
+
+float target_voltage = 3;
+
+LowsideCurrentSense current_sense  = LowsideCurrentSense(0.01f, 101.0f, 34, 39, 36);
+
+Commander command = Commander(Serial);
+void doTarget(char* cmd) { command.scalar(&target_voltage, cmd); }
+
+void setup() {
+
+  Wire.setPins(33,32);
+  Wire.begin();
+  sensor.init(&Wire);
+  motor.linkSensor(&sensor);
+
+  driver.voltage_power_supply = 12;
+  driver.init();
+  motor.linkDriver(&driver);
+
+  // aligning voltage 
+  motor.voltage_sensor_align = 3;
+
+  current_sense.linkDriver(&driver);
+
+  motor.foc_modulation = FOCModulationType::SpaceVectorPWM;
+  motor.torque_controller = TorqueControlType::dc_current;
+  motor.controller = MotionControlType::torque;
+
+  // PID参数 - 默认
+  motor.PID_current_q.P = 5;                       // 3    - Arduino UNO/MEGA
+  //motor.PID_current_q.I = 1000;                    // 300  - Arduino UNO/MEGA
+  //motor.PID_current_q.D = 0;
+
+  Serial.begin(115200);
+
+  motor.useMonitoring(Serial);
+
+  motor.init();
+
+  if (current_sense.init())  Serial.println("Current sense init success!");
+  else{
+    Serial.println("Current sense init failed!");
+    return;
+  }
+  motor.linkCurrentSense(&current_sense);
+
+  motor.initFOC();
+
+  current_sense.driverAlign(motor.voltage_sensor_align);
+
+  command.add('T', doTarget, "target current");
+
+  Serial.println(F("Motor ready."));
+  Serial.println(F("Set the target current using serial terminal:"));
+  _delay(1000);
+}
+
+void loop() {
+  motor.loopFOC();
+
+  motor.move(target_voltage);
+
+  command.run();
+}
+```
