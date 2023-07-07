@@ -406,7 +406,72 @@ Wire.begin(SDA, SCL);
 ```
 #### 实例
 ##### 主从设备传输
-###### 方法
+###### Wire库方法
+> 初始化IIC连接，并作为主机或者从机设备加入IIC总线
+```
+begin();
+begin(address);	// 当没有填写参数时，设备会以主机模式加人IIC总线；当填写了参数时，设备会以从机模式加入IIC总线，address可以设置为0~127中的任意地址。
+```
+> 主机向从机发送数据请求信号
+> 
+> 使用 requestFrom() 后，从机端可以使用 onRequest() 注册一个事件用以响应主机的请求；主机可以通过available() 和 read() 函数读取这些数据
+```
+Wire.requestFrom(address, quantity);
+Wire.requestFrom(address, quantity, stop); //quantity请求的字节数；stop当其值为true时将发送一个停止信息，释放IIC总线；当为false时，将发送一个重新开始信息，并继续保持IIC总线的有效连接
+```
+> 设定传输数据到指定地址的从机设备
+> 
+> 随后可以使用 write() 函数发送数据，并搭配endTransmission()函数结束数据传输
+```
+Wire.beginTransmission(address);
+```
+> 结束数据传输
+```
+Wire.endTransmission() ;
+Wire.endTransmission(stop);
+```
+> 发送数据
+> 
+> 为主机状态时，主机将要发送的数据加入发送队列；当为从机状态时，从机发送数据至发起请求的主机
+```
+Wire.write(value);
+Wire.write(string);
+Wire.write(data, length);
+```
+参数：
++ value，以单字节发送。
++ string，以一系列字节发送。
++ data，以字节形式发送数组。
++ length，传输的字节数。
+返回值：
++ byte型值，返回输入的字节数。
+
+> 返回接收到的字节数
+> 
+> 在主机中，一般用于主机发送数据请求后；在从机中，一般用于数据接收事件中。
+```
+Wire. available();
+```
+> 读取1B的数据
+> 
+> 在主机中，当使用 requestFrom() 函数发送数据请求信号后，需要使用 read() 函数来获取数据；在从机中需要使用该函数读取主机发送来的数据
+```
+Wire.read()
+```
+
+> 从机端注册一个事件，当从机收到主机发送的数据时即被触发
+```
+Wire.onReceive(handler);
+```
+参数：
++ handler，当从机接收到数据时可被触发的事件。该事件带有一个int型参数(从主机读到的字节数)且没有返回值，如 `void myHandler(int numBytes)`
+
+> 注册一个事件,当从机接收到主机的数据请求时即被触发
+```
+Wire.onRequest(handler);
+```
+参数：
++ handler，可被触发的事件。该事件不带参数和返回值，如 `voidmyHandler()`
 
 ###### 示例
 > 主发从收
