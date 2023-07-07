@@ -476,7 +476,7 @@ Wire.onRequest(handler);
 ###### 示例
 > 主发从收
 
-主机：
++ 主机：
 ```
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→master_writer可以打开该文件
 #include <Wire.h>
@@ -497,7 +497,7 @@ void loop() {
 }
 
 ```
-从机：
++ 从机：
 ```
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→slave_receiver，可以打开该文件
 #include <Wire.h>
@@ -527,7 +527,7 @@ void receiveEvent(int howMany) {
 
 > 主收从发
 
-主机：
++ 主机：
 ```
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→master_reader，可以打开该文件
 #include <Wire.h>
@@ -549,7 +549,7 @@ void loop() {
 }
 
 ```
-从机：
++ 从机：
 ```
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→slave_sender，可以打开该文件
 #include <Wire.h>
@@ -571,8 +571,119 @@ void requestEvent() {
 
 ```
 > 应答交互通讯
+> 
+> 这个程序用于iic控制电机驱动，主机是一个uno，负责发送目标速度，从机是电机驱动板，负责返回当前角度
+
++ uno：
+```
+#include <Wire.h>
+
+void setup(){
+  Serial.begin(115200);
+  Wire.begin(); 
+}
+
+void loop(){
+  String inString="";
+  while(Serial.available()>0){
+    inString += char(Serial.read());
+    delay(1);
+  }
+  if(inString!=""){
+    Serial.print("IIC send:");
+    Serial.println(inString);
+    const char* cstr = inString.c_str();
+    Wire.beginTransmission(1);
+    Wire.write(cstr);
+    Wire.endTransmission();
+  }
+  
+  String recString="";
+  Wire.requestFrom(1, 8);
+  while (Wire.available()) { 
+    recString += char(Wire.read());
+  }
+  if(recString!=""){
+    Serial.print("IIC received:");
+    Serial.println(recString.toInt());
+  }
+}
 ```
 
++ esp32驱动板：
+```
+#include <SimpleFOC.h>
+#include <Wire.h>
+#include <dummy.h>
+
+MagneticSensorI2C sensor = MagneticSensorI2C(AS5600_I2C);
+
+BLDCMotor motor = BLDCMotor(11);
+BLDCDriver3PWM driver = BLDCDriver3PWM(25, 26, 27, 14);
+
+float target_velocity = 0;
+
+TwoWire Wire_foc = TwoWire(0);
+TwoWire Wire_rec = TwoWire(1);
+
+void setup() {
+  Serial.begin(115200);
+
+  Wire_rec.setPins(16,17);
+  Wire_rec.begin(1);
+  Wire_rec.onReceive(receiveEvent);
+  Wire_rec.onRequest(requestEvent);
+
+  Wire_foc.setPins(33,32);
+  Wire_foc.begin();
+  sensor.init(&Wire_foc);
+
+  motor.linkSensor(&sensor);
+
+  driver.voltage_power_supply = 12;
+  driver.init();
+
+  motor.linkDriver(&driver);
+
+  motor.controller = MotionControlType::velocity;
+
+  motor.PID_velocity.P = 0.2f;
+  motor.PID_velocity.I = 20;
+  motor.PID_velocity.D = 0;
+  motor.voltage_limit = 6;
+  motor.PID_velocity.output_ramp = 1000;
+  motor.LPF_velocity.Tf = 0.01f;
+
+  motor.init();
+  motor.initFOC();
+
+  _delay(1000);
+}
+
+void loop() {
+  motor.loopFOC();
+
+  motor.move(target_velocity);
+}
+
+void receiveEvent(int howMany) {
+  String inString="";
+  //Serial.println("IIC received:");
+  for (int i=howMany;i>1;i--){
+    inString += char(Wire_rec.read());
+  }
+    target_velocity = inString.toFloat()/100;
+    inString="";
+}
+
+void requestEvent() {
+  float get_ang = sensor.getAngle();
+  int ang = int(get_ang*100);
+  Serial.println(ang);
+  char cstr[8];
+  itoa(ang, cstr, 10);
+  Wire_rec.write(cstr);
+}
 ```
 ##### as5600编码器
 此程序为读取`as5600`磁编码器的i2c数据，其中SDA为D22，SCL为D23：
