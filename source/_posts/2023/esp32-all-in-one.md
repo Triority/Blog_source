@@ -377,7 +377,7 @@ void loop(void){
 
 ```
 ### 3组UART接口
-#### 简介
+#### GPIO
 ESP32里面有3个串口，uart0默认作为log和console输出，我们可以使用uart1和uart2。因为接SPI Flash，会占用GPIO6~GPIO11，所以uart1使用默认管脚的时候会有冲突，我们需要把管脚配置到其它的GPIO上.
 默认情况下的UART引脚：
 
@@ -390,7 +390,47 @@ ESP32里面有3个串口，uart0默认作为log和console输出，我们可以�
 | U2_RXD  |  GPIO16 | U2_CTS  | GPIO8  |
 | U2_TXD | GPIO17  |  U2_RTS | GPIO7  |
 
+#### 硬件串口重定义
+```
+#include <HardwareSerial.h>
 
+HardwareSerial SerialPort(1); // 使用UART1
+
+void setup()  {
+  //初始化串口，并重新定义引脚；参数包括波特率、串行模式、RX 引脚和 TX 引脚;串行模式SERIAL_8N1为8位数据位、无校验、1位停止位
+  SerialPort.begin(115200, SERIAL_8N1, 4, 2); 
+}
+
+void loop(){
+  SerialPort.println("Hello World");
+}
+```
+#### 使用软件串口
+如果硬件串口不够用可以使用软件串口，但是效率较低
+```
+#include <SoftwareSerial.h>
+//实例化软串口
+SoftwareSerial mySerial(2, 3); // RX, TX
+
+void setup(){
+  Serial.begin(115200);
+  while (!Serial) {
+  }
+
+  Serial.println("Hello World!");
+
+  mySerial.begin(9600);
+  mySerial.println("Hello World?");
+}
+
+void loop(){
+  if (mySerial.available())
+    Serial.write(mySerial.read());
+  if (Serial.available())
+    mySerial.write(Serial.read());
+}
+```
+在arduino uno使用多个软件串口时，同一时间只能监听一个串口，不知道esp32有没有这个限制，不过需要注意这件事时候你已经用了5个串口通道了，一般人应该都没这个需求吧懒得尝试了
 ### 1组I2C接口
 #### 简介
 ESP32默认的I2C引脚为：
@@ -2369,3 +2409,4 @@ https://blog.csdn.net/qq_62361151/article/details/130102202
 https://zhuanlan.zhihu.com/p/145369083
 https://blog.csdn.net/z755924843/article/details/82704020
 https://blog.csdn.net/xq151750111/article/details/115142727
+https://blog.csdn.net/Naisu_kun/article/details/86004049
