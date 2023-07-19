@@ -2,7 +2,7 @@
 title: python的socket连接编程
 tags:
   - python
-cover: /img/
+cover: /img/5af741ba43356384ace081fe1d15371.jpg
 categories:
 - [计算机, 知识整理]
 date: 2023-07-01 02:57:21

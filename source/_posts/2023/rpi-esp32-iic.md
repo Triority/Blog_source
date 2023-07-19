@@ -1,8 +1,10 @@
 ---
 title: 树莓派和esp32电机控制器通讯的底盘控制
 tags:
-  - null
-cover: /img/
+  - esp32
+  - arduino
+  - 树莓派
+cover: /img/Rpi4b.jpg
 categories:
   - [计算机, 源码分享]
 date: 2023-07-10 14:02:29

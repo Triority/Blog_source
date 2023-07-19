@@ -1,10 +1,12 @@
 ---
 title: tft-espi使用sprite方法实现动画效果
 tags:
-  - null
-cover: /img/
+  - arduino
+  - 显示屏
+  - esp32
+cover: /img/微信截图_20230720023001.png
 categories:
-  - null
+- [计算机, 折腾记录]
 date: 2023-07-03 01:59:19
 description: 这个其实是为了实现早就想做的蓝牙小键盘的前置任务，也就是配合旋钮的动画效果
 ---
