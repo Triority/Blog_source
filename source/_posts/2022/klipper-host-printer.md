@@ -12,7 +12,7 @@ categories:
 ## 前言
 这里主要讲上位机klipper的配置，硬件使用大鱼的设计，主板mks genl2.1，klipper安装于上位机。
 mks的说明书已经详细说明了klipper的搭建配置过程：[MKS GEN_L V2.1 Klipper固件使用说明书](https://blog.csdn.net/gjy_skyblue/article/details/121103193 "MKS GEN_L V2.1 Klipper固件使用说明书")
-![MKS GEN_L V2.1](mksgenl21.png)
+![MKS GEN_L V2.1](MKSGENLSIZE.png)
 ## 对mks配置文件的修改
 ### lcd
 我没有使用lcd屏，但是mks提供的配置文件`printer.cfg`对lcd进行了配置，需要删除，这一点说明书没有提及，lcd配置include了其他文件，文件在mks的github仓库可以找到。
