@@ -175,3 +175,12 @@ githubcalendar:
   rel: false
   tags: true
   categories: true
+
+# index2 generator是否包含官方的hexo-generator-index，默认true（包含）
+index2_include_index: true
+index2_generator:
+  per_page: 0
+  order_by: -date # 按发布时间排序
+  exclude:
+    - tag hide # 不包含标签为hide的文章
+    - category hide # 不包含分类为hide的文章
