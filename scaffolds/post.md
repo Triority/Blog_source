@@ -3,7 +3,7 @@ title: {{ title }}
 date: {{ date }}
 tags:
 - 
-cover: /img/
+cover: /img/RUN.png
 categories: 
 - 
 description: 
