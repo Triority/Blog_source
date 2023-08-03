@@ -1588,6 +1588,16 @@ void loop() {
   server.handleClient();
 }
 ```
+### ota升级
+在Arduino IDE中选择`File>Example>ArduinoOTA>OTAWebUpdate`例子程序。在程序中更改成自己的WiFi名字和密码。
+
+上载程序后打开串口监视器，按ESP32板子的复位重启按钮，通过串口监视器可以看到这个ESP32服务器的地址
+
+输入ESP32 IP地址，可以在浏览器中输入用户名和密码，点击login。
+
+用`Sketch>Export compiled Binary`。这时在sketch中创建一个.bin的文件。现在，在OTA的web page中选择文件，‘Choose File’ 按钮，选择.bin文件。点击Update按钮。开始上载程序
+
+实操程序无法运行，未找到原因找到再来写，不过话说这个好似是一次性的，也就没太大用
 ### 多核操作
 ESP32具有两个32位`Tensilica Xtensa LX6`微处理器，这使其成为功能强大的双核（core0和core1）微控制器。有单核和双核两种版本。但是双核版本更受欢迎，因为它们之间没有明显的价格差异。
 
