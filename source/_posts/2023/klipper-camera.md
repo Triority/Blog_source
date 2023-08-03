@@ -32,29 +32,11 @@ sudo make install
 这个命令也可以直接在终端输入，然后打开浏览器查看8080端口网页
 
 ## 设置开机启动
-安装之后本身带有一个服务，直接复制即可
+在`/etc/rc.local`中，在`exit 0`前写入
 ```
-sudo cp ~/mjpg-streamer/mjpg_streamer@.service /etc/systemd/system
-```
-然后修改这个服务文件的路径成我们自己的启动脚本
-```
-sudo nano /etc/systemd/system/mjpg_streamer@.service 
-```
-```
-[Unit]
-Description=A server for streaming Motion-JPEG from a video capture device
-After=network.target
-
-[Service]
-User=mjpg_streamer
-ExecStart=/home/orangepi/mjpg-streamer/start.sh
-
-[Install]
-WantedBy=multi-user.target
-```
-最后就可以启用这个服务
-```
-sudo systemctl enable mjpg_streamer@.service 
+cd /home/orangepi/mjpg-streamer/
+sh start.sh &
+cd -
 ```
 
 # 安装Moonraker-timelapse：
