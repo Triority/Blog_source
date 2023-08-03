@@ -80,11 +80,12 @@ max_temp: 270
 #pid_Ki: 0.888
 #pid_Kd: 129.435
 max_extrude_only_distance: 50000.0
+max_extrude_only_velocity: 40
 
 [verify_heater extruder]
 max_error: 120
-hysteresis: 20
-check_gain_time: 10
+hysteresis: 10
+check_gain_time: 20
 heating_gain: 1
 
 #[extruder_stepper extra_stepper]
@@ -126,28 +127,15 @@ serial:/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
 
 [printer]
 kinematics: corexy
-max_velocity: 1500
-max_accel: 1500
+max_velocity: 600
+max_accel: 3000
 max_z_velocity: 30
 max_z_accel: 300
-square_corner_velocity: 10.0
-
-[output_pin Camera_control]
-pin: PC4
+square_corner_velocity: 30.0
 
 [fan_generic LED]
 pin: PL0
 shutdown_speed: 1.0
-
-[fan_generic Camera_X]
-pin: PG5
-max_power: 0.125
-cycle_time: 0.02
-
-[fan_generic Camera_Y]
-pin: PE3
-max_power: 0.125
-cycle_time: 0.02
 
 [virtual_sdcard]
 path: ~/gcode_files
@@ -206,9 +194,9 @@ probe_count: 4,3
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  0.112500, 0.040000, -0.060000, -0.063750
-#*# 	  0.133750, 0.025000, 0.006250, 0.010000
-#*# 	  0.190000, 0.083750, 0.077500, 0.088750
+#*# 	  0.682500, 0.191250, -0.295000, -0.762500
+#*# 	  0.668750, 0.160000, -0.253750, -0.680000
+#*# 	  0.697500, 0.236250, -0.187500, -0.603750
 #*# tension = 0.2
 #*# min_x = 60.0
 #*# algo = lagrange
@@ -280,16 +268,4 @@ channel: stable
 repo: fluidd-core/fluidd
 path: ~/fluidd
 
-[timelapse]
-##   Following basic configuration is default to most images and don't need
-##   to be changed in most scenarios. Only uncomment and change it if your
-##   Image differ from standart installations. In most common scenarios
-##   a User only need [timelapse] in there configuration.
-#output_path: ~/timelapse/      #文件输出路径 
-##   Directory where the generated video will be saved
-#frame_path: /tmp/timelapse/   #项目临时存放路径 
-##   Directory where the temporary frames are saved
-#ffmpeg_binary_path: /usr/bin/ffmpeg
-##   Directory where ffmpeg is installed #编译器路径
-snapshoturl: http://localhost:8080/?action=snapshot
 ```
