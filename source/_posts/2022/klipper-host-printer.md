@@ -88,6 +88,10 @@ hysteresis: 10
 check_gain_time: 20
 heating_gain: 1
 
+[led LED]
+white_pin: PH4
+hardware_pwm: True
+
 #[extruder_stepper extra_stepper]
 #step_pin: PC1
 #dir_pin: !PC3
@@ -219,53 +223,5 @@ probe_count: 4,3
 #*# pid_kp = 10000000
 #*# pid_ki = 0
 #*# pid_kd = 0
-
-```
-
-`moonraker.conf`
-```
-[server]
-host: 0.0.0.0
-port: 7125
-enable_debug_logging: False
-klippy_uds_address: /tmp/klippy_uds
-
-[authorization]
-trusted_clients:
-    10.0.0.0/8
-    127.0.0.0/8
-    169.254.0.0/16
-    172.16.0.0/12
-    192.168.0.0/16
-    FE80::/10
-    ::1/128
-cors_domains:
-    http://*.lan
-    http://*.local
-    https://my.mainsail.xyz
-    http://my.mainsail.xyz
-    https://app.fluidd.xyz
-    http://app.fluidd.xyz
-
-[database]
-database_path: /home/orangepi/.moonraker_database
-
-[file_manager]
-config_path: /home/orangepi/klipper_config
-log_path: /home/orangepi/klipper_logs
-
-[octoprint_compat]
-
-[history]
-
-[update_manager]
-channel: dev
-refresh_interval: 168
-
-[update_manager fluidd]
-type: web
-channel: stable
-repo: fluidd-core/fluidd
-path: ~/fluidd
 
 ```
