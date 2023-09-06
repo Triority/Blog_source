@@ -587,9 +587,10 @@ google_adsense:
   enable_page_level_ads: true
 
 # Insert ads manually (手動插入廣告)
-# ad:
+ad:
 #   index:
-#   aside:
+  aside: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5897116252372531"
+     crossorigin="anonymous"></script>
 #   post:
 
 # Verification (站長驗證)

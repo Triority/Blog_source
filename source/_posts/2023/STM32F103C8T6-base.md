@@ -56,7 +56,6 @@ http://dan.drown.org/stm32duino/package_STM32duino_index.json
 ```
 然后就可以找到`STM32F103C`来给我的板子编程了。
 
-实际尝试过程中程序上传失败，目前认为原因可能是用的`ch340`做usb转串口，但是网络上找到的文章都是使用的`cp2102`做的，买了一个还没到，以后再补坑
 
 # 使用keil编程
 ## 软件下载安装
