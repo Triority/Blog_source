@@ -205,5 +205,45 @@ int main(void){
 [Delay.c](Delay.c)
 [Delay.h](Delay.h)
 
+### GPIO输入
+这一部分原理和上面几乎一样，通过`GPIO_ReadInputDataBit()`读取GPIO输入
+```
+//初始化引脚
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+
+GPIO_InitTypeDef GPIO_InitStructure;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //IPU为输入模式
+GPIO_InitStructure.GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_11; //可以这样写同时设置多个引脚
+GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+
+GPIO_Init(GPIOB, &GPIO_InitStructure);
+
+//读取引脚输入
+if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1) == 0)
+	{
+		Delay_ms(20);
+		while (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1) == 0);
+		Delay_ms(20);
+		KeyNum = 1;
+	}
+
+```
+
+此外，对于输出的引脚，也可以使用`GPIO_ReadOutputDataBit()`读取输出，比如这样翻转输出电平：
+```
+void LED_Turn(void)
+{
+	if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_1) == 0){
+		GPIO_SetBits(GPIOA, GPIO_Pin_1);
+	}else{
+		GPIO_ResetBits(GPIOA, GPIO_Pin_1);
+	}
+}
+```
+### 中断
+中断涉及的结构如下图：
+![](微信截图_20230911200344.png)
+这一流程也就是我们配置中断的流程
+
 
 ### PWM输出
