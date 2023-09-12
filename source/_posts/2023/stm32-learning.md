@@ -245,5 +245,123 @@ void LED_Turn(void)
 ![](微信截图_20230911200344.png)
 这一流程也就是我们配置中断的流程
 
+#### 配置GPIO
+```
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+GPIO_InitTypeDef GPIO_InitStructure;
+GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //上拉输入
+GPIO_InitStructure.GPIO_Pin = GPIO_Pin_11;
+GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+GPIO_Init(GPIOB, &GPIO_InitStructure);
+```
+
+#### 配置AFIO选择引脚
+```
+RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);  //打开AFIO的时钟
+GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource11);  //将11线路连接到B11
+```
+
+#### 配置EXTI
+```
+EXTI_InitTypeDef EXTI_InitStructure;  //定义EXTI初始化结构体
+EXTI_InitStructure.EXTI_Line = EXTI_Line11;
+EXTI_InitStructure.EXTI_LineCmd = ENABLE; //使能
+EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; //事件模式或中断模式。这里选中断
+EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿触发
+EXTI_Init(&EXTI_InitStructure);
+```
+其中触发方式包含：
+```
+//下降沿
+EXTI_Trigger_Falling
+//上升沿
+EXTI_Trigger_Rising
+//上升或下降
+EXTI_Trigger_Rising_Falling
+```
+
+#### 配置NVIC
+```
+NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断分组，两位抢占优先级两位响应优先级
+NVIC_InitTypeDef NVIC_InitStructure;  //定义NVIC初始化结构体
+NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;  //配置中断通道，EXITI10-15都在这个通道
+NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //使能
+NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1; //优先级设置为1
+NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;  //优先级设置为1
+NVIC_Init(&NVIC_InitStructure);
+```
+
+#### 中断函数
+stm32的中断函数名字是固定的，比如这里是EXTI15_10_IRQn通道的函数：
+```
+void EXTI15_10_IRQHandler(void){
+  //首先判断标志位，确定是11线路的信号
+  if (EXTI_GetITStatus(EXTI_Line11) == SET){
+    //执行的程序
+
+    //清除中断标志位，退出中断。注意如果不清除将会不停申请中断导致卡死
+    EXTI_ClearITPendingBit(EXTI_Line11);
+  }
+}
+```
+
+#### 实例
+这个程序可以实现PB11下降沿中断时反转PC13引脚的输出：
+```
+#include "stm32f10x.h"
+
+int main(void){
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+    
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
+    
+    GPIO_InitTypeDef GPIO_InitStructure2;
+    GPIO_InitStructure2.GPIO_Mode = GPIO_Mode_IPU;
+    GPIO_InitStructure2.GPIO_Pin = GPIO_Pin_11;
+    GPIO_InitStructure2.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOB, &GPIO_InitStructure2);
+    
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);  //打开AFIO的时钟
+    GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource11);  //将11线路连接到B11
+    
+    EXTI_InitTypeDef EXTI_InitStructure;  //定义EXTI初始化结构体
+    EXTI_InitStructure.EXTI_Line = EXTI_Line11;
+    EXTI_InitStructure.EXTI_LineCmd = ENABLE; //使能
+    EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt; //事件模式或中断模式。这里选中断
+    EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿触发
+    EXTI_Init(&EXTI_InitStructure);
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断分组，两位抢占优先级两位响应优先级
+    NVIC_InitTypeDef NVIC_InitStructure;  //定义NVIC初始化结构体
+    NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;  //配置中断通道，EXITI10-15都在这个通道
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE; //使能
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1; //优先级设置为1
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;  //优先级设置为1
+    NVIC_Init(&NVIC_InitStructure);
+    
+    
+    while(1){}
+}
+
+void EXTI15_10_IRQHandler(void){
+  if (EXTI_GetITStatus(EXTI_Line11) == SET){
+    //执行的程序
+	if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13) == 0){
+		GPIO_SetBits(GPIOC, GPIO_Pin_13);
+	}else{
+		GPIO_ResetBits(GPIOC, GPIO_Pin_13);
+	}
+    
+    EXTI_ClearITPendingBit(EXTI_Line11);
+  }
+}
+
+```
 
 ### PWM输出
