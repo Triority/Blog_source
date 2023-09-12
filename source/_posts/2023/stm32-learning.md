@@ -366,6 +366,8 @@ void EXTI15_10_IRQHandler(void){
 
 ### 定时器
 #### 定时中断
+定时中断基本结构:
+![定时中断基本结构](QQ截图20230913003026.png)
 ##### 操作流程
 ```
 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);  //tim2是APB1总线的外设，开启时钟
