@@ -364,4 +364,99 @@ void EXTI15_10_IRQHandler(void){
 
 ```
 
-### PWM输出
+### 定时器
+#### 定时中断
+##### 操作流程
+```
+RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);  //tim2是APB1总线的外设，开启时钟
+
+TIM_InternalClockConfig(TIM2);  //设置时基单元时钟为内部时钟，默认值也是这个所以其实可以不写
+
+TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;  //定义时基单元初始化结构体
+TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1; //时钟滤波器时钟分频，1表示不分频，还可以是2和4
+TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up; //计数模式，这里是向上计数
+TIM_TimeBaseInitStructure.TIM_Period = 10000 - 1; //计数器，10k频率计数1w也即是1s定时，数值必须位于0-65535
+TIM_TimeBaseInitStructure.TIM_Prescaler = 7200 - 1; //预分频器，对72M分频7200得到10k频率，数值必须位于0-65535
+TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;  //重复计数器，仅高级计时器有，所以直接配置0
+TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);
+
+TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);  //tim2的更新中断使能，使信号通往NVIC
+
+//NVIC配置，上一节讲过了
+NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+NVIC_InitTypeDef NVIC_InitStructure;
+NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn; //tim2的通道
+NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+NVIC_Init(&NVIC_InitStructure);
+
+TIM_Cmd(TIM2, ENABLE);  //使能定时器
+```
+下面是中断函数
+```
+void TIM2_IRQHandler(void){
+	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET){
+		//做点东西
+
+    //清除标志位
+		TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+	}
+}
+
+```
+##### 代码操作
+这个程序可以让PC13每秒亮灭一次
+```
+#include "stm32f10x.h"
+
+int main(void){
+    RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
+    
+    GPIO_InitTypeDef GPIO_InitStructure;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+    GPIO_Init(GPIOC, &GPIO_InitStructure);
+    
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+    
+    TIM_InternalClockConfig(TIM2);
+    
+    TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+    TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+    TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+    TIM_TimeBaseInitStructure.TIM_Period = 10000 - 1;
+    TIM_TimeBaseInitStructure.TIM_Prescaler = 7200 - 1;
+    TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;
+    TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);
+    
+    TIM_ClearFlag(TIM2, TIM_FLAG_Update); //这个函数上面没讲。因为上电启动会直接触发中断以更新配置，这样写可以避免上电立刻触发中断
+    TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+    
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    
+    NVIC_InitTypeDef NVIC_InitStructure;
+    NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
+    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 1;
+    NVIC_Init(&NVIC_InitStructure);
+    
+    TIM_Cmd(TIM2, ENABLE);
+    
+    while(1){}
+}
+
+void TIM2_IRQHandler(void){
+    if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET){
+        if (GPIO_ReadOutputDataBit(GPIOC, GPIO_Pin_13) == 0){
+            GPIO_SetBits(GPIOC, GPIO_Pin_13);
+        }else{
+            GPIO_ResetBits(GPIOC, GPIO_Pin_13);
+        }
+        TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+    }
+}
+
+```
