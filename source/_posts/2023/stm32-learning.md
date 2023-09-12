@@ -46,7 +46,7 @@ STM32单片机支持3种程序下载方式
 这种方式很少使用，不再详细叙述
 
 > 如果我们不需要使用JTAG下载，但GPIO资源紧张或PCB设计时已经使用了这些第一功能为JTAG的引脚，那么我们就需要关闭JTAG。比如说我要使用GPIOA15作为GPIO口，那么代码层面需要这样实现：
-> ```
+> ```c
 >   GPIO_InitTypeDef GPIO_InitStructure;
 >  	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA|RCC_APB2Periph_AFIO,ENABLE);//使能PORTA时钟
 > 	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable , ENABLE);// 关闭JTAG但使能SWD
@@ -88,7 +88,7 @@ http://dan.drown.org/stm32duino/package_STM32duino_index.json
 #### 磨磨唧唧的讲解
 在GPIO输出之前要先对要操作的GPIO进行配置，下面这个程序可以连续将PC13这个引脚拉低拉高:
 
-```
+```c
 # include "stm32f10x.h"
 void LED_Init(void){
     //A
@@ -116,7 +116,7 @@ int main(){
 
 > A:定义GPIO的初始化类型结构体
 
-```
+```c
 GPIO_InitTypeDef GPIO_InitStructure;
 ```
 此结构体的定义是在`stm32f10x_gpio.h`文件中，其中包括3个成员：
@@ -135,17 +135,17 @@ GPIO_InitTypeDef GPIO_InitStructure;
 
 > B:使能GPIO时钟
 
-```
+```c
 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
 ```
 此函数是在`stm32f10x_rcc.c`文件中定义的。其中第一个参数指要打开哪一组GPIO的时钟，取值参见`stm32f10x_rcc.h`文件中的宏定义，第二个参数为打开或关闭使能，取值参见`stm32f10x.h`文件中的定义，其中`ENABLE`代表开启使能，`DISABLE`代表关闭使能。
-```
+```c
 void RCC_APB2PeriphClockCmd(uint32_t RCC_APB2Periph, FunctionalState NewState);
 ```
 
 
 > C:设置`GPIO_InitTypeDef`结构体三个成员的值
-```
+```c
 GPIO_InitStructure.GPIO_Pin = GPIO_Pin_13;
 GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
@@ -153,7 +153,7 @@ GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 
 
 > D:初始化GPIO
-```
+```c
 GPIO_Init(GPIOC, &GPIO_InitStructure);
 ```
 
@@ -161,24 +161,24 @@ GPIO_Init(GPIOC, &GPIO_InitStructure);
 > E:GPIO电平输出
 
 函数就是置位GPIO，即让相应的GPIO输出高电平
-```
+```c
 GPIO_ResetBits(GPIOC,GPIO_Pin_13);
 GPIO_SetBits(GPIOC,GPIO_Pin_13);
 ```
 
 很多网上找到的程序也会这样做，在文件开头写
-```
+```c
 #define LED3_OFF GPIO_SetBits(GPIOB,GPIO_Pin_5)
 #define LED3_ON GPIO_ResetBits(GPIOB,GPIO_Pin_5)
 ```
 然后在调用时候就可以直接写
-```
+```c
 LED3_ON;
 LED3_OFF;
 ```
 
 #### 直接上代码(LED闪烁)
-```
+```c
 #include "stm32f10x.h"
 #include "Delay.h"
 
@@ -207,7 +207,7 @@ int main(void){
 
 ### GPIO输入
 这一部分原理和上面几乎一样，通过`GPIO_ReadInputDataBit()`读取GPIO输入
-```
+```c
 //初始化引脚
 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 
@@ -230,7 +230,7 @@ if (GPIO_ReadInputDataBit(GPIOB, GPIO_Pin_1) == 0)
 ```
 
 此外，对于输出的引脚，也可以使用`GPIO_ReadOutputDataBit()`读取输出，比如这样翻转输出电平：
-```
+```c
 void LED_Turn(void)
 {
 	if (GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_1) == 0){
@@ -246,7 +246,7 @@ void LED_Turn(void)
 这一流程也就是我们配置中断的流程
 
 #### 配置GPIO
-```
+```c
 RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB, ENABLE);
 GPIO_InitTypeDef GPIO_InitStructure;
 GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU; //上拉输入
@@ -256,13 +256,13 @@ GPIO_Init(GPIOB, &GPIO_InitStructure);
 ```
 
 #### 配置AFIO选择引脚
-```
+```c
 RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);  //打开AFIO的时钟
 GPIO_EXTILineConfig(GPIO_PortSourceGPIOB, GPIO_PinSource11);  //将11线路连接到B11
 ```
 
 #### 配置EXTI
-```
+```c
 EXTI_InitTypeDef EXTI_InitStructure;  //定义EXTI初始化结构体
 EXTI_InitStructure.EXTI_Line = EXTI_Line11;
 EXTI_InitStructure.EXTI_LineCmd = ENABLE; //使能
@@ -271,7 +271,7 @@ EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Falling; //下降沿触发
 EXTI_Init(&EXTI_InitStructure);
 ```
 其中触发方式包含：
-```
+```c
 //下降沿
 EXTI_Trigger_Falling
 //上升沿
@@ -281,7 +281,7 @@ EXTI_Trigger_Rising_Falling
 ```
 
 #### 配置NVIC
-```
+```c
 NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2); //中断分组，两位抢占优先级两位响应优先级
 NVIC_InitTypeDef NVIC_InitStructure;  //定义NVIC初始化结构体
 NVIC_InitStructure.NVIC_IRQChannel = EXTI15_10_IRQn;  //配置中断通道，EXITI10-15都在这个通道
@@ -293,7 +293,7 @@ NVIC_Init(&NVIC_InitStructure);
 
 #### 中断函数
 stm32的中断函数名字是固定的，比如这里是EXTI15_10_IRQn通道的函数：
-```
+```c
 void EXTI15_10_IRQHandler(void){
   //首先判断标志位，确定是11线路的信号
   if (EXTI_GetITStatus(EXTI_Line11) == SET){
@@ -307,7 +307,7 @@ void EXTI15_10_IRQHandler(void){
 
 #### 实例
 这个程序可以实现PB11下降沿中断时反转PC13引脚的输出：
-```
+```c
 #include "stm32f10x.h"
 
 int main(void){
@@ -369,7 +369,7 @@ void EXTI15_10_IRQHandler(void){
 定时中断基本结构:
 ![定时中断基本结构](QQ截图20230913003026.png)
 ##### 操作流程
-```
+```c
 RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);  //tim2是APB1总线的外设，开启时钟
 
 TIM_InternalClockConfig(TIM2);  //设置时基单元时钟为内部时钟，默认值也是这个所以其实可以不写
@@ -396,7 +396,7 @@ NVIC_Init(&NVIC_InitStructure);
 TIM_Cmd(TIM2, ENABLE);  //使能定时器
 ```
 下面是中断函数
-```
+```c
 void TIM2_IRQHandler(void){
 	if (TIM_GetITStatus(TIM2, TIM_IT_Update) == SET){
 		//做点东西
@@ -409,7 +409,7 @@ void TIM2_IRQHandler(void){
 ```
 ##### 代码操作
 这个程序可以让PC13每秒亮灭一次
-```
+```c
 #include "stm32f10x.h"
 
 int main(void){
