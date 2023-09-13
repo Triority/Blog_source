@@ -462,3 +462,49 @@ void TIM2_IRQHandler(void){
 }
 
 ```
+#### PWM输出
+![](微信截图_20230913111001.png)
+
+定时器配置和上一节一样，只不过不需要中断配置了
+
+```c
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA, ENABLE);
+// 这部分注释表示引脚重映射，默认tim2定时器的输出引脚是PA0，注释这部分可以重映射到PA15，当然下面GPIO_Pin_0也要改成注释的GPIO_Pin_15
+//	RCC_APB2PeriphClockCmd(RCC_APB2Periph_AFIO, ENABLE);  //打开AFIO
+//	GPIO_PinRemapConfig(GPIO_PartialRemap1_TIM2, ENABLE); //打开部分重映射1
+//	GPIO_PinRemapConfig(GPIO_Remap_SWJ_JTAGDisable, ENABLE);  //PA15默认复用为调试端口，关闭JTAG功能即可作为普通GPIO，但是务必保留SWJ否则无法再使用st-link下载程序
+	
+	GPIO_InitTypeDef GPIO_InitStructure;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0;		//GPIO_Pin_15;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	
+	TIM_InternalClockConfig(TIM2);
+	
+	TIM_TimeBaseInitTypeDef TIM_TimeBaseInitStructure;
+	TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	TIM_TimeBaseInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInitStructure.TIM_Period = 100 - 1;		//ARR，输出1k
+	TIM_TimeBaseInitStructure.TIM_Prescaler = 720 - 1;		//PSC，分频到100k
+	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;
+	TIM_TimeBaseInit(TIM2, &TIM_TimeBaseInitStructure);
+	//这里上面的都和之前一样
+
+	TIM_OCInitTypeDef TIM_OCInitStructure;  //定义配置结构体
+	TIM_OCStructInit(&TIM_OCInitStructure); //初始化结构体。下面几个参数是通用定时器的参数，还有一些没用到的参数这样可以初始化配置，如果未来改成高级定时器不至于出错
+	TIM_OCInitStructure.TIM_OCMode = TIM_OCMode_PWM1; //输出比较模式
+	TIM_OCInitStructure.TIM_OCPolarity = TIM_OCPolarity_High; //输出比较极性
+	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable; //输出使能
+	TIM_OCInitStructure.TIM_Pulse = 0;		//CCR
+	TIM_OC1Init(TIM2, &TIM_OCInitStructure);  //输出比较器配置，使用通道为OC1
+	
+	TIM_Cmd(TIM2, ENABLE);
+```
+
+之后修改pwm占空比就可以使用这个函数：Compare为CCR
+```c
+TIM_SetCompare1(TIM2, Compare);
+```
