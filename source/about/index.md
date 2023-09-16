@@ -27,7 +27,7 @@ comment: false
 
 + bilibili主页:**[bilibili](https://space.bilibili.com/162010648)**
 
-+ CSDN主页:**[CSDN](https://blog.csdn.net/m0_61749498?type=blog)** (不怎么用了但是好似还有些远古内容)
++ CSDN主页:**[CSDN](https://blog.csdn.net/m0_61749498?type=blog)** (抵制CSDN，内容都删了搬到网站上了)
 
 + Steam好友代码:`1218146564`
 
