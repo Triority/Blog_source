@@ -2,6 +2,7 @@
 title: 无刷电机foc控制
 tags:
   - arduino
+  - 电力电子
 cover: /img/fc092efaf8286e4f6bd0228af448ab3.jpg
 categories:
 - [计算机, 折腾记录]
