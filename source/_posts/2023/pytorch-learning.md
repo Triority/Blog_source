@@ -365,7 +365,7 @@ net.to(device)
 inputs, labels = data[0].to(device), data[1].to(device)
 ```
 将之前训练的程序改为GPU计算：
-```
+```py
 import torch
 import torchvision
 import torchvision.transforms as transforms
