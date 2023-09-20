@@ -235,7 +235,7 @@ aside:
       link: https://github.com/Triority
   card_announcement:
     enable: true
-    content: 高考加油！欢迎报考中国矿业大学（北京）！
+    content: 文章一般写完多少发多少，如果一篇文章没写完不要急哦，最多过几年就会删掉的！当然也可以直接联系我哦(联系方式看关于页)
   card_recent_post:
     enable: false
     limit: 5 # if set 0 will show all

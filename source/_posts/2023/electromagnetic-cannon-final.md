@@ -2,7 +2,8 @@
 title: 电磁炉设计(没有使用H桥能量回收)
 tags:
   - 电磁炉
-cover: /img/RUN.png
+  - 电力电子
+cover: /img/v2-100f3b14743b9c8fe3e58536acaa072c_r.png
 categories:
   - null
 date: 2023-09-20 13:02:24
