@@ -14,7 +14,7 @@ description: 使用社区RLC工具和maxwell仿真计算
 
 如果报错缺少DLL，请安装这个：[VB6RuntimeFiles](IDAutomation_VB6RuntimeFiles.exe)
 
-有了仿真工具设计就容易多了hhh当然具体参数不便透露，嗯嗯最终发射速度大概1m/s吧
+有了仿真工具设计就容易多了hhh当然具体参数不便透露，嗯嗯最终发射速度大概1m/s吧，打穿一张A4纸看运气
 
 ![](微信截图_20231012171920.png)
 
