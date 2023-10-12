@@ -11,7 +11,7 @@ description: 使用社区RLC工具和maxwell仿真计算
 ---
 # RLC计算
 有一个社区工具：
-[线圈RLC工具](线圈炮RLC工具 HA.coilgun.exe)
+[线圈RLC工具](RLC工具.exe)
 
 如果报错缺少DLL，请安装这个：
 [VB6RuntimeFiles](IDAutomation_VB6RuntimeFiles.exe)
