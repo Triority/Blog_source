@@ -3,6 +3,7 @@ title: 电磁炉：使用H桥能量回收
 tags:
   - 电磁炉
   - 电力电子
+  - PCB设计
 cover: /img/v2-100f3b14743b9c8fe3e58536acaa072c_r.png
 categories:
   - [电力电子, 电磁炉]

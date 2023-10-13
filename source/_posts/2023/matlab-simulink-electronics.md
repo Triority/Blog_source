@@ -4,7 +4,7 @@ tags:
   - 电力电子
 cover: /img/QQ截图20230912211748.png
 categories:
-  - 电力电子
+  - [电力电子, 仿真计算]
 date: 2023-09-12 19:45:44
 description: 电力电子仿真
 ---
