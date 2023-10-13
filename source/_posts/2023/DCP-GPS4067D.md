@@ -3,9 +3,10 @@ title: 电磁炉：使用IGBT主动关断控制
 tags:
   - 电磁炉
   - 电力电子
+  - PCB设计
 cover: /img/fbq.png
 categories:
-  - null
+  - [电力电子, 电磁炉]
 date: 2023-10-10 12:31:00
 description: 使用IGBT：GPS4067D主动关断的进阶版本
 ---

@@ -5,7 +5,7 @@ tags:
   - 电力电子
 cover: /img/微信截图_20231012171920.png
 categories:
-  - null
+  - [电力电子, 电磁炉]
 date: 2023-10-12 14:02:59
 description: 使用社区RLC工具和maxwell仿真计算
 ---
