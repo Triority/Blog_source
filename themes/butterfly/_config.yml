@@ -52,31 +52,31 @@ avatar:
 disable_top_img: false
 
 # The banner image of home page
-index_img: /img/RUN.png
+index_img: /img/mmexport1696680248562.jpg
 
 # If the banner of page not setting, it will show the top_img
 default_top_img: /img/RUN.png
 
 # The banner image of archive page
-archive_img: /img/RUN.png
+archive_img: /img/mmexport1696680248562.jpg
 
 # If the banner of tag page not setting, it will show the top_img
 # note: tag page, not tags page (子標籤頁面的 top_img)
-tag_img: /img/RUN.png
+tag_img: /img/mmexport1696680248562.jpg
 
 # The banner image of tag page
 # format:
 #  - tag name: xxxxx
-tag_per_img: /img/RUN.png
+tag_per_img: /img/mmexport1696680248562.jpg
 
 # If the banner of category page not setting, it will show the top_img
 # note: category page, not categories page (子分類頁面的 top_img)
-category_img: /img/RUN.png
+category_img: /img/mmexport1696680248562.jpg
 
 # The banner image of category page
 # format:
 #  - category name: xxxxx
-category_per_img: /img/RUN.png
+category_per_img: /img/mmexport1696680248562.jpg
 
 cover:
   # display the cover or not (是否顯示文章封面)
