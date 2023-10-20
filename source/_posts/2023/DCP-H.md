@@ -30,3 +30,28 @@ description: 使用IGBT控制的H桥电路回收电感能量
 3D模型那个电容重叠是因为要兼容1个1000uf电容和最多4个220uf的电容，节约点高度(不然高度10cm以上了你懂的)
 
 等板子到了再更新效果
+
+程序：
+```
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+  pinMode(12, OUTPUT);
+  digitalWrite(12, HIGH);
+  pinMode(0,INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(digitalRead(0)==LOW){
+    digitalWrite(13, HIGH);
+    delay(100);
+    digitalWrite(13, LOW);
+    digitalWrite(12, LOW);
+    delay(2000);
+  digitalWrite(12, HIGH);
+  }
+}
+
+```
