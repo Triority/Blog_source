@@ -46,6 +46,30 @@ PC817C最大驱动电流是100mA，而70tps16驱动电流刚好100mA，所以去
 | :------------: | :------------: | :------------: |
 | 原理图  | PCB  | 3D模型  |
 
+# 控制程序
+```
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(13, OUTPUT);
+  digitalWrite(13, LOW);
+  pinMode(12, OUTPUT);
+  digitalWrite(12, LOW);
+  pinMode(0,INPUT);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  if(digitalRead(0)==LOW){
+    digitalWrite(13, HIGH);
+    delay(2);
+    digitalWrite(12, HIGH);
+    delay(50);
+    digitalWrite(13, LOW);
+    digitalWrite(12, LOW);
+    delay(2000);
+  }
+}
+```
 
 # 器件参数
 晶闸管70tps16参数如下
