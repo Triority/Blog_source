@@ -6,7 +6,7 @@ cover: /img/cf4a1aa937ae83ef732755a631406b6.jpg
 categories:
   - null
 date: 2023-10-21 18:46:49
-description: 大功率的无刷电机驱动
+description: eg2104+nce6080
 ---
 # 需求
 有一个无刷电机，准备做轮腿用的，大概电压24V电流5A，这样大功率的foc驱动要一两百块，所以自己做一个驱动板(也许以后会拿来卖？)
