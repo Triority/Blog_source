@@ -900,24 +900,104 @@ attachInterrupt(digitalPinToInterrupt(GPIO), function, mode);
 
 #### 实例
 ##### 外部引脚中断
-当D12引脚被外部拉低时将会串口输出`interrupt`:
-```
-void setup(){
-  Serial.begin(115200);
-  pinMode(12, INPUT|PULLUP );
-  // 检测到引脚下降沿，触发中断函数 blink
-  attachInterrupt(port, blink, FALLING);
-  Serial.println("\nstart irq test");
+> 此处内容在2023.10.30进行了修改
+
+程序目的是在引脚上升沿输出开机毫秒数
+
+有个小问题就是如果在中断函数使用串口输出极易导致中断看门狗复位，因此应该在中断函数中只进行计时并保存，串口输出交给loop循环
+
+这是错误的程序：
+```c
+unsigned long t;
+
+struct Button {
+	const uint8_t PIN;
+	uint32_t numberKeyPresses;
+	bool pressed;
+};
+
+Button button1 = {18, 0, false};
+
+void IRAM_ATTR isr() {
+	button1.numberKeyPresses++;
+	button1.pressed = true;
+  t = micros();
+  Serial.println(t);
 }
 
-void loop(){}
-
-// 中断函数
-void blink(){
-  Serial.println("interrupt");
+void setup() {
+	Serial.begin(115200);
+	pinMode(button1.PIN, INPUT_PULLUP);
+	attachInterrupt(button1.PIN, isr, FALLING);
 }
 
+void loop() {
+	if (button1.pressed) {
+		Serial.printf("Button has been pressed %u times\n", button1.numberKeyPresses);
+		button1.pressed = false;
+	}
+}
 ```
+
+具体报错如下：
+```
+17:24:50.601 -> Guru Meditation Error: Core  1 panic'ed (Interrupt wdt timeout on CPU1). 
+17:24:50.601 -> 
+17:24:50.601 -> Core  1 register dump:
+17:24:50.642 -> PC      : 0x4008ab8a  PS      : 0x00060b35  A0      : 0x80089b02  A1      : 0x3ffbf0ec  
+17:24:50.642 -> A2      : 0x3ffb8314  A3      : 0x3ffb81a4  A4      : 0x00000004  A5      : 0x00060b23  
+17:24:50.642 -> A6      : 0x00060b23  A7      : 0x00000001  A8      : 0x3ffb81a4  A9      : 0x00000018  
+17:24:50.642 -> A10     : 0x3ffb81a4  A11     : 0x00000018  A12     : 0x3ffc22fc  A13     : 0x00060b23  
+17:24:50.642 -> A14     : 0x007bf308  A15     : 0x003fffff  SAR     : 0x0000000e  EXCCAUSE: 0x00000006  
+17:24:50.667 -> EXCVADDR: 0x00000000  LBEG    : 0x400863fd  LEND    : 0x4008640d  LCOUNT  : 0xfffffffd  
+17:24:50.667 -> Core  1 was running in ISR context:
+17:24:50.667 -> EPC1    : 0x400da62f  EPC2    : 0x00000000  EPC3    : 0x00000000  EPC4    : 0x00000000
+17:24:50.667 -> 
+17:24:50.667 -> 
+17:24:50.667 -> Backtrace: 0x4008ab87:0x3ffbf0ec |<-CORRUPTED
+17:24:50.667 -> 
+17:24:50.667 -> 
+17:24:50.667 -> Core  0 register dump:
+17:24:50.667 -> PC      : 0x4008ad27  PS      : 0x00060035  A0      : 0x8008972b  A1      : 0x3ffbea2c  
+17:24:50.700 -> A2      : 0x3ffbf308  A3      : 0xb33fffff  A4      : 0x0000abab  A5      : 0x00060023  
+17:24:50.700 -> A6      : 0x00060021  A7      : 0x0000cdcd  A8      : 0x0000abab  A9      : 0xffffffff  
+17:24:50.700 -> A10     : 0x3ffc2118  A11     : 0x00000000  A12     : 0x3ffc2114  A13     : 0x00000007  
+17:24:50.700 -> A14     : 0x007bf308  A15     : 0x003fffff  SAR     : 0x0000001d  EXCCAUSE: 0x00000006  
+
+```
+应该改成这样：
+```c
+unsigned long t;
+
+struct Button {
+	const uint8_t PIN;
+	uint32_t numberKeyPresses;
+	bool pressed;
+};
+
+Button button1 = {18, 0, false};
+
+void IRAM_ATTR isr() {
+	button1.numberKeyPresses++;
+	button1.pressed = true;
+  t = micros();
+}
+
+void setup() {
+	Serial.begin(115200);
+	pinMode(button1.PIN, INPUT_PULLUP);
+	attachInterrupt(button1.PIN, isr, FALLING);
+}
+
+void loop() {
+	if (button1.pressed) {
+		Serial.printf("Button has been pressed %u times\n", button1.numberKeyPresses);
+		button1.pressed = false;
+    Serial.println(t);
+	}
+}
+```
+
 ##### 定时器中断
 定时器每秒触发一次中断
 ```
@@ -2421,3 +2501,4 @@ https://zhuanlan.zhihu.com/p/145369083
 https://blog.csdn.net/z755924843/article/details/82704020
 https://blog.csdn.net/xq151750111/article/details/115142727
 https://blog.csdn.net/Naisu_kun/article/details/86004049
+https://lastminuteengineers.com/handling-esp32-gpio-interrupts-tutorial/
