@@ -25,7 +25,7 @@ description: ALL IN ONE！！！
 https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
 ```
 arduino基础
-```
+```c
 pinMode(Pin, OUTPUT);
 pinMode(Pin,INPUT);
 pinMode(Pin,INPUT_PULLUP);
@@ -93,7 +93,7 @@ ADC 输入通道具有 12 位分辨率。这意味着您可以获得范围从 0 
 
 #### 实例
 ##### 读取模拟值及设置分辨率
-```
+```c
 void setup() {
   Serial.begin(115200);
   // 设置ADC分辨率,可以是一个介于9(0 - 511)和12位(0 - 4095)之间的值。默认是12位分辨率
@@ -107,7 +107,7 @@ void loop() {
 }
 ```
 ##### 读取模拟电压(毫伏)
-```
+```c
 void setup() {
   Serial.begin(115200);
 }
@@ -121,7 +121,7 @@ GPIO口会对输入的电压进行一定的减弱,以防止电压过大造成单
 
 默认参数是衰减11db,即使没有设置,也是11db.
 
-```
+```c
 // 设置所有ADC引脚的输入衰减
 analogSetAttenuation(attenuation)
 // 设置pin引脚的输入衰减
@@ -134,7 +134,7 @@ analogSetPinAttenuation(pin, attenuation)
 > `ADC_6db`: ADC的输入电压将被衰减，扩展测量范围至约1350 mV
 > `ADC_11db`: ADC的输入电压将被衰减，扩展测量范围至约2600 mV
 
-```
+```c
 void setup() {
   Serial.begin(115200);
   // 设置GPIO2引脚的衰减
@@ -147,7 +147,7 @@ void loop() {
 }
 ```
 ##### 其他可设置项
-```
+```c
 // 设置每个样本的循环次数。默认是8。取值范围:1 ~ 255
 analogSetCycles(cycles)
 //设置范围内的样本数量。默认为1个样本。它有增加灵敏度的作用
@@ -180,7 +180,7 @@ SPI0和SPI1在内部用于访问ESP32所连接的闪存。两个控制器共享�
 SPI2和SPI3是通用SPI控制器，有时分别称为HSPI和VSPI。它们向用户开放。SPI2和SPI3具有独立的总线信号，分别具有相同的名称。每条总线具有3条CS线，最多能控制6个SPI从设备。
 #### 实例
 ![点亮一个1.8寸128*120的TFT屏幕](4ac3c90f138cd7577687727fb046924.jpg)
-```
+```c
 #include <SPI.h>
 #include "Ucglib.h"
 
@@ -391,7 +391,7 @@ ESP32里面有3个串口，uart0默认作为log和console输出，我们可以�
 | U2_TXD | GPIO17  |  U2_RTS | GPIO7  |
 
 #### 硬件串口重定义
-```
+```c
 #include <HardwareSerial.h>
 
 HardwareSerial SerialPort(1); // 使用UART1
@@ -407,7 +407,7 @@ void loop(){
 ```
 #### 使用软件串口
 如果硬件串口不够用可以使用软件串口，但是效率较低
-```
+```c
 #include <SoftwareSerial.h>
 //实例化软串口
 SoftwareSerial mySerial(2, 3); // RX, TX
@@ -441,39 +441,39 @@ GPIO 22 (SCL)
 在ESP32中任何引脚都可以定义为SDA或SCL，但不到逼不得已不推荐这么做。
 
 可在Arduino IDE 中使用以下语句配置其它引脚为SDA或SCL
-```
+```c
 Wire.begin(SDA, SCL);
 ```
 #### 实例
 ##### 主从设备传输
 ###### Wire库方法
 > 初始化IIC连接，并作为主机或者从机设备加入IIC总线
-```
+```c
 begin();
 begin(address);	// 当没有填写参数时，设备会以主机模式加人IIC总线；当填写了参数时，设备会以从机模式加入IIC总线，address可以设置为0~127中的任意地址。
 ```
 > 主机向从机发送数据请求信号
 > 
 > 使用 requestFrom() 后，从机端可以使用 onRequest() 注册一个事件用以响应主机的请求；主机可以通过available() 和 read() 函数读取这些数据
-```
+```c
 Wire.requestFrom(address, quantity);
 Wire.requestFrom(address, quantity, stop); //quantity请求的字节数；stop当其值为true时将发送一个停止信息，释放IIC总线；当为false时，将发送一个重新开始信息，并继续保持IIC总线的有效连接
 ```
 > 设定传输数据到指定地址的从机设备
 > 
 > 随后可以使用 write() 函数发送数据，并搭配endTransmission()函数结束数据传输
-```
+```c
 Wire.beginTransmission(address);
 ```
 > 结束数据传输
-```
+```c
 Wire.endTransmission() ;
 Wire.endTransmission(stop);
 ```
 > 发送数据
 > 
 > 为主机状态时，主机将要发送的数据加入发送队列；当为从机状态时，从机发送数据至发起请求的主机
-```
+```c
 Wire.write(value);
 Wire.write(string);
 Wire.write(data, length);
@@ -489,25 +489,25 @@ Wire.write(data, length);
 > 返回接收到的字节数
 > 
 > 在主机中，一般用于主机发送数据请求后；在从机中，一般用于数据接收事件中。
-```
+```c
 Wire. available();
 ```
 > 读取1B的数据
 > 
 > 在主机中，当使用 requestFrom() 函数发送数据请求信号后，需要使用 read() 函数来获取数据；在从机中需要使用该函数读取主机发送来的数据
-```
+```c
 Wire.read()
 ```
 
 > 从机端注册一个事件，当从机收到主机发送的数据时即被触发
-```
+```c
 Wire.onReceive(handler);
 ```
 参数：
 + handler，当从机接收到数据时可被触发的事件。该事件带有一个int型参数(从主机读到的字节数)且没有返回值，如 `void myHandler(int numBytes)`
 
 > 注册一个事件,当从机接收到主机的数据请求时即被触发
-```
+```c
 Wire.onRequest(handler);
 ```
 参数：
@@ -517,7 +517,7 @@ Wire.onRequest(handler);
 > 主发从收
 
 + 主机：
-```
+```c
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→master_writer可以打开该文件
 #include <Wire.h>
 
@@ -538,7 +538,7 @@ void loop() {
 
 ```
 + 从机：
-```
+```c
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→slave_receiver，可以打开该文件
 #include <Wire.h>
 
@@ -568,7 +568,7 @@ void receiveEvent(int howMany) {
 > 主收从发
 
 + 主机：
-```
+```c
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→master_reader，可以打开该文件
 #include <Wire.h>
 
@@ -590,7 +590,7 @@ void loop() {
 
 ```
 + 从机：
-```
+```c
 // 直接在Arduino IDE选择“文件”→“示例”→Wire→slave_sender，可以打开该文件
 #include <Wire.h>
 
@@ -616,7 +616,7 @@ void requestEvent() {
 > 其中电机驱动板使用了TwoWire来创建两个iic通道
 
 + uno：
-```
+```c
 #include <Wire.h>
 
 void setup(){
@@ -652,7 +652,7 @@ void loop(){
 ```
 
 + esp32驱动板：
-```
+```c
 #include <SimpleFOC.h>
 #include <Wire.h>
 #include <dummy.h>
@@ -728,7 +728,7 @@ void requestEvent() {
 ```
 ##### as5600编码器
 此程序为读取`as5600`磁编码器的i2c数据，其中SDA为D22，SCL为D23：
-```
+```c
 #include "AS5600.h"
 #include "Wire.h"
 
@@ -758,7 +758,7 @@ void loop(){
 
 ```
 ##### oled屏幕
-```
+```c
 #include <Wire.h>
 #include "SSD1306.h"
 // 声明类SSD1306的对象,参数为:地址,SDA,SCL
@@ -793,7 +793,7 @@ void loop(){
 ESP32 PWM 控制器有 8 个高速通道(80MHz)和 8 个低速通道(1MHz)，我们总共有 16 个通道。它们根据速度分为两组。每组有 4 个定时器/8 个通道。这意味着每两个通道共享同一个定时器。因此，我们无法独立控制每对通道的 PWM 频率。
 所有可以作为输出的引脚都可以用作 PWM 引脚(GPIO 34 到 39 不能产生 PWM)。
 #### 实例
-```
+```c
 int freq = 50;  //频率
 int channel = 8;  //使用的通道
 int resolution = 8; // 8位分辨率，可以使用0到255的值来控制
@@ -803,7 +803,7 @@ ledcAttachPin(servo, channel);  //指定通道与引脚
 ledcWrite(channel, 127);  //输出50%的PWM
 ```
 顺便赠送一个使用舵机的函数
-```
+```c
 int servoPWM(int degree)
 { // 0-180度
   // 20ms周期，高电平0.5-2.5ms，对应0-180度角度
@@ -825,7 +825,7 @@ DAC2 (GPIO26)
 ```
 #### 实例
 输出电压将在`0-3.3V`之间变化：
-```
+```c
 void setup(){}
  
 void loop(){
@@ -857,7 +857,7 @@ T8 (GPIO 33)
 T9 (GPIO 32)
 ```
 #### 实例
-```
+```c
 // set pin numbers(D4/T0)
 const int touchPin = 4;
 // change with your threshold value
@@ -888,7 +888,7 @@ void loop(){
 所有引脚都可以配置为中断。
 
 中断函数:
-```
+```c
 attachInterrupt(digitalPinToInterrupt(GPIO), function, mode);
 ```
 其中参数`mode`有5种：
@@ -1002,7 +1002,7 @@ void loop() {
 
 ##### 定时器中断
 定时器每秒触发一次中断
-```
+```c
 //定义定时器指针
 hw_timer_t *timer = NULL;
 //中断函数
@@ -1071,7 +1071,7 @@ GPIO 39 (VN)
 上面的代码经常用于读取按钮是否被按下，但是实际上机械按钮在开关时总会因为各种原因导致的抖动，导致多次触发中断。
 
 我解决这个问题的想法就是先检查最近50ms有没有过中断，如果没有，继续检查接下来20ms有没有回到高电平，如果还没有，就可以判定确实按下了按钮。代码如下：
-```
+```c
 unsigned long previousMillis = 0;
 void setup(){
   Serial.begin(115200);
@@ -1101,7 +1101,7 @@ void blink(){
 ```
 ### 光污染制作--ws2812驱动
 讲真这个和ESP32关系不大，但是我就想写怎么着hhh
-```
+```c
 #include "Freenove_WS2812_Lib_for_ESP32.h"
 
 #define LEDS_COUNT  128    //彩灯数目
@@ -1127,7 +1127,7 @@ void loop() {
 ```
 ### WIFI连接服务器获取数据
 此处示例为使用STA模式连接WIFI并发起TCP连接获取数据，然后读取其中的`r`和`d`作为分隔符的内容
-```
+```c
 #include <WiFi.h>
 
 const char *ssid = "xxx";
@@ -1176,7 +1176,7 @@ void loop(){
 ```
 ### 蓝牙键盘
 D12引脚拉低则蓝牙键盘输出`HELLO`。问题在于如果esp32重启，必须重新配对才能让蓝牙键盘继续工作，还不知道原因，网上也没有搜到类似现象，也许是我esp32板子的问题？等我再换一个板子试一试。好了问题解决，github直接下载的`0.3`版本的`ESP32-BLE-Keyboard`库有bug，已经有人提出了[issue](https://github.com/T-vK/ESP32-BLE-Keyboard/issues/166)，在`0.3.2`中已经解决了这个问题，不过`0.3.2`还是Pre-release。下载这个库时候记得看版本要`0.3.2`。
-```
+```c
 #include <BleKeyboard.h>
 
 unsigned long previousMillis = 0;
@@ -1228,7 +1228,7 @@ ESP-NOW 是乐鑫开发的一种无连接通信协议，沒有握手协议(CHAP)
 2个ESP32开发板在空旷区域中进行单向通讯，相隔30米仍然能很好低接收信息。
 #### 示例
 ##### 发送端(slave/sender)
-```
+```c
 // 加载需要的库 
 #include <esp_now.h>
 #include <WiFi.h>
@@ -1308,7 +1308,7 @@ void loop() {
 }
 ```
 ##### ESPNOW接收端
-```
+```c
 // 加载需要的库 
 #include <esp_now.h>
 #include <WiFi.h>
@@ -1376,7 +1376,7 @@ EEPROM里面的数据是可以断电保存的，重新上电数据并不会丢�
 
 在 ESP32 的闪存读取和写入将使用 EEPROM 库。其实是和 Arduino EEPROM 一样的，并没有太大区别。
 
-```
+```c
 // 加载EEPROM的库
 #include <EEPROM.h>
 
@@ -1440,7 +1440,7 @@ ESP32通过Wi-Fi的`DTIM Beacon`机制与路由器保持连接。在`Modem-sleep
 
 ##### 定时唤醒：6uA左右
 这是官方提供的示例代码，已经把注释改成了中文。
-```
+```c
 #define uS_TO_S_FACTOR 1000000ULL  //微秒到秒的转换
 #define TIME_TO_SLEEP  5        //进入休眠模式时间
 RTC_DATA_ATTR int bootCount = 0;
@@ -1478,7 +1478,7 @@ void loop(){}
 ```
 ##### Touchpad唤醒：36uA左右
 调用`esp_deep_sleep_enable_touchpad_wakeup()`函数使能`touchpad`唤醒，然后调用`esp_deep_sleep_start()`函数进入`Deep-sleep`模式
-```
+```c
 /*
 此代码展示深度睡眠以触摸作为唤醒源以及如何存储数据，RTC内存在重新启动时使用
 
@@ -1582,7 +1582,7 @@ RTC 控制器包含使用 多个 RTC IO 触发唤醒的逻辑。两个逻辑功�
 
 但是，如果 RTC 外设断电，内部上拉和下拉电阻将被禁用。要使用内部上拉或下拉电阻，请在睡眠期间请求 RTC 外设电源域保持上电。`esp_sleep_enable_ext1_wakeup()`函数可用于启用此唤醒源。
 
-```
+```c
 /*
 此代码展示如何将深度睡眠与作为唤醒源的外部触发器，以及如何将数据存储在 RTC 内存中，以便在重新启动时使用它
 按下 GPIO 33 按钮以 10K 欧姆向下拉
@@ -1628,7 +1628,7 @@ void loop(){}
 
 ### web服务器
 连接wifi后，浏览器输入串口输出的ip，打开网页就会让led灯亮起一秒。考虑到学弟喜欢写脚本疯狂访问来让继电器输出PWM，加了个10s的延时不接受新的连接。
-```
+```c
 #include <WiFi.h>
 #include <WebServer.h>
 const char* ssid = "xxx";
@@ -1691,12 +1691,12 @@ ESP32开发板已经安装了`FreeRTOS`固件。 `FreeRTOS`是开源的实时操
 
 #### 查找ESP32内核ID
 可以从void setup()和void loop()函数中调用此函数，以了解运行这些函数的内核ID
-```
+```c
 xPortGetCoreID()
 ```
 
 测试一下这个程序：
-```
+```c
 void setup(){
   Serial.begin(115200);
   Serial.print("setup() function running on core: ");
@@ -1736,7 +1736,7 @@ xTaskCreatePinnedToCore(Task1code, "Task1", 10000, NULL, 1, NULL,  0);
 ```
 #### 定义Taskcode函数
 在`void setup(){}`函数之外，为任务创建单独的函数，这个函数将在`core0`上运行
-```
+```c
 Void Task1code( void * parameter) {
   Serial.print("Task1 running on core ");
   Serial.println(xPortGetCoreID());
@@ -1776,7 +1776,7 @@ Void Task1code( void * parameter) {
 其中，tft屏幕任务代码来自`#include "Ucglib.h"`的示例程序，foc控制任务代码来自`#include <SimpleFOC.h>`的示例程序
 
 虽然但是，就这两个任务而言，其实就算都在`cpu1`执行也无所谓hhh
-```
+```c
 #include <SimpleFOC.h>
 #include <SPI.h>
 #include "Ucglib.h"
@@ -1955,7 +1955,7 @@ void loop() {
 <details>
   <summary>main.ino</summary>
 
-```
+```c
 #include "WiFiUser.h"
 
 const int resetPin = 0;                    //设置重置按键引脚,用于删除WiFi信息
@@ -1996,7 +1996,7 @@ void loop(){
 <details>
   <summary>WiFiUser.h</summary>
 
-```
+```c
 #ifndef __WIFIUSER_H__
 #define __WIFIUSER_H__
  
@@ -2038,7 +2038,8 @@ void blinkLED(int led, int n, int t); //LED闪烁函数        //用不上LED可
 <details>
   <summary>WiFiUser.cpp</summary>
 这个程序原作者写了`WiFi.hostname(HOST_NAME);`实测报错，注释掉也不影响使用
-```
+
+```c
 #include "WiFiUser.h"
  
 const byte DNS_PORT = 53;                  //设置DNS端口号
