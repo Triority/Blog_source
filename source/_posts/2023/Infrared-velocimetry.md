@@ -20,6 +20,47 @@ description: Infrared-velocimetry
 | 原理图  | PCB  | 3D模型  |
 
 # 程序
-```
 
 ```
+unsigned long t12 = 0;
+unsigned long t13 = 0;
+int trigger = 0;
+
+void IRAM_ATTR isr12() {
+  t12 = micros();
+  trigger = 12;
+}
+
+void IRAM_ATTR isr13() {
+  t13 = micros();
+  trigger = 13;
+}
+
+void setup() {
+	Serial.begin(115200);
+	pinMode(12, INPUT_PULLUP);
+  pinMode(13, INPUT_PULLUP);
+	attachInterrupt(12, isr12, RISING);
+  attachInterrupt(13, isr13, RISING);
+}
+
+void loop() {
+	if (trigger == 13){
+		Serial.print("trigger13:");
+    Serial.println(t13-t12);
+    Serial.print("-----v:");
+    Serial.print(5600000/(t13-t12));
+    Serial.println("cm/s");
+		trigger = 0;
+	}else if(trigger == 12){
+    Serial.print("trigger12:");
+    Serial.print(t12-t13);
+    Serial.print("-----v:");
+    Serial.print(5600000/(t12-t13));
+    Serial.println("cm/s");
+		trigger = 0;
+  }
+}
+```
+通过这个程序发现实际使用过程中，有时候会出现同一位置两次触发，暂时不确定是因为振铃还是因为物体长度。考虑到物体长度减小触发间隔减小，我认为应该是物体长度导致的变化
+![](QQ截图20231103233139.png)
