@@ -21,7 +21,7 @@ description: Infrared-velocimetry
 
 # 程序
 
-```
+```c
 unsigned long t12 = 0;
 unsigned long t13 = 0;
 int trigger = 0;
