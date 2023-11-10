@@ -52,24 +52,42 @@ PC817C最大驱动电流是100mA，而70tps16驱动电流刚好100mA，所以去
 考虑到还要根据实际情况调参，这里时间和引脚配置没有直接int而是写了个数组，等我不懒的时候会改成串口调参
 
 ```
+// 三极管导通时间(us)
+int time_trigger = 10;
+// 级数
+int levels = 2;
+// 每一级的控制引脚和下一级的间隔时间
+int pin_delaymicros[4][2] = {
+  {13,2000},
+  {12,1000},
+  {14,500},
+  {27,250}
+};
+
 void setup() {
-  // put your setup code here, to run once:
-  pinMode(13, OUTPUT);
-  digitalWrite(13, LOW);
-  pinMode(12, OUTPUT);
-  digitalWrite(12, LOW);
+  Serial.begin(115200);
+  for (int i=0;i<levels;i++){
+    pinMode(pin_delaymicros[i][0], OUTPUT);
+    digitalWrite(pin_delaymicros[i][0], LOW);
+    Serial.print("初始化引脚：");
+    Serial.println(pin_delaymicros[i][0]);
+  }
   pinMode(0,INPUT);
+  Serial.println("初始化完成等待触发...");
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
   if(digitalRead(0)==LOW){
-    digitalWrite(13, HIGH);
-    delay(2);
-    digitalWrite(12, HIGH);
-    delay(50);
-    digitalWrite(13, LOW);
-    digitalWrite(12, LOW);
+    for (int i=0;i<levels;i++){
+      digitalWrite(pin_delaymicros[i][0], HIGH);
+      Serial.print("trigger:");
+      Serial.println(pin_delaymicros[i][0]);
+      delayMicroseconds(time_trigger);
+      digitalWrite(pin_delaymicros[i][0], LOW);
+
+      delayMicroseconds(pin_delaymicros[i][1]);
+    }
+
     delay(2000);
   }
 }
