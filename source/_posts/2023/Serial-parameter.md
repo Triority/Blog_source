@@ -4,7 +4,7 @@ tags:
   - arduino
   - C语言
   - 文档
-cover: /img/RUN.png
+cover: /img/QQ截图20231204230308.png
 categories:
 - [计算机, 源码分享]
 - [计算机, 文档教程]
