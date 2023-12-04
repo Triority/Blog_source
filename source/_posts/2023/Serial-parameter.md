@@ -24,7 +24,6 @@ description: Adjust the parameters through the serial port
 #include "Arduino.h"
 void ser_par(int *par_list[]);
 ```
-
 [`ser_par.cpp`](ser_par.cpp):
 ```cpp
 #include "Arduino.h"
