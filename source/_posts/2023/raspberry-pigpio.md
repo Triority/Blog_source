@@ -57,5 +57,7 @@ The following packages will be upgraded:
 Need to get 56.8 MB of archives.
 After this operation, 84.4 MB of additional disk space will be used.
 Do you want to continue? [Y/n] y
+
+pi@raspberrypi:~ $ python3 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python
 ```
 
