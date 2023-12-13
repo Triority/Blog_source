@@ -3,7 +3,7 @@ title: 树莓派使用opencv识别操场跑道线并使用pigpio控制
 tags:
   - 树莓派
   - python
-  = opencv
+  - opencv
 cover: /img/RUN.png
 categories:
   - [计算机, 源码分享]
