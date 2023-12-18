@@ -1,10 +1,11 @@
 ---
 title: 首次出差——重庆
 tags:
-  - null
+  - 摄影
+  - 全原图文章
 cover: /img/RUN.png
 categories:
-  - null
+- [生活, 游览记录]
 date: 2023-12-13 15:25:49
 description: 智能车竞赛室外组5G和ROS
 ---
