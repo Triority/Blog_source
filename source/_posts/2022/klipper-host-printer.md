@@ -225,3 +225,74 @@ probe_count: 4,3
 #*# pid_kd = 0
 
 ```
+
+`moonraker.conf`:
+
+```
+[server]
+host: 0.0.0.0
+port: 7125
+enable_debug_logging: False
+klippy_uds_address: /tmp/klippy_uds
+
+[authorization]
+trusted_clients:
+    10.0.0.0/8
+    127.0.0.0/8
+    169.254.0.0/16
+    172.16.0.0/12
+    192.168.0.0/16
+    FE80::/10
+    ::1/128
+cors_domains:
+    http://*.lan
+    http://*.local
+    https://my.mainsail.xyz
+    http://my.mainsail.xyz
+    https://app.fluidd.xyz
+    http://app.fluidd.xyz
+
+[database]
+database_path: /home/orangepi/.moonraker_database
+
+[file_manager]
+config_path: /home/orangepi/klipper_config
+log_path: /home/orangepi/klipper_logs
+
+[octoprint_compat]
+
+[history]
+
+[update_manager]
+channel: dev
+refresh_interval: 168
+
+[update_manager fluidd]
+type: web
+channel: stable
+repo: fluidd-core/fluidd
+path: ~/fluidd
+
+[timelapse]
+
+
+[notifier print_start]
+url: mailto://triority:key@qq.com/?to=triority@qq.com
+title: 打印任务已开始
+events: started
+body: 模型“'{event_args[1].filename}'”开始打印……
+
+[notifier print_complete]
+
+url: mailto://triority:key@qq.com/?to=triority@qq.com
+title: 打印任务已完成
+events: complete
+body: 模型“'{event_args[1].filename}'”打印完成。
+
+[notifier print_error]
+url: mailto://triority:key@qq.com/?to=triority@qq.com
+title: 打印任务发生错误
+events: error
+body: 错误：{event_args[1].message}
+
+```
