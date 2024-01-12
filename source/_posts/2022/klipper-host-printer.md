@@ -60,7 +60,7 @@ rotation_distance: 8
 endstop_pin: probe:z_virtual_endstop  #Z-Min, PD2:Z-Max
 position_max: 285
 position_min: -3
-homing_speed: 30
+homing_speed: 20
 
 [extruder]
 step_pin: PA4
@@ -80,11 +80,13 @@ max_temp: 270
 #pid_Ki: 0.888
 #pid_Kd: 129.435
 max_extrude_only_distance: 50000.0
-max_extrude_only_velocity: 40
+max_extrude_only_velocity: 20
+max_extrude_only_accel: 100
+pressure_advance = 0.2
 
 [verify_heater extruder]
 max_error: 120
-hysteresis: 10
+hysteresis: 20
 check_gain_time: 20
 heating_gain: 1
 
@@ -116,9 +118,9 @@ max_temp: 180
 #pid_kd = 1319.559
 
 [verify_heater heater_bed]
-max_error: 12000
-hysteresis: 30
-check_gain_time: 300
+max_error: 1200
+hysteresis: 10
+check_gain_time: 60
 heating_gain: 1
 
 [fan]
@@ -131,15 +133,12 @@ serial:/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0
 
 [printer]
 kinematics: corexy
-max_velocity: 600
-max_accel: 3000
-max_z_velocity: 30
+max_velocity: 180
+max_accel: 2000
+max_z_velocity: 20
 max_z_accel: 300
-square_corner_velocity: 30.0
+square_corner_velocity: 20.0
 
-[fan_generic LED]
-pin: PL0
-shutdown_speed: 1.0
 
 [virtual_sdcard]
 path: ~/gcode_files
@@ -161,7 +160,7 @@ sensor_pin: ^PD2
 control_pin: PB5
 x_offset: -9
 y_offset: -51
-z_offset: 1.8
+#z_offset: 1.6
 speed: 5.0
 samples: 2
 samples_result: median
@@ -192,15 +191,17 @@ mesh_min:60,30
 mesh_max:240,130
 probe_count: 4,3
 
+[include timelapse.cfg]
+
 #*# <---------------------- SAVE_CONFIG ---------------------->
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  0.682500, 0.191250, -0.295000, -0.762500
-#*# 	  0.668750, 0.160000, -0.253750, -0.680000
-#*# 	  0.697500, 0.236250, -0.187500, -0.603750
+#*# 	  -0.286250, -0.097500, 0.118750, 0.276250
+#*# 	  -0.172500, 0.022500, 0.218750, 0.391250
+#*# 	  -0.058750, 0.117500, 0.320000, 0.515000
 #*# tension = 0.2
 #*# min_x = 60.0
 #*# algo = lagrange
@@ -220,9 +221,13 @@ probe_count: 4,3
 #*#
 #*# [heater_bed]
 #*# control = pid
-#*# pid_kp = 10000000
-#*# pid_ki = 0
-#*# pid_kd = 0
+#*# pid_kp = 80.0
+#*# pid_ki = 100.0
+#*# pid_kd = 1000.0
+#*#
+#*# [bltouch]
+#*# z_offset = 1.800
+
 
 ```
 
