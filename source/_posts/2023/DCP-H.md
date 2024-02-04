@@ -38,7 +38,7 @@ void setup() {
   pinMode(13, OUTPUT);
   digitalWrite(13, LOW);
   pinMode(12, OUTPUT);
-  digitalWrite(12, HIGH);
+  digitalWrite(12, LOW);
   pinMode(0,INPUT);
 }
 
@@ -46,12 +46,9 @@ void loop() {
   // put your main code here, to run repeatedly:
   if(digitalRead(0)==LOW){
     digitalWrite(13, HIGH);
-    delay(100);
+    delayMicroseconds(1200);
     digitalWrite(13, LOW);
-    digitalWrite(12, LOW);
     delay(2000);
-  digitalWrite(12, HIGH);
   }
 }
-
 ```
