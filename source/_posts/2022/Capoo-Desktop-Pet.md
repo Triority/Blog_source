@@ -7,9 +7,9 @@ tags:
 description: 使用PyQT开发桌宠程序并打包为windows软件
 cover: /img/Capoo.jpg
 categories: 
-- 折腾记录
-- 作品&项目总结
-- 值得一提的文章
+- [折腾记录]
+- [作品&项目总结]
+- [值得一提的文章]
 ---
 ## 前言
 之前在b站刷到了Capoo的视频，这猫猫也太好玩了哈哈，最近原作者做了一个桌宠app，但是付款方式只有paypel(据说价格挺贵)，so自己搓一个？

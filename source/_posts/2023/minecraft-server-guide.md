@@ -4,8 +4,8 @@ tags:
   - minecraft
 cover: /img/RUN.png
 categories:
-- 整活&游戏
-- 文档&笔记
+- [整活&游戏]
+- [文档&笔记]
 date: 2023-07-27 13:15:40
 description: Minecraft Server ALL In One
 ---

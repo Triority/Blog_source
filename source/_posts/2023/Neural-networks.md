@@ -5,9 +5,9 @@ tags:
   - python
 cover: /img/v2-777808fc5b00e7727df4dc835c1fc44f_1440w.jpg
 categories:
-- 文档&笔记
-- 折腾记录
-- 值得一提的文章
+- [文档&笔记]
+- [折腾记录]
+- [值得一提的文章]
 notshow: false
 date: 2023-04-24 04:53:00
 description: 神经网络入门笔记

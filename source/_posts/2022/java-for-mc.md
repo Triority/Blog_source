@@ -7,8 +7,8 @@ tags:
 - 教程
 - minecraft
 categories: 
-- 整活&游戏
-- 文档&笔记
+- [整活&游戏]
+- [文档&笔记]
 ---
 ## 如何启动MC
 ### java

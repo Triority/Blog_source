@@ -4,8 +4,8 @@ description: 在参加智能车竞赛航天物流组线上赛过程中,采用ope
 cover: /img/opencv.png
 date: 2022-01-16 17:23:58
 categories: 
-- 文档&笔记
-- 值得一提的文章
+- [文档&笔记]
+- [值得一提的文章]
 tags:
 - python
 - opencv

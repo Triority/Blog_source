@@ -7,9 +7,9 @@ tags:
   - ROS
 cover: /img/ros.png
 categories:
-- 文档&笔记
-- 折腾记录
-- 值得一提的文章
+- [文档&笔记]
+- [折腾记录]
+- [值得一提的文章]
 notshow: false
 date: 2023-02-21 16:37:19
 description: 重写一篇笔记

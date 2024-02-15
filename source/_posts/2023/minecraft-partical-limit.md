@@ -4,8 +4,8 @@ tags:
   - minecraft
 cover: /img/villager_particle.jpg
 categories:
-- 折腾记录
-- 整活&游戏
+- [折腾记录]
+- [整活&游戏]
 notshow: false
 date: 2023-01-22 13:12:32
 description: 新年快乐！

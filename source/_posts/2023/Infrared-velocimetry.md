@@ -4,8 +4,8 @@ tags:
   - PCB设计
 cover: /img/RUN.png
 categories:
-- 过时&弃用&无意义&失败品
-- 折腾记录
+- [过时&弃用&无意义&失败品]
+- [折腾记录]
 date: 2023-10-15 16:20:01
 description: Infrared-velocimetry
 ---
