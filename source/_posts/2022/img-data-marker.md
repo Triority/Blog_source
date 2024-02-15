@@ -8,7 +8,7 @@ tags:
 description: 改进了之前的自动标注算法，增加一些自定义功能使其适应更多情况
 cover: /img/auto-marking.png
 categories: 
-- [计算机, 源码分享]
+- 作品&项目总结
 - 值得一提的文章
 ---
 ## 前言

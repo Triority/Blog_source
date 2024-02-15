@@ -4,7 +4,7 @@ tags:
   - 神经网络
 cover: /img/QQ截图20230920192636.png
 categories:
-  - null
+- 文档&笔记
 date: 2023-09-20 18:08:22
 description: pytorch？蟒蛇火把！
 ---

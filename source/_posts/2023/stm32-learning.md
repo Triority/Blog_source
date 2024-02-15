@@ -5,7 +5,7 @@ tags:
   - C语言
 cover: /img/STM32F103C8T6.png
 categories:
-  - [计算机, 知识整理]
+- 文档&笔记
 date: 2023-09-11 14:49:06
 description: STM32基础，以STM32F103C8T6最小系统板为例
 ---

@@ -6,8 +6,8 @@ tags:
   - 文档
 cover: /img/QQ截图20231204230308.png
 categories:
-- [计算机, 源码分享]
-- [计算机, 文档教程]
+- 折腾记录
+- 文档&笔记
 date: 2023-12-04 22:42:41
 description: Adjust the parameters through the serial port
 ---

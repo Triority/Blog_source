@@ -7,7 +7,7 @@ tags:
 description: 想买个800mm镜头hhhhhhhhhc
 cover: /img/mid-moon-festival.jpg
 categories: 
-- [生活, 天文摄影]
+- 旅游&摄影
 ---
 网友拍的月亮:
 {% asset_img mmexport1662824565221.jpg 网友拍的月亮 %}

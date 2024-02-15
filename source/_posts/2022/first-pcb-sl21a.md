@@ -1,10 +1,10 @@
 ---
 title: 我的第一个PCB：1-4的usb2.0拓展坞
 tags:
-  - null
+- PCB设计
 cover: /img/RUN.png
 categories:
-  - null
+- 折腾记录
 date: 2022-7-21 19:13:33
 description: 使用SL2.1A芯片制作的usb2.0拓展坞
 ---

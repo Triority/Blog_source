@@ -7,7 +7,7 @@ tags:
 description: 编写博客过程中需要的特殊代码永远记不住...用一次查一次...于是：
 cover: /img/hexo-post-code.webp
 categories: 
-- [计算机, CV工程师]
+- 文档&笔记
 ---
 ### 文章分类
 ```

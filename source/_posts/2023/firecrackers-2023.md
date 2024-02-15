@@ -6,7 +6,7 @@ tags:
 description: 两千响礼炮送上，祝大家元旦快乐！
 cover: /img/要多想.png
 categories: 
-- 整活
+- 整活&游戏
 ---
 
 # 两千响礼炮送上，

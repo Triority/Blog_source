@@ -7,7 +7,7 @@ tags:
 description: conda常用命令
 cover: /img/conda.png
 categories: 
-- [计算机, 知识整理]
+- 文档&笔记
 ---
 ## 下载及安装
 ```

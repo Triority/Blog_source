@@ -4,7 +4,7 @@ tags:
   - minecraft
 cover: /img/Ore_Layout.webp
 categories:
-- minecraft
+- 整活&游戏
 notshow: false
 date: 2023-04-04 6:54:12
 description: minecraft矿石生成概率机制

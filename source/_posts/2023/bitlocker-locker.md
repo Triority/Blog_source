@@ -4,7 +4,7 @@ tags:
   - windows
 cover: /img/OIP-C.jpg
 categories:
-  - [计算机, 折腾记录]
+  - 折腾记录
 date: 2023-10-03 17:58:19
 description: bitlocker不用重启的锁定
 ---

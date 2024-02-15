@@ -4,7 +4,7 @@ tags:
   - 旅游
 cover: /img/3cb471f9c32bbe95fec7ec3acadd550.jpg
 categories:
-- [生活, 游览记录]
+- 旅游&摄影
 notshow: false
 date: 2023-02-04 01:00:01
 description: SPICY！

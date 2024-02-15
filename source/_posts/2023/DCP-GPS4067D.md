@@ -6,7 +6,7 @@ tags:
   - PCB设计
 cover: /img/fbq.png
 categories:
-  - [电力电子, 电磁炉]
+- 折腾记录
 date: 2023-10-10 12:31:00
 description: 使用IGBT：GPS4067D主动关断的进阶版本
 ---

@@ -2,7 +2,7 @@
 title: 删除在github提交的敏感文件
 cover: /img/RUN.png
 categories:
-- [计算机, 折腾记录]
+- 折腾记录
 date: 2023-09-29 12:22:38
 description: 删除git仓库的一个文件及其全部历史记录
 ---

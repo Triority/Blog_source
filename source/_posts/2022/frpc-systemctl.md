@@ -6,7 +6,7 @@ tags:
 description: 日常重建环境...之frpc...
 cover: /img/frp.png
 categories: 
-- [计算机, CV工程师]
+- 文档&笔记
 ---
 frp总是要去配置systemctl服务，所以复制粘贴什么的最棒了
 首先编辑：

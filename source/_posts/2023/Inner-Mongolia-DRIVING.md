@@ -5,7 +5,7 @@ tags:
   - 摄影
 cover: /img/RUN.png
 categories:
-  - [生活, 游览记录]
+- 旅游&摄影
 date: 2023-10-08 18:59:45
 description: 内蒙古-天津
 ---

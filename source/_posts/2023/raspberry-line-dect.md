@@ -4,7 +4,7 @@ tags:
   - null
 cover: /img/RUN.png
 categories:
-  - null
+- 折腾记录
 date: 2023-11-03 12:40:38
 description: LYK说如果在能用的情况下帧率达到3fps他就吃屎，我们来试一试
 ---

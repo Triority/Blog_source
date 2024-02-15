@@ -6,8 +6,7 @@ tags:
 description: 使用和风天气api获取天气并发送邮件
 cover: /img/hp-feat-data.png
 categories: 
-- [计算机, 源码分享]
-- [计算机, 折腾记录]
+- 折腾记录
 ---
 ## 简介
 城市代号可以在这个网址查看:https://where.qweather.com/index.html

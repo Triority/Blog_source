@@ -6,7 +6,7 @@ tags:
   - PCB设计
 cover: /img/v2-100f3b14743b9c8fe3e58536acaa072c_r.png
 categories:
-  - [电力电子, 电磁炉]
+- 折腾记录
 date: 2023-1-18 12:56:17
 description: 使用IGBT控制的H桥电路回收电感能量
 ---

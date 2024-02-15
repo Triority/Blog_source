@@ -7,7 +7,7 @@ tags:
 description: 在智能车航天组中的视觉识别赛道并拟合数据
 cover: /img/opencv-for-Aerospace.png
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
 - 值得一提的文章
 ---
 ## 在智能车航天组中的视觉识别赛道

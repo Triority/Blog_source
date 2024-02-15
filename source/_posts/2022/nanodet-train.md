@@ -8,7 +8,7 @@ tags:
 description: 由于这次需要使用CPU进行识别，同时要求较高帧率，因此使用nanodet而非yolo进行目标识别，同时这也是我第一次尝试模型训练，如有错误欢迎指出
 cover: /img/nanodet-plus.jpg
 categories: 
-- [计算机, 折腾记录]
+- 折腾记录
 ---
 # 环境配置
 **这部分内容需要用nvidia显卡，如果只使用CPU识别，那么不需要在识别的电脑上配置，但是训练的电脑建议安装如下内容**

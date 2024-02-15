@@ -5,7 +5,7 @@ tags:
   - esp32
 cover: /img/d5bd564e82238fa871150c9b3fe22c8.jpg
 categories:
-- [计算机, 折腾记录]
+- 折腾记录
 notshow: false
 date: 2023-03-28 17:18:00
 description: 一种类似spi片选功能的方法控制多个相同地址设备

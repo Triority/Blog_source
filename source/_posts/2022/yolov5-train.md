@@ -7,8 +7,7 @@ tags:
 description: yolov5数据集训练
 cover: /img/yolov5.png
 categories: 
-- [计算机, 知识整理]
-- [计算机, 折腾记录]
+- 折腾记录
 ---
 ## 下载yolov5
 ```

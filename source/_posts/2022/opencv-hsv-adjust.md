@@ -7,13 +7,15 @@ tags:
 description: opencv经常使用颜色识别某一物体，而找到这一参数范围极其麻烦，因此写了这个程序来帮助确认最佳参数
 cover: /img/opencv-hsv-adjust.png
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
 ---
 ## 前言
 opencv经常使用颜色识别某一物体，而找到这一参数范围极其麻烦，因此写了这个程序来帮助确认最佳参数
 效果如下：
 ![识别蓝色锥桶效果](/img/opencv-hsv-adjust.png)
 ## 代码
+> 2023年末的比赛中，学弟为这个程序添加了一些小功能，比如按键保存参数，[博客链接](https://qwqpap.xyz/2023/12/%e6%99%ba%e8%83%bd%e8%bd%a618%e5%b1%8aros%e7%bb%84%e8%a7%86%e8%a7%89%e6%96%b9%e6%a1%88/)
+
 ```python
 import cv2
 import numpy as np

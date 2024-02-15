@@ -5,7 +5,8 @@ tags:
   - python
 cover: /img/微信截图_20230607003814.png
 categories:
-- [计算机, 源码分享]
+- 整活&游戏
+- 折腾记录
 notshow: false
 date: 2022-04-01 01:23:59
 description: 考验眼力的时候到了

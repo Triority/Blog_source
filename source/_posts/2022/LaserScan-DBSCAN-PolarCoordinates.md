@@ -9,7 +9,8 @@ tags:
 description: 根据激光雷达的数据特点对DBSCAN聚类算法进行修改
 cover: /img/LaserScan-DBSCAN-PolarCoordinates.png
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
+- 作品&项目总结
 ---
 ## DBSCAN聚类算法
 有一个对这个算法进行[可视化的网站](https://www.naftaliharris.com/blog/visualizing-dbscan-clustering/ "可视化的网站")

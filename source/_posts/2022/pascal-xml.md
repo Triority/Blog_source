@@ -7,7 +7,7 @@ tags:
 - python
 - 神经网络
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
 ---
 
 ## 前言

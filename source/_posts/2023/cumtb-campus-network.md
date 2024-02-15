@@ -5,7 +5,7 @@ tags:
   - 整活
 cover: /img/QQ截图20230125233832(1).png
 categories:
-  - 整活
+- 整活&游戏
 notshow: false
 date: 2023-01-25 23:36:03
 description: 此视频只是浅浅吐槽一下校园网，毫无恶意，手动狗头保命hhh

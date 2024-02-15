@@ -1,10 +1,10 @@
 ---
 title: 中国矿业大学（北京）3D打印社团招新简述（2022-2023学年末）
 tags:
-  - null
+- 3D打印
 cover: /img/
 categories:
-  - null
+- 外部引用
 date: 2023-07-23 13:14:16
 description: 北矿3D打印社团历史文件
 ---

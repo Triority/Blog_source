@@ -7,7 +7,7 @@ tags:
 description: 希望疫情早日结束哦~
 cover: /img/牢房.png
 categories: 
-- 整活
+- 整活&游戏
 ---
 这么好的活，不发出来太可惜了
 [转自一位学弟]

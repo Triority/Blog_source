@@ -6,7 +6,7 @@ tags:
 description: 提问的智慧
 cover: /img/ask.png
 categories: 
-- [计算机, 源码分享]
+- 文档&笔记
 ---
 # 提问的智慧
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/pulls)

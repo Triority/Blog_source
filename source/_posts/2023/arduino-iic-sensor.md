@@ -4,8 +4,8 @@ tags:
   - arduino
 cover: /img/
 categories:
-- [计算机, 源码分享]
-- [计算机, 折腾记录]
+- 折腾记录
+- 作品&项目总结
 notshow: false
 date: 2023-02-25 23:28:44
 description: 使用arduino的同轴麦轮自平衡车

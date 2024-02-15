@@ -1,8 +1,10 @@
 ---
 title: pytorch模型版本修改
 tags:
-  - hide
+  - 神经网络
 date: 2023-07-25 17:59:34
+categories:
+- 折腾记录
 ---
 在torch1.6版本及其以后，torch.save函数使用了一种新的文件格式。torch.load任然保持着对旧版本的兼容，如果高版本环境下想要保存低版本兼容的模型文件格式，可以使用_use_new_zipfile_serialization=False参数设定
 ```

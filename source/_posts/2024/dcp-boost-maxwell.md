@@ -1,10 +1,10 @@
 ---
 title: 使用maxwell进行boost拓扑的DCP仿真
 tags:
-  - null
+  - 电磁炉
 cover: /img/RUN.png
 categories:
-  - null
+- 折腾记录
 date: 2024-01-31 11:49:35
 description: 使用外电路作为激励源的DCP仿真模型
 ---

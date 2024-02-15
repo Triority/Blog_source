@@ -6,7 +6,7 @@ tags:
   - opencv
 cover: /img/RUN.png
 categories:
-  - [计算机, 源码分享]
+- 折腾记录
 date: 2023-12-09 02:15:41
 description: 2023年12月智能车室外组5G源码开源
 ---

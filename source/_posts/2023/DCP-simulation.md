@@ -5,8 +5,7 @@ tags:
   - 电力电子
 cover: /img/微信截图_20231012171920.png
 categories:
-  - [电力电子, 电磁炉]
-  - [电力电子, 仿真计算]
+- 折腾记录
 date: 2023-10-12 14:02:59
 description: 使用社区RLC工具和maxwell仿真计算
 ---

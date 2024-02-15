@@ -4,7 +4,7 @@ description: 年初DIY的3D打印机使用12V电源电压,而拍摄延时摄影�
 cover: /img/arduino-voltmeter.jpg
 date: 2022-05-17 19:32:00
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
 tags:
 - arduino
 - 3D打印

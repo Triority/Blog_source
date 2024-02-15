@@ -5,7 +5,7 @@ cover: /img/minecraft-13.png
 tags:
 - minecraft
 categories: 
-- minecraft
+- 整活&游戏
 date: 2022-05-17 00:00:00
 ---
 # 根据Minecraft中文Wiki的资料,今天是Minecraft的Java版（Classic）发布13周年!

@@ -4,7 +4,7 @@ tags:
   - python
 cover: /img/5af741ba43356384ace081fe1d15371.jpg
 categories:
-- [计算机, 知识整理]
+- 文档&笔记
 date: 2023-07-01 02:57:21
 description: 使用python进行网络收发编程的常用代码记录
 ---

@@ -4,7 +4,8 @@ date: 2022-06-21 22:47:02
 description: 数据集标注真的是太累了hhh所以开始偷懒:...
 cover: /img/auto-marking.png
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
+- 值得一提的文章
 tags: 
 - python
 - opencv

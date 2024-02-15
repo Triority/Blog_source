@@ -4,7 +4,7 @@ tags:
   - web
 cover: /img/RUN.png
 categories:
-- [计算机, 折腾记录]
+- 折腾记录
 date: 2023-09-03 15:01:14
 description: 私有虚拟局域网搭建
 ---

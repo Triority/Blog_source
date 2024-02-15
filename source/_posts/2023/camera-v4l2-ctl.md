@@ -4,7 +4,7 @@ tags:
   - linux
 cover: /img/微信截图_20230626103717.png
 categories:
-  - [计算机, CV工程师]
+- 文档&笔记
 date: 2023-06-26 10:11:05
 ---
 # 安装

@@ -5,7 +5,7 @@ tags:
   - opencv
 cover: /img/微信截图_20230720023925.png
 categories:
-- [计算机, 折腾记录]
+- 折腾记录
 date: 2023-07-02 00:30:26
 description:
 ---

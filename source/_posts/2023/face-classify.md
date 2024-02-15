@@ -6,7 +6,7 @@ tags:
 description: 人脸识别图像分类
 cover: /img/syk3.jpg
 categories: 
-- [计算机, 知识整理]
+- 折腾记录
 ---
 ## 人脸识别
 ### 人脸识别的基本过程
@@ -61,7 +61,7 @@ cv2.waitKey()
 #### 人脸关键特征点识别
 `face_landmarks` 识别人脸关键特征点。返回值是包含面部特征点字典的列表，列表长度就是图像中的人脸数。
 
-面部特征包括以下几个部分：nose_bridge (鼻梁)、right _eyebrow (右眼眉)、left_eyebrow (左眼眉)、right_eye（右眼)、left_eye（左眼)、chin(下巴)、 nose_tip（下鼻部)、bottom_lip (下嘴唇) 
+面部特征包括以下几个部分：nose_bridge (鼻梁)、right _eyebrow (右眼眉)、left_eyebrow (左眼眉)、right_eye（右眼)、left_eye（左眼)、chin(下巴)、 nose_tip（下鼻部） 、bottom_lip (下嘴唇) 
 
 ```
 # -*-coding:GBK -*-

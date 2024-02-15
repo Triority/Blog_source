@@ -6,8 +6,7 @@ tags:
   - PCB设计
 cover: /img/esp32-pinout-chip-ESP-WROOM-32.webp
 categories:
-- [计算机, 知识整理]
-- [计算机, 文档教程]
+- 文档&笔记
 - 值得一提的文章
 notshow: false
 date: 2023-03-07 10:14:48

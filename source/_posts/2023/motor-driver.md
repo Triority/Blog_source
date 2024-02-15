@@ -4,7 +4,7 @@ tags:
   - null
 cover: /img/cf4a1aa937ae83ef732755a631406b6.jpg
 categories:
-  - null
+- 折腾记录
 date: 2023-10-21 18:46:49
 description: eg2104+nce6080
 ---

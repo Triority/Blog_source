@@ -7,7 +7,7 @@ tags:
 - python
 - ROS
 categories: 
-- [计算机, 知识整理]
+- 文档&笔记
 cover: /img/ros.png
 description: ros学习知识整理和过程记录
 ---

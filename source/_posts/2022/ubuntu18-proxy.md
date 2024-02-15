@@ -7,7 +7,7 @@ tags:
 description: 近期买了一个印度的服务器，搭建一个代理服务器玩一玩
 cover: /img/ubuntu18-proxy.png
 categories: 
-- [计算机, 折腾记录]
+- 折腾记录
 ---
 # 仅供学习请勿用于其他用途！
 

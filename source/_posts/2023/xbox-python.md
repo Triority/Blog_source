@@ -7,7 +7,7 @@ tags:
   - opencv
 cover: /img/QQ截图20230227164056.png
 categories:
-- [计算机, 源码分享]
+- 折腾记录
 notshow: false
 date: 2023-02-27 16:38:34
 description: 使用python控制车模

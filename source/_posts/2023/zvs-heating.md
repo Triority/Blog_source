@@ -6,7 +6,7 @@ tags:
   - 电力电子
 cover: /img/
 categories:
-  - [电力电子, 电磁炉]
+- 折腾记录
 date: 2023-01-15 15:43:33
 description: 来自与立创开源广场的电路
 ---

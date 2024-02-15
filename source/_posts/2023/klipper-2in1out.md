@@ -4,8 +4,7 @@ tags:
   - 3D打印
 cover: /img/klipper.png
 categories:
-- [计算机, 折腾记录]
-- [计算机, CV工程师]
+- 折腾记录
 date: 2023-07-10 00:59:09
 description: 3D打印机改装两进一出
 ---

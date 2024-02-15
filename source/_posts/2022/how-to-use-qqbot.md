@@ -4,7 +4,7 @@ description: MPG的成员经常发生变化,此时就需要一个文档来告诉
 cover: /img/aboutqqbot.png
 date: 2022-06-16 22:43:01
 categories: 
-- [计算机, 文档教程]
+- 文档&笔记
 tags:
 - 文档
 - QQ机器人

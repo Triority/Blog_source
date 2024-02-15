@@ -6,6 +6,8 @@ date: 2022-05-14 17:39:18
 tags:
   - PCB设计
   - 日常
+categories: 
+- 折腾记录
 ---
 ## 关于PCB
 

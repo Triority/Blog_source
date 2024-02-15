@@ -2,8 +2,7 @@
 title: 在工程中将代码提交至github
 cover: /img/v2-4dccef85028e88d0d69f082d03dc2d09_1440w.jpg
 categories:
-- [计算机, 知识整理]
-- [计算机, 文档教程]
+- 折腾记录
 notshow: false
 date: 2023-04-16 19:26:10
 description: 将自己的工程记录到github

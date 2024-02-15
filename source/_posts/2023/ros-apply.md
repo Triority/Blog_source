@@ -7,7 +7,8 @@ tags:
   - ROS
 cover: /img/ros.png
 categories:
-- [计算机, 知识整理]
+- 文档&笔记
+- 折腾记录
 - 值得一提的文章
 date: 2023-06-05 00:11:24
 description: 这部分文章是从最基础那篇文章分离出来的，不然那个太长了hhh

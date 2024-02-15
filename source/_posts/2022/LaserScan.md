@@ -9,7 +9,7 @@ tags:
 description: 用于使用激光雷达识别目标
 cover: /img/LaserScan.png
 categories: 
-- [计算机, 源码分享]
+- 折腾记录
 ---
 ## 激光雷达数据结构
 ```

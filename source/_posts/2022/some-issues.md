@@ -6,7 +6,7 @@ tags:
 description: 总有那么一些小问题，一行命令就能解决，但是这一行似乎永远记不住......
 cover: /img/tips.png
 categories: 
-- [计算机, CV工程师]
+- 文档&笔记
 ---
 ## windows清除原有SSH公钥
 在powershell输入：

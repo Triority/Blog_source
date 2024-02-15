@@ -6,7 +6,7 @@ tags:
   - 树莓派
 cover: /img/Rpi4b.jpg
 categories:
-  - [计算机, 源码分享]
+- 折腾记录
 date: 2023-07-10 14:02:29
 description: 树莓派与esp32通讯来控制电机转速，并据此计算小车底盘的位置信息
 ---

@@ -5,7 +5,7 @@ tags:
   - web
 cover: /img/selenium.webp
 categories:
-- [计算机, 源码分享]
+- 折腾记录
 date: 2023-12-06 23:24:09
 description: 百抗校园网自动登录
 ---

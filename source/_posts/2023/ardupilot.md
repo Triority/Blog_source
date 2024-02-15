@@ -4,7 +4,8 @@ tags:
   - arduino
 cover: /img/slides_01_Ardupilot42.webp
 categories:
-  - [计算机, 知识整理]
+- 折腾记录
+- 作品&项目总结
 notshow: false
 date: 2023-05-17 22:33:16
 description: 晚上心血来潮随手搓个四轴玩

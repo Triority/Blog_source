@@ -4,7 +4,7 @@ tags:
   - 3D打印
 cover: /img/moonraker.png
 categories:
-- [计算机, 折腾记录]
+- 折腾记录
 date: 2023-08-02 22:45:47
 description: 通过python向moonraker发送api请求。至于封面，是一种很新的moonraker
 ---

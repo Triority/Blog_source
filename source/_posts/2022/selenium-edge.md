@@ -6,7 +6,7 @@ tags:
 description: python使用selenium操作edge浏览器
 cover: /img/selenium.webp
 categories: 
-- [计算机, 折腾记录]
+- 文档&笔记
 ---
 ## 安装所需文件
 ### python库

@@ -6,7 +6,8 @@ tags:
 description: 某位帅气学弟(@ztn)建立了一个论坛，欢迎各位校友来聊天啊
 cover: /img/lyk.jpg
 categories: 
-- 整活
+- 整活&游戏
+- 过时&弃用&无意义&失败品
 ---
 ## 前言
 

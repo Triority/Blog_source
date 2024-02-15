@@ -6,7 +6,7 @@ tags:
 description: corexy结构方向调整
 cover: /img/corexy-debugging.png
 categories: 
-- [计算机, 知识整理]
+- 文档&笔记
 ---
 ## 简单
 XY轴需要互换 ->  反向随便哪个电机

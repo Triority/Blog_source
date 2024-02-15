@@ -7,8 +7,8 @@ tags:
 description: 使用PyQT开发桌宠程序并打包为windows软件
 cover: /img/Capoo.jpg
 categories: 
-- [计算机, 知识整理]
-- [计算机, 折腾记录]
+- 折腾记录
+- 作品&项目总结
 - 值得一提的文章
 ---
 ## 前言

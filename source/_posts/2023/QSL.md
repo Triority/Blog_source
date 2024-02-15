@@ -1,10 +1,10 @@
 ---
 title: QSL卡片
 tags:
-  - null
+  - 无线电
 cover: /img/QSLCard.png
 categories:
-  - null
+- 无线电
 date: 2023-12-23 15:15:40
 description: QSL卡片设计
 ---

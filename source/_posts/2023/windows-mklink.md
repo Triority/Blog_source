@@ -4,7 +4,7 @@ tags:
   - windows
 cover: /img/QQ截图20230204020745.png
 categories:
-- [计算机, CV工程师]
+- 折腾记录
 notshow: false
 date: 2023-02-04 02:08:32
 description: mklink

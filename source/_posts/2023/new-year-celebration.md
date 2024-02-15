@@ -4,7 +4,7 @@ tags:
   - web
 cover: /img/QQ截图20230126133459.png
 categories:
-- 整活
+- 整活&游戏
 notshow: false
 date: 2023-01-26 13:16:53
 description: new-year-celebration

@@ -7,7 +7,7 @@ tags:
 description: 卸载ubuntu系统
 cover: /img/win_ubuntu_uninstall.png
 categories: 
-- [计算机, 折腾记录]
+- 折腾记录
 ---
 ## 前言
 半年前安装的Windows+ubuntu18双系统，由于当时硬盘空间紧张，所以只分配了20G挂载在"/"以及20G挂载在"/home"，经过半年的使用，ubuntu的存储空间已经耗尽，所以打算重装来重新分配空间
