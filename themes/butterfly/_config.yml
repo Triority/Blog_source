@@ -363,11 +363,11 @@ algolia_search:
 
 # Local search
 local_search:
-  enable: false
+  enable: true
   # Preload the search data when the page loads.
-  preload: true
+  preload: false
   # Show top n results per article, show all results by setting to -1
-  top_n_per_article: 5
+  top_n_per_article: 10
   # Unescape html strings to the readable one.
   unescape: true
   CDN:
@@ -590,8 +590,7 @@ google_adsense:
 # Insert ads manually (手動插入廣告)
 ad:
 #   index:
-  aside: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5897116252372531"
-     crossorigin="anonymous"></script>
+#   aside: 
 #   post:
 
 # Verification (站長驗證)

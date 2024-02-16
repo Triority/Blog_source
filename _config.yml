@@ -119,9 +119,11 @@ markdown:
   plugins:
     - markdown-it-ruby
 
-search: 
-  path: search.xml;
-  field: post;
+search:
+  path: search.xml
+  field: post
+  content: true
+  template: ./search.xml
 
 # Security
 encrypt: # hexo-blog-encrypt
