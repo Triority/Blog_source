@@ -2,7 +2,7 @@
 title: 使用maxwell进行boost拓扑的DCP仿真
 tags:
   - 电磁炉
-cover: /img/RUN.png
+cover: /img/微信截图_20240216120300.png
 categories:
 - 折腾记录
 date: 2024-01-31 11:49:35

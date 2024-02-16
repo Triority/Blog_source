@@ -3,7 +3,7 @@ title: 首次出差——重庆
 tags:
   - 摄影
   - 全原图文章
-cover: /img/RUN.png
+cover: /img/cf3bafcb81f56ca1e218de53b16565e.jpg
 categories:
 - 旅游&摄影
 date: 2023-12-13 15:25:49

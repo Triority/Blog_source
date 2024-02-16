@@ -2,7 +2,7 @@
 title: boost拓扑的电磁炉
 tags:
   - 电磁炉
-cover: /img/RUN.png
+cover: /img/微信截图_20240216120631.png
 categories:
 - 折腾记录
 date: 2024-02-02 22:38:32

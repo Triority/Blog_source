@@ -4,7 +4,7 @@ tags:
   - 树莓派
   - python
   - opencv
-cover: /img/RUN.png
+cover: /img/f9e10d50d001cde61bff96abb6d77f4.jpg
 categories:
 - 折腾记录
 date: 2023-12-09 02:15:41
