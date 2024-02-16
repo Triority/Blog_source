@@ -3,7 +3,7 @@ title: 内蒙古-天津自驾游旅行
 tags:
   - 旅游
   - 摄影
-cover: /img/RUN.png
+cover: /img/8842552991ddee142606610ee0bde0b.jpg
 categories:
 - 旅游&摄影
 date: 2023-10-08 18:59:45
