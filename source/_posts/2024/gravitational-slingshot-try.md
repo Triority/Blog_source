@@ -31,3 +31,6 @@ description: KSP使用引力弹弓前往jool
 短暂的看一眼jool的日出之后到达海拔高度0，即使开了无损坏也会直接爆炸
 
 ![](8119ca77c5a35013bf2cb924a828976.png)
+
+附赠一张高清dv图，维基百科的太糊了
+![](f301b63d683434dafa9b8779080f40a17105e555.jpg@1256w_1776h_!web-article-pic.avif)
