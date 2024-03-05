@@ -4,7 +4,7 @@ tags:
   - arduino
   - esp32
   - 无线电
-cover: /img/006.BMP
+cover: /img/fde96b3ea3b995379fadc65a705774e.png
 categories:
   - - 折腾记录
   - - 无线电
