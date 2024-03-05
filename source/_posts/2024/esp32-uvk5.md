@@ -4,7 +4,7 @@ tags:
   - arduino
   - esp32
   - 无线电
-cover: /img/RUN.png
+cover: /img/006.BMP
 categories:
   - - 折腾记录
   - - 无线电
@@ -69,7 +69,7 @@ void loop(){
 # 地面接收
 ## 频谱计算
 这部分直接ADC采样然后FFT计算：
-```
+```c
 #include "arduinoFFT.h"
 #define SAMPLES 1024             //采样点，必须是2的指数
 #define SAMPLING_FREQUENCY 10000 //采样频率(Hz)，由于adc限制应该小于10k
