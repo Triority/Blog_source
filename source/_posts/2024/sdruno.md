@@ -89,3 +89,5 @@ sdr常用软件一般是`sdr#`(sdrsharp)和`sdruno`，sdr#有汉化版本，但�
 
 ## plugins(插件,已加载rec插件)
 ![](plugins_rec.png)
+
+插件就没什么好说的了用哪个就去安装然后load，图片右边是录音插件，只有一项提一嘴，`Use Squesch`开关控制静噪录音，勾选后信号只有高于静噪强度之后才会开启录音
