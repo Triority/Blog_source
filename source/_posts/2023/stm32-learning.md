@@ -508,3 +508,7 @@ void TIM2_IRQHandler(void){
 ```c
 TIM_SetCompare1(TIM2, Compare);
 ```
+
+#### TIM输入捕获
+
+### 串口通讯
