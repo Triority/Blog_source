@@ -27,7 +27,7 @@ comment: false
 
 + bilibili主页:**[bilibili](https://space.bilibili.com/162010648)**
 
-+ CSDN主页:**[CSDN](https://blog.csdn.net/m0_61749498?type=blog)** (抵制CSDN，内容都删了搬到网站上了)
++ 无线电QRZ:**[QRZ](https://www.qrz.com/db/bi1rwi)**
 
 + Steam好友代码:`1218146564`
 
@@ -54,11 +54,16 @@ comment: false
 + 摄影
   + 风景
   + 天文
+  + 漫展(?)
 + 各种DIY
   + xxx Pi/arduino/esp...
-  + 电磁炉
+  + 电机
   + 3D打印机
   + ...
++ 业余无线电BI1RWI-OM89dx
+  + BY1CP(439.250MHz-6.950Hz-88.5Hz)
+  + 438.500MHz
+  + SDR随机频率
 + Minecraft
   + 红石/生电
   + 指令/命令方块
