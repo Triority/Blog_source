@@ -12,7 +12,7 @@ description: 优雅的双系统引导
 # Start
 最近换了新的平板，从surface pro 7 i5 8+128G换成了surface pro 7 plus i7 16+512G，可以说是解决了以前一切的使用痛点(也许有个LTE会更加完美?但是不太必要)，由于windows系统无与伦比的巨大功耗，准备再分出64G安装一个ubuntu用于应急情况
 
-写这篇文章还有一个原因就是在我大一刚买电脑时候参考的C\*\*N上一篇很好的双系统安装教程文章现在改成收费了，让我十分不爽，也重新写一份给入门的同学们看，最后有关surface的特定内容忽略就好。关于双系统中Ubuntu系统的卸载可以参考[这篇之前的文章](https://triority.cn/2022/windows-ubuntu-uninstall/){% spoiler 这篇文章的结尾还有C\*\*N那篇文章的链接 %}
+写这篇文章还有一个原因就是在我大一刚买电脑时候参考的C\*\*N上一篇很好的双系统安装教程文章现在改成收费了，让我十分不爽，也重新写一份给入门的同学们看，最后有关surface的特定内容忽略就好。关于双系统中Ubuntu系统的卸载可以参考[这篇之前的文章](https://triority.cn/2022/windows-ubuntu-uninstall/){% spoiler （这篇文章的结尾还有C\*\*N那篇文章的链接） %}
 
 # 安装Ubuntu
 提前准备了一个64G空白位置用于安装ubuntu22.04 LTS系统，启动盘制作好后，在按下音量+的时候按电源键开机，直到进入BIOS松开音量键，设置U盘启动，关闭安全启动(如果你有)，进入ubuntu安装程序。
@@ -54,7 +54,7 @@ sudo apt-get install refind
 ## 配置文件信息
 `rEFind`的配置信息位于`/boot/efi/EFI/refind/refind.conf`
 
-```
+```conf
 # refind.conf
 # Configuration file for the rEFInd boot menu
 #
@@ -155,7 +155,7 @@ include themes/rEFInd-minimal/theme.conf
 
 关于`theme.conf`文件，这是[官方介绍文档](https://github.com/topics/refind-theme)
 
-```
+```conf
 # Minimal refind theme
 
 # Hide user interface elements for personal preference or to increase
@@ -299,7 +299,44 @@ WantedBy=default.target
 ```
 sudo apt install linux-surface-secureboot-mok
 ```
-下载[linux-surface签名公钥](https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.cer)
+有的版本的mok会直接给你一个密码来给你，后面导入的流程里就不会再需要输入密码了。安装时候终端输出都会告诉你，类似这样
+```bash
+triority@triority-Surface-Pro-7-PLUS:~$ sudo apt install linux-surface-secureboot-mok
+[sudo] password for triority: 
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  linux-surface-secureboot-mok
+0 upgraded, 1 newly installed, 0 to remove and 94 not upgraded.
+Need to get 5,616 B of archives.
+After this operation, 18.4 kB of additional disk space will be used.
+Get:1 https://pkg.surfacelinux.com/debian release/main amd64 linux-surface-secureboot-mok amd64 20231003-1 [5,616 B]
+Fetched 5,616 B in 8s (678 B/s)                          
+Selecting previously unselected package linux-surface-secureboot-mok.
+(Reading database ... 195210 files and directories currently installed.)
+Preparing to unpack .../linux-surface-secureboot-mok_20231003-1_amd64.deb ...
+Unpacking linux-surface-secureboot-mok (20231003-1) ...
+Setting up linux-surface-secureboot-mok (20231003-1) ...
+
+The secure-boot certificate has been installed to
+
+    /usr/share/linux-surface-secureboot/surface.cer
+
+It will now be automatically enrolled for you and guarded with the password
+
+    surface
+
+To finish the enrollment process you need to reboot, where you will then be
+asked to enroll the certificate. During the import, you will be prompted for
+the password mentioned above. Please make sure that you are indeed adding
+the right key and confirm by entering 'surface'.
+
+Note that you can always manage your secure-boot keys, including the one
+just enrolled, from inside Linux via the 'mokutil' tool.
+```
+
+然后下载[linux-surface签名公钥](https://raw.githubusercontent.com/linux-surface/linux-surface/master/pkg/keys/surface.cer)
 
 导入公钥
 ```
@@ -312,4 +349,29 @@ sudo mokutil --import surface.cer
 完成后即可进入UEFI，在`secure boot`中将`boot configuration`改为`Microsoft & 3rd party CA`就可以使用安全启动了
 
 # (可选)surface开启安全启动：签名rEFind
-
+其实最开始跟上面差不多，看看目录内容(我闲的,没必要)然后导入密钥
+```bash
+triority@triority-Surface-Pro-7-PLUS:~$ sudo ls /boot/efi/EFI
+Boot  Microsoft  refind  tools ubuntu
+triority@triority-Surface-Pro-7-PLUS:~$ sudo ls /boot/efi/EFI/ubuntu
+BOOTX64.CSV  grub.cfg  grubx64.efi  mmx64.efi  shimx64.efi
+triority@triority-Surface-Pro-7-PLUS:~$ sudo ls /boot/efi/EFI/refind/keys
+altlinux.cer          openSUSE-UEFI-CA-Certificate.cer
+canonical-uefi-ca.cer         redhatsecureboot003.cer
+centossecureboot201.cer         redhatsecureboot401.cer
+centossecurebootca2.cer         redhatsecurebootca2.cer
+debian.cer          redhatsecurebootca4.cer
+fedora-ca.cer          refind.cer
+microsoft-kekca-public.cer        refind_local.cer
+microsoft-pca-public.cer        refind_local.crt
+microsoft-uefica-public.cer        SLES-UEFI-CA-Certificate.cer
+openSUSE-UEFI-CA-Certificate-4096.cer
+triority@triority-Surface-Pro-7-PLUS:~$ sudo ls /boot/efi/EFI/refind
+BOOT.CSV  drivers_x64  icons  keys  refind.conf  refind_x64.efi  vars
+triority@triority-Surface-Pro-7-PLUS:~$ sudo cp -i /boot/efi/EFI/ubuntu/shimx64.efi /boot/efi/EFI/refind
+triority@triority-Surface-Pro-7-PLUS:~$ sudo cp -i /boot/efi/EFI/ubuntu/mmx64.efi /boot/efi/EFI/refind
+triority@triority-Surface-Pro-7-PLUS:~$ sudo mokutil -i /boot/efi/EFI/refind/keys/refind.cer
+input password: 
+input password again: 
+triority@triority-Surface-Pro-7-PLUS:~$
+```
