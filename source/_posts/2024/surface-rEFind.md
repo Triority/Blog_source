@@ -33,6 +33,46 @@ description: 优雅的双系统引导
 
 然后下面`Device for boot loader installation`选择刚才设置的`/boot`的设备，我这里是`/dev/nvme0n1p5`然后继续continue，直到系统安装完成
 
+如果你只是想安装一个双系统而不想用rEFind，可以用ubuntu来引导Windows启动，但是这样每次进入都会默认选择第一项进入ubuntu。我们可以把它改成保存上次设置
+```
+sudo nano /etc/default/grub
+```
+```
+# If you change this file, run 'update-grub' afterwards to update
+# /boot/grub/grub.cfg.
+# For full documentation of the options in this file, see:
+#   info -f grub -n 'Simple configuration'
+# 下面这个默认是0改成saved即可
+GRUB_DEFAULT=saved
+GRUB_TIMEOUT_STYLE=hidden
+# 这个是等待时间，默认10s没啥必要改成3了
+GRUB_TIMEOUT=3 
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
+GRUB_CMDLINE_LINUX=""
+
+# Uncomment to enable BadRAM filtering, modify to suit your needs
+# This works with Linux (no patch required) and with any kernel that obtains
+# the memory map information from GRUB (GNU Mach, kernel of FreeBSD ...)
+#GRUB_BADRAM="0x01234567,0xfefefefe,0x89abcdef,0xefefefef"
+
+# Uncomment to disable graphical terminal (grub-pc only)
+#GRUB_TERMINAL=console
+
+# The resolution used on graphical terminal
+# note that you can use only modes which your graphic card supports via VBE
+# you can see them in real GRUB with the command `vbeinfo'
+#GRUB_GFXMODE=640x480
+
+# Uncomment if you don't want GRUB to pass "root=UUID=xxx" parameter to Linux
+#GRUB_DISABLE_LINUX_UUID=true
+
+# Uncomment to disable generation of recovery mode menu entries
+#GRUB_DISABLE_RECOVERY="true"
+
+# Uncomment to get a beep at grub start
+#GRUB_INIT_TUNE="480 440 1"
+```
 # 安装rEFind
 rEFInd是一个非常好看好用的UEFI启动管理器，如果不用第三方引导，启动windows要么先启动ubuntu然后选择启动windows，要么BIOS设置windows优先然后每次启动ubuntu都要修改bios(然后再改回去十分离谱不建议)
 
