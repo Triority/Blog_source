@@ -19,7 +19,7 @@ menu:
   友链: /link/ || fas fa-link
   关于: /about/ || fas fa-heart
   服务: /services/ || fas fa-list
-  # 朋友圈: /tag/Moments/ || fas fa-book
+  相册: /photo/ || fas fa-book
 
 # Code Blocks (代碼相關)
 # --------------------------------------
