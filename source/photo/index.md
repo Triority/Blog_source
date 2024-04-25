@@ -30,9 +30,9 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 ## 6.21：沈师大
 虽然没有拍好看的照片，但是蒲公英真的好大啊！感谢洛平老师带队哈哈
 
-| {% dplayer "url=/photo/VID_20230621_182349.mp4" %} | {% dplayer "url=/photo/VID_20230621_182207.mp4" %} |
-| - | - |
-| <img width=1000/> | <img width=1000/> |
+{% dplayer "url=/photo/VID_20230621_182349.mp4" %}
+
+{% dplayer "url=/photo/VID_20230621_182207.mp4" %}
 
 ## 6月：小飞机
 叠个buff先：不在北京，封闭场地，非禁飞区
