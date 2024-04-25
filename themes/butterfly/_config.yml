@@ -236,7 +236,7 @@ aside:
       link: https://github.com/Triority
   card_announcement:
     enable: true
-    content: The website is updated as it happens. Please contact me if you have any questions(Contact information is on about page). We are using the CDN service by Cloudflare, without Chinese mainland node. Users in Chinese mainland should solve the problem of slow loading speed by yourselves.
+    content: Please contact me if you have any questions. We are using the CDN service by Cloudflare, without nodes in Chinese mainland. Users in Chinese mainland should solve the problem of terrible loading speed by yourselves.
     #content: 文章一般写完多少发多少，如果一篇文章没写完不要急哦，也许过几天就会直接删掉文章的！有疑问可以直接联系我哦(联系方式看关于页)！本站使用cloudflare的CDN服务，没有中国大陆节点，中国大陆用户加载速度慢请自行解决。
   card_recent_post:
     enable: false
