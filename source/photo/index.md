@@ -5,8 +5,112 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 ---
 # 2024
 这一年一月初，过21生日这一天，依靠我悲惨的2023年获得的收入，买下一部相机(zve10)，但这只是个开始，无论是花销上还是。。。
+## 4.21：北京-天津骑行
 
+{% gallery true,220,10 %}
+![](/photo/DSC2428.jpg)
+![](/photo/DSC2431.jpg)
+![](/photo/DSC2433.jpg)
+![](/photo/DSC2435.jpg)
+![](/photo/DSC2406.jpg)
+![](/photo/DSC2448.jpg)
+{% endgallery %}
 
+## 4.19：景山公园
+
+{% gallery true,220,10 %}
+![](/photo/DSC2287.jpg)
+![](/photo/DSC2272.jpg)
+![](/photo/DSC2291.jpg)
+![](/photo/DSC2353.jpg)
+![](/photo/DSC2374.jpg)
+![](/photo/DSC2380.jpg)
+{% endgallery %}
+
+## 4.14：天坛
+
+甚至最后去陶然亭公园时候还蹭拍到了佳能的拍摄活动
+
+{% gallery true,220,10 %}
+![](/photo/DSC2223.jpg)
+![](/photo/DSC2174.jpg)
+![](/photo/DSC2218.jpg)
+![](/photo/DSC2255.jpg)
+![](/photo/DSC2326.jpg)
+{% endgallery %}
+
+## 4.5：北京IJOY漫展
+
+第一次拍漫展，自我感觉良好乐乐乐
+
+{% gallery true,220,10 %}
+![](/photo/DSC0854.jpg)
+![](/photo/DSC0759.jpg)
+![](/photo/DSC0772.jpg)
+![](/photo/DSC0803.jpg)
+![](/photo/DSC0804.jpg)
+{% endgallery %}
+
+## 3.23：天津淄博自驾
+
+{% spoiler 好吧这几张照片真的好大因为都是PNG格式没有压缩 %}
+
+{% gallery true,220,10 %}
+![](/photo/DSC0024.png)
+![](/photo/DSC0029.png)
+![](/photo/DSC0048.png)
+![](/photo/DSC0071.png)
+![](/photo/DSC0085.png)
+{% endgallery %}
+
+## 3.10：故宫
+最后一张从门望出去的是景山公园，很快就会去了
+
+{% gallery true,220,10 %}
+![](/photo/DSC1348.jpg)
+![](/photo/DSC1300.jpg)
+![](/photo/DSC1353.jpg)
+![](/photo/DSC1331.jpg)
+![](/photo/DSC1347.jpg)
+{% endgallery %}
+
+## 我标记了一处地点：5G国一奖杯！
+一个通宵码8小时拿到的国一！顺便在此感谢来自QQX同学的后勤支持！旁边还带上了我的木质耗材3D打印呼号牌
+
+![](/photo/fd949d289e0854e929258b19dd9e37a.jpg)
+
+## 3.3:奥森
+
+| ![](/photo/DSC9850.jpg) | ![](/photo/DSC9881.jpg) | ![](/photo/DSC9885.jpg) |
+| - | - | - |
+
+## 2.12：本溪水洞，本溪人第一次去的水洞
+{% gallery true,220,10 %}
+![](/photo/IMG_20240212_122638-已增强-降噪.jpg)
+![](/photo/IMG_20240212_120357-已增强-降噪.jpg)
+![](/photo/IMG_20240212_120311-已增强-降噪.jpg)
+![](/photo/IMG_20240212_120250-已增强-降噪.jpg)
+![](/photo/736a6f53e80af36c5ddc578ebe51497.jpg)
+{% endgallery %}
+
+{% spoiler 其实我忘带相机了，Shot By Mi 10S %}
+
+## 2.10：跨年必备节目
+{% gallery true,220,10 %}
+![](/photo/386c64f78a4cafd3a80d3ab0244dbb7.jpg)
+![](/photo/cbc11495b6cc0182dad2050c97550d3.jpg)
+![](/photo/3f14b672881f9f962e91bc8aa36551c.jpg)
+{% endgallery %}
+
+## 1.26：一月份本溪必备项目：平顶山
+可惜这一学期1.10还没放假，不能在过1.10这一天爬了，不过放假回家之后第一件事就是！
+{% gallery true,220,10 %}
+![](/photo/e8dd4c59f888ffbac6baabfbc0e7ace.jpg)
+![](/photo/e357952a8db712e5dabdc8c117aa7f9.jpg)
+![](/photo/cb84c2ca2088d6bd69e141ec85ba226.jpg)
+![](/photo/f0efe92cfec31b9339ae6e0cca412f6.jpg)
+![](/photo/b35513b5c14b3f581ce70e9bebdf8e3.jpg)
+{% endgallery %}
 
 # 2023
 这一年感觉一直在实验室几乎没有出门，估计照片不多，不过还有点好玩的的（可惜一部分好玩的不敢发比如电磁炉乐乐乐）
