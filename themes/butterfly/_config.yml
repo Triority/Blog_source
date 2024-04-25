@@ -236,7 +236,7 @@ aside:
       link: https://github.com/Triority
   card_announcement:
     enable: true
-    content: 文章一般写完多少发多少，如果一篇文章没写完不要急哦，最多过几年就会删掉的！当然也可以直接联系我哦(联系方式看关于页)
+    content: 文章一般写完多少发多少，如果一篇文章没写完不要急哦，也许过几天就会直接删掉文章的！有疑问可以直接联系我哦(联系方式看关于页)！本站使用cloudflare的CDN服务，没有中国大陆节点，加载速度慢请自行解决，不会解决的请关闭本站。如需访问源站请加入二级域名www，源站位于中国香港。
   card_recent_post:
     enable: false
     limit: 5 # if set 0 will show all
