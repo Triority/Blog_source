@@ -6,6 +6,46 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 # 2024
 
 # 2023
+这一年感觉一直在实验室几乎没有出门，估计照片不多，不过还有点好玩的的（可惜一部分好玩的不敢发比如电磁炉乐乐乐）
+## 罕见的一道光
+一种十分无聊导致的行为，日落时间跑到教学楼外侧楼梯顶拍摄日落，有的时候还能遇到摄影协会的同学在此蹲点
+
+
+## 12.7：重庆出差
+![当时写的原文：《首次出差——重庆》](https://triority.cn/2023/first-business-trip/)
+
+## 10.4：内蒙古-天津
+![当时写的原文：《内蒙古-天津自驾游旅行》](https://triority.cn/2023/Inner-Mongolia-DRIVING/)
+
+## 7.3：月
+图一感谢我校天文社团提供的天文望远镜支持（甚至是社长自费筹资购买）
+{% gallery true,220,10 %}
+![](/photo/5ac57ca55a3749a90a6c69d5e65c609.jpg)
+![](/photo/4a74c07dc22e2c7b18fb216ce538245.jpg)
+{% endgallery %}
+
+## 6月：小飞机
+叠个buff先：不在北京，封闭场地，非禁飞区
+{% dplayer "url=/photo/c892fdc82e3ff20b6fc08efecd36fbb31687581119(1).mp4" %}
+
+## 3.25：喇叭沟——北天联活动
+{% gallery true,220,10 %}
+![](/photo/567c51516ba4bad42d9916992a272a3.jpg)
+![](/photo/cbbe41521d9522286c56baf50e2173c.jpg)
+{% endgallery %}
+
+## 3.12：环京100km骑行
+虽然没留下什么好看照片，但是第一次长途骑行还是想记录一下的
+{% gallery true,220,10 %}
+![](/photo/657f025b370fef344a478bff82f5521.jpg)
+![](/photo/d3819380c2491c2b0934d95d415a402.jpg)
+![](/photo/c93fedeca5b97aa69cb0016a286c002.jpg)
+![](/photo/d4df4464c87cb621b1f8c9f3613b64f.jpg)
+{% endgallery %}
+
+## 2.4：重庆
+![当时写的原文：《重庆》](https://triority.cn/2023/spicy/)
+
 
 # 2022
 ## 9.21：夕阳下的教学楼
