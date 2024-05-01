@@ -166,6 +166,12 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 
 
 # 2022
+## 11.8：木星和木卫！
+{% gallery true,220,10 %}
+![](/photo/cc2e5e662123c510fc5d43d07bf07c8.jpg)
+![](/photo/66c35fc7681d5c2d2e80116b14a98c0.jpg)
+{% endgallery %}
+
 ## 9.21：夕阳下的教学楼
 {% gallery true,220,10 %}
 ![夕阳下的教学楼](/photo/IMG_20220921_030949.jpg)
