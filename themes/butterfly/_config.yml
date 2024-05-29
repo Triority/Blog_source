@@ -584,14 +584,15 @@ google_adsense:
   enable: false
   auto_ads: true
   js: https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js
-  client: AW-11207750761
+  client: 
   enable_page_level_ads: true
 
 # Insert ads manually (手動插入廣告)
 ad:
 #   index:
 #  aside: <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=86 src="//music.163.com/outchain/player?type=2&id=1395957507&auto=1&height=66"></iframe>
-  aside:  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=450 src="//music.163.com/outchain/player?type=0&id=812917997&auto=1&height=430"></iframe>
+#  aside: <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=450 src="//music.163.com/outchain/player?type=0&id=812917997&auto=1&height=430"></iframe>
+  aside:  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=450 src="//music.163.com/outchain/player?type=0&id=9796678610&auto=0&height=430"></iframe>
 #   post:
 
 # Verification (站長驗證)
