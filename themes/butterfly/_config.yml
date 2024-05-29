@@ -210,7 +210,7 @@ footer:
   owner:
     enable: true
     since: 2021
-  custom_text:
+  custom_text: 阿美莉卡ICP备114514号
   copyright: false # Copyright of theme and framework
 
 # aside (側邊欄)
