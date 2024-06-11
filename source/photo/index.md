@@ -11,8 +11,9 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 
 ## 6.11：雷阵雨
 
-{% gallery false,220,10 %}
 ![](/photo/media/DSC4069.jpg)
+
+{% gallery false,220,10 %}
 ![](/photo/media/DSC4016.jpg)
 ![](/photo/media/DSC4237-已增强-降噪.jpg)
 ![](/photo/media/DSC4240-已增强-降噪.jpg)
