@@ -10,9 +10,11 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 # 2024
 
 ## 6.17：徒步北京最高峰——灵山主峰
+![](/photo/media/DSC4522-Pano.jpg)
 
 {% gallery false,220,10 %}
 ![](/photo/media/DSC4495-已增强-降噪.jpg)
+![](/photo/media/DSC4510.jpg)
 ![](/photo/media/DSC4538.jpg)
 ![](/photo/media/DSC4561.jpg)
 ![](/photo/media/DSC4655.jpg)
@@ -21,7 +23,7 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 ![](/photo/media/DSC4679.jpg)
 {% endgallery %}
 
-## 6.11：雷阵雨
+## 6.11：北京阵雨雷暴
 
 ![](/photo/media/DSC4069.jpg)
 
