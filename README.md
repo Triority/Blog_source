@@ -1,2 +1,2 @@
 # hexo_source
-hexo博客源代码
+This is the source code of [my blog](https://triority.cn/). Welcome!
