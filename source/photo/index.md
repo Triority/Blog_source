@@ -9,6 +9,15 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 
 # 2024
 
+## 6.24：国家天文台密云站
+{% gallery false,220,10 %}
+![](/photo/media/DSC5320.jpg)
+![](/photo/media/DSC5344-.jpg)
+![](/photo/media/DSC5355.jpg)
+![](/photo/media/DSC5318.jpg)
+![](/photo/media/DSC5331.jpg)
+{% endgallery %}
+
 ## 6.17：徒步北京最高峰——灵山主峰
 ![](/photo/media/DSC4522-Pano.jpg)
 
