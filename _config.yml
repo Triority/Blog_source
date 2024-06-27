@@ -112,6 +112,7 @@ deploy:
   token: ${{ secrets.SSH_PRIVATE }}
 
 
+
 spoiler:
   style: box
   color: black
