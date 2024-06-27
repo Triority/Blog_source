@@ -106,10 +106,9 @@ theme: butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: git
-  message: update
-  repo: git@github.com:Triority/Triority.github.io.git
-  branch: main
+  - type: git
+    repository:
+      github: https://${{ secrets.REPO_TOKEN }}@github.com/Triority/Triority.github.io.git,main
 
 
 
