@@ -111,6 +111,11 @@ deploy:
   repo: git@github.com:Triority/Triority.github.io.git
   branch: main
 
+
+
+
+
+
 spoiler:
   style: box
   color: black
