@@ -38,14 +38,14 @@ jobs:
         env:
           SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
           GIT_NAME: triority
-          GIT_EMAIL: triority@qq.com
+          GIT_EMAIL: 2605925210@qq.com
         run: |
           mkdir -p ~/.ssh/
           echo "$SSH_PRIVATE" | tr -d '\r' > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
           git config --global user.name "triority"
-          git config --global user.email "triority@qq.com"
+          git config --global user.email "2605925210@qq.com"
           hexo deploy
 
       - run: echo "Deploy Successful!"
