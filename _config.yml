@@ -108,7 +108,7 @@ theme: butterfly
 deploy:
   type: git
   message: update
-  repo: https://github.com/Triority/Triority.github.io.git
+  repo: git@github.com:Triority/Triority.github.io.git
   branch: main
 
 spoiler:
