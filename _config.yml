@@ -108,8 +108,8 @@ theme: butterfly
 deploy:
   type: git
   message: update
-  repo: root@www.triority.cn:/root/hexo.git
-  branch: master
+  repo: https://github.com/Triority/Triority.github.io.git
+  branch: main
 
 spoiler:
   style: box
