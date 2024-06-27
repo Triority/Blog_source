@@ -41,7 +41,7 @@ jobs:
           echo "build blog successful"
       - name: Deploy
         env:
-          SSH_PRIVATE: ${{ secret.SSH_PRIVATE }}
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
           GIT_NAME: Triority
           GIT_EMAIL: triority@qq.com
         run: |
