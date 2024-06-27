@@ -27,10 +27,12 @@ jobs:
           key: ${{ runner.OS }}-npm-cache
           restore-keys: |
             ${{ runner.OS }}-npm-cache
+      - name: sudo
+        run: sudo chmod 777 /*
       - name: Install Dependencies
         run: npm install
       - name: Build
-        run: sudo npm run build
+        run: npm run build
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
