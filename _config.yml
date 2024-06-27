@@ -110,7 +110,7 @@ deploy:
   repo: git@github.com:Triority/Triority.github.io.git
   branch: gh-pages
   token: ${{ secrets.SSH_PRIVATE }}
-
+  
 
 
 spoiler:
