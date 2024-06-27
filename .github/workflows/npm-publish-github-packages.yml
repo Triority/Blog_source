@@ -1,4 +1,4 @@
-name: DoubleAm's Blog CI/CD # 脚本 workflow 名称
+name: CI/CD
 
 on:
   push:
@@ -10,7 +10,7 @@ on:
 
 jobs:
   blog: 
-    timeout-minutes: 30
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2 # 拉取仓库代码
@@ -26,7 +26,7 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Init Node.js # 安装源代码所需插件
+      - name: Init Node.js
         run: |
           npm install
           echo "init node successful"
@@ -34,12 +34,16 @@ jobs:
         run: |
           npm install -g hexo-cli --save
           echo "install hexo successful"
-      - name: Build Blog # 编译创建静态博客文件
+      - name: Build
         run: |
           hexo clean
           hexo g
           echo "build blog successful"
-      - name: Deploy DoubleAm's Blog # 设置 git 信息并推送静态博客文件
+      - name: Deploy
+        env:
+          SSH_PRIVATE: ${{ secrets.SSH_PRIVATE }}
+          GIT_NAME: Triority
+          GIT_EMAIL: triority@qq.com
         run: |
           git config --global user.name "Triority"
           git config --global user.email "triority@qq.com"
