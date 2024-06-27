@@ -40,17 +40,9 @@ jobs:
           key: ${{ runner.OS }}-npm-cache
           restore-keys: |
             ${{ runner.OS }}-npm-cache
-      # 查看路径 : /home/runner/work/blog/blog
-      # - name: Look Path
-      #   run: pwd
-      # 查看文件
-      - name: Look Dir List
-        run: tree -L 3 -a
       # 第一次或者依赖发生变化的时候执行 Install Dependencies，其它构建的时候不需要这一步
       - name: Install Dependencies
         run: npm install
-      - name: Look Dir List
-        run: tree -L 3 -a
       - name: Clean
         run: npm run clean
       - name: Build
