@@ -538,7 +538,7 @@ void loop() {
   command.run();
 }
 ```
-### esp32+LM324力矩闭环
+### esp32+LM324力矩闭环(未经验证)
 我在LM324周围实际焊接的电阻是1K和100K，所以实际上电压会放大101倍，就按100倍算，也就是1A时电阻产生电压为0.01V，ADC电压为1V，esp32默认ADC范围是3.3V，也就是电流可以达到3.3A已经超过驱动芯片drv8313最大值2.5A了，量程刚刚好。三相线都有电流检测功能。
 
 这个程序还没有通过验证。
@@ -611,6 +611,93 @@ void loop() {
 
   motor.move(target_voltage);
 
+  command.run();
+}
+```
+
+### drv8313驱动+as5600磁编码器+ina240电流检测(验证完成，上面两个方案现在意义不大)
+| ![](微信截图_20240628004934.png) | ![](微信截图_20240628004959.png) |
+|:---:|:---:|
+| [原理图](ProDoc_P1_2024-06-28.epro) | [PCB](ProDoc_PCB1_2024-06-28.epro) |
+
+```c
+#include <SimpleFOC.h>
+
+// BLDC motor & driver instance
+BLDCMotor motor = BLDCMotor(7);
+BLDCDriver3PWM driver = BLDCDriver3PWM(25, 26, 27, 14);
+
+MagneticSensorI2C sensor = MagneticSensorI2C(AS5600_I2C);
+
+// current sensor
+InlineCurrentSense current_sense = InlineCurrentSense(0.01f, 50.0f, 34, 35);
+
+// instantiate the commander.2
+
+Commander command = Commander(Serial);
+void doTarget(char* cmd) { command.scalar(&motor.target, cmd); }
+
+void setup() { 
+  
+  // initialise magnetic sensor hardware
+  sensor.init();
+  // link the motor to the sensora
+  motor.linkSensor(&sensor);
+
+  // driver config
+  // power supply voltage [V]
+  driver.voltage_power_supply = 12;
+  driver.init();
+  // link driver
+  motor.linkDriver(&driver);
+  // link the driver to the current sense
+  current_sense.linkDriver(&driver);
+
+  // current sense init hardware
+  current_sense.init();
+  // link the current sense to the motor
+  motor.linkCurrentSense(&current_sense);
+
+  // set torque mode:
+  motor.torque_controller = TorqueControlType::foc_current; 
+  // set motion control loop to be used
+  motor.controller = MotionControlType::torque;
+
+  // foc current control parameters (Arduino UNO/Mega)
+  motor.PID_current_q.P = 5;
+  motor.PID_current_q.I= 300;
+  motor.PID_current_d.P= 5;
+  motor.PID_current_d.I = 300;
+  motor.LPF_current_q.Tf = 0.01; 
+  motor.LPF_current_d.Tf = 0.01; 
+
+  // use monitoring with serial 
+  Serial.begin(115200);
+  // comment out if not needed
+  motor.useMonitoring(Serial);
+
+  // initialize motor
+  motor.init();
+  // align sensor and start FOC
+  motor.initFOC();
+
+  // add target command T
+  command.add('T', doTarget, "target current");
+
+  Serial.println(F("Motor ready."));
+  Serial.println(F("Set the target current using serial terminal:"));
+  _delay(1000);
+}
+
+void loop() {
+
+  // main FOC algorithm function
+  motor.loopFOC();
+
+  // Motion control function
+  motor.move();
+
+  // user communication
   command.run();
 }
 ```
