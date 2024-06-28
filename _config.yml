@@ -107,9 +107,8 @@ theme: butterfly
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: git
-  repo: git@github.com:Triority/Triority.github.io.git
+  repo: https://github.com/Triority/triority.github.io.git
   branch: gh-pages
-  token: ${{ secrets.SSH_PRIVATE }}
   
 
 
