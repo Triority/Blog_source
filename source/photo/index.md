@@ -43,6 +43,15 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 ![](/photo/media/DSC4240-已增强-降噪.jpg)
 {% endgallery %}
 
+## 6.08：矿喵
+{% gallery false,220,10 %}
+![](7e650e556dc77541b09f79d786b7674.jpg)
+![](873870efc04f3d2621e073a0ef0b2de.jpg)
+![](d7534a8ee77467263a270461f030945.jpg)
+{% endgallery %}
+
+{% spoiler 虽然第二章是在五道口理工学院拍的 %}
+
 ## 5.14：北京火烧云！
 ![](/photo/media/DSC3080-HDR.jpg)
 
