@@ -13,7 +13,7 @@ mixin postUI(posts)
       -
       if post_cover && theme.cover.index_enable
         .post_cover(class=leftOrRight)
-          a(href=url_for(link) title=title)
+          a(href=url_for(link) title=title target="_blank")
             if article.cover_type === 'img'
               img.post-bg(src=url_for(post_cover) onerror=`this.onerror=null;this.src='${url_for(theme.error_img.post_page)}'` alt=title)
             else
