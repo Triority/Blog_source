@@ -50,7 +50,7 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 ![](d7534a8ee77467263a270461f030945.jpg)
 {% endgallery %}
 
-{% spoiler 虽然第二章是在五道口理工学院拍的 %}
+{% spoiler 虽然第二张是在五道口理工学院拍的 %}
 
 ## 5.14：北京火烧云！
 ![](/photo/media/DSC3080-HDR.jpg)
