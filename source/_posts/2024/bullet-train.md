@@ -6,21 +6,20 @@ cover: /img/RUN.png
 date: 9999-01-01 00:00:00
 description: article bullet train
 ---
-# Project
-## FOC driver
 
+# 磁场矢量控制的三相无刷电机驱动器
 
+https://triority.cn/2024/foc-driver-finally/
 
-## IMG data maker
+# 用于神经网络视觉识别训练的数据集自动生成与标注
 
 https://triority.cn/2022/img-data-marker/
 
-## Ultra-high-speed linear motors
+# 超高速直线电机设计
 
+https://triority.cn/2024/Ultra-high-speed-linear-motor/
 
-
-# Document
-## ESP32 for arduino
+# ESP32单片机在arduino环境下的使用全指南
 
 https://triority.cn/2023/esp32-all-in-one/
 

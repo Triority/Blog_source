@@ -233,6 +233,8 @@ void loop() {
 
 ### 力矩(foc电流)闭环控制
 
+![](https://docs.simplefoc.com/extras/Images/foc_current_mode.png)
+
 ```c
 #include <SimpleFOC.h>
 
