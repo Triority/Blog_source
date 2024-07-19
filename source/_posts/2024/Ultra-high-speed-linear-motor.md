@@ -90,6 +90,174 @@ description: 高功率高压高速直线电机
 
 ![](fb16ed462e5e7065995940dd605b93f.jpg)
 
+代码在这里，时序使用循环计算，不再需要手动考虑高低电平切换顺序了，以及做了串口调参，节省一下flash的烧录寿命hhh
+
+```c
+//cxx: control[just a str], level, 0:duration/1:start time//2:end time
+
+// start time
+int c11_time = 0;
+int c21_time = 1650;
+int c31_time = 2400;
+int c41_time = 2950;
+// duration
+int c10_time = 1460;
+int c20_time = 840;
+int c30_time = 670;
+int c40_time = 580;
+
+// trigger status
+const int c1 = 26;
+const int c2 = 27;
+const int c3 = 14;
+const int c4 = 12;
+const int c5 = 13;
+const int sw = 0;
+
+unsigned long pulseStartTime = 0;
+unsigned long pulseNowTime = 0;
+
+String inData="";
+
+void setup() {
+  Serial.begin(115200);
+  pinMode(c1, OUTPUT);
+  pinMode(c2, OUTPUT);
+  pinMode(c3, OUTPUT);
+  pinMode(c4, OUTPUT);
+  pinMode(c5, OUTPUT);
+  digitalWrite(c1, LOW);
+  digitalWrite(c2, LOW);
+  digitalWrite(c3, LOW);
+  digitalWrite(c4, LOW);
+  digitalWrite(c5, LOW);
+
+  pinMode(sw, INPUT);
+}
+
+void loop() {
+  // serial
+  while(Serial.available()>0){
+    delay(5);
+    char recieved = Serial.read();
+    inData += recieved;
+    if(recieved == '\n'){
+      if (inData.length()<4){
+        Serial.println("Too short");
+        break;
+      }
+      String function = inData.substring(0, 4);
+
+      if (function=="c11 "){
+        String value_str = inData.substring(4, inData.length());
+        c11_time = value_str.toInt();
+        Serial.printf("Now c11 = ");
+        Serial.println(c11_time);
+      }else if (function=="c10 "){
+        String value_str = inData.substring(4, inData.length());
+        c10_time = value_str.toInt();
+        Serial.printf("Now c10 = ");
+        Serial.println(c10_time);
+      }else if (function=="c21 "){
+        String value_str = inData.substring(4, inData.length());
+        c21_time = value_str.toInt();
+        Serial.printf("Now c21 = ");
+        Serial.println(c21_time);
+      }else if (function=="c20 "){
+        String value_str = inData.substring(4, inData.length());
+        c20_time = value_str.toInt();
+        Serial.printf("Now c20 = ");
+        Serial.println(c20_time);
+      }else if (function=="c31 "){
+        String value_str = inData.substring(4, inData.length());
+        c31_time = value_str.toInt();
+        Serial.printf("Now c31 = ");
+        Serial.println(c31_time);
+      }else if (function=="c30 "){
+        String value_str = inData.substring(4, inData.length());
+        c30_time = value_str.toInt();
+        Serial.printf("Now c30 = ");
+        Serial.println(c30_time);
+      }else if (function=="c41 "){
+        String value_str = inData.substring(4, inData.length());
+        c41_time = value_str.toInt();
+        Serial.printf("Now c41 = ");
+        Serial.println(c41_time);
+      }else if (function=="c40 "){
+        String value_str = inData.substring(4, inData.length());
+        c40_time = value_str.toInt();
+        Serial.printf("Now c40 = ");
+        Serial.println(c40_time);
+      }
+      inData="";
+    }
+
+  }
+
+  // switch
+  if (digitalRead(sw)==LOW){
+    // reset
+    int c11 = 1;
+    int c21 = 1;
+    int c31 = 1;
+    int c41 = 1;
+    int c12 = 1;
+    int c22 = 1;
+    int c32 = 1;
+    int c42 = 1;
+    int c12_time = c11_time + c10_time;
+    int c22_time = c21_time + c20_time;
+    int c32_time = c31_time + c30_time;
+    int c42_time = c41_time + c40_time;
+    Serial.println("starting");
+    pulseStartTime = micros();
+    pulseNowTime = micros();
+    while(c11||c12||c21||c22||c31||c32||c41||c42){
+      pulseNowTime = micros();
+      if(pulseNowTime-pulseStartTime>c11_time && c11){
+        digitalWrite(c1, HIGH);
+        c11 = 0;}
+      if(pulseNowTime-pulseStartTime>c12_time && c12){
+        digitalWrite(c1, LOW);
+        c12 = 0;}
+
+      if(pulseNowTime-pulseStartTime>c21_time && c21){
+        digitalWrite(c2, HIGH);
+        c21 = 0;}
+      if(pulseNowTime-pulseStartTime>c22_time && c22){
+        digitalWrite(c2, LOW);
+        c22 = 0;}
+
+      if(pulseNowTime-pulseStartTime>c31_time && c31){
+        digitalWrite(c3, HIGH);
+        c31 = 0;}
+      if(pulseNowTime-pulseStartTime>c32_time && c32){
+        digitalWrite(c3, LOW);
+        c32 = 0;}
+
+      if(pulseNowTime-pulseStartTime>c41_time && c41){
+        digitalWrite(c4, HIGH);
+        c41 = 0;}
+      if(pulseNowTime-pulseStartTime>c42_time && c42){
+        digitalWrite(c4, LOW);
+        c42 = 0;}
+
+      if(pulseNowTime-pulseStartTime>1000000){
+        Serial.print("ERROR, time out");
+        break;
+      }
+    }
+    Serial.println("releasing");
+
+    digitalWrite(c5, HIGH);
+    delay(2000);
+    digitalWrite(c5, LOW);
+    Serial.println("finished");
+  }
+}
+
+```
+
 #### 开关阵列等其他
 随着后续发展，出现了行波加速方式，即线圈宽度减少到直径以下，并且相邻多个线圈一起通电(起止时间不同)达到磁场近似均匀行进的效果，以平滑加速度使效率进一步提升，同时大幅提高了平均加速度。这种方式需要更更更多的级数(不到1cm的连续几十级)，因此开关管的数量变得巨大，于是显而易见应该尝试使用开关管组成矩阵多次触发减少使用量，目前这种拓扑还在实践中没有看到成熟的设计，现有行波加速依然是在使用boost拓扑
 
