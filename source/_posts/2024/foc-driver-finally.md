@@ -5,7 +5,7 @@ tags:
   - 电力电子
   - esp32
   - 单片机
-cover: /img/RUN.png
+cover: /img/3ff5fd67c30ac14c014e009861d6d0e.jpg
 categories:
   - 值得一提的文章
   - 折腾记录

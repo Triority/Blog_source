@@ -3,7 +3,7 @@ title: 超高速直线电机
 tags:
   - 电力电子
   - PCB设计
-cover: /img/RUN.png
+cover: /img/微信截图_20240720191614.png
 categories:
   - 值得一提的文章
   - 折腾记录
