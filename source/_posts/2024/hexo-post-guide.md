@@ -18,6 +18,8 @@ description: 博客帮助文件
 + 打开终端，输入`hexo new [name]`即可新建一个web链接为name的文章。请务必设置name为英文字母数字和减号，不要包含中文字符等内容
 + 文章按年份分类，新建的文章保存为`/hexo/source/[year]/[name].md`，即可在其中使用markdown语言编写文章
 
+推荐使用[vscode remote ssh](https://github.com/Microsoft/vscode-remote-release)进行博客编写
+
 # 文章配置
 ```md
 ---
