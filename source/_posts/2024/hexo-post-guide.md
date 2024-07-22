@@ -64,15 +64,96 @@ description: 博客帮助文件
 ---
 ```
 
+{% note danger modern %}
+不需要的配置项记得删除，比如你不想写description就把这一行全都删掉，否则文件生成会报错。
+如果你添加了新的categories，请编辑模板文件加上你新增的分类字符串，模板文件位于`/hexo/scaffolds/post.md`
+{% endnote %}
+
 # 内容编辑
 ## markdown
 markdown语言语法请自行学习，初期使用不熟练推荐使用开源项目：[Editor.md](https://pandao.github.io/editor.md/)
 ## 资源文件路径
+新建文章时，除了文章的文本文件``/hexo/source/[year]/[name].md``同时还会新建`/hexo/source/[year]/[name]`文件夹，对于在文章中使用的文件，均应保存在此处，包括图片，文件等内容。调用时直接使用文件名即可。
 
-## 标签外挂语法
+例如文章中添加的图片`![](img.img)`，图片`img.img`直接保存在上述文件夹即可，文件同理
+
+{% note danger modern %}
+注意：由于服务器由阿里云提供，存储设备为机械硬盘，如果在这部分放了过多(>5)大文件(>5MB)，可能在资源生成阶段导致IOPS超出限定值导致服务器阻塞死机，务必注意。
+{% endnote %}
+
+## 标签外挂等特殊语法
+这里只说一些常用的，因为标签外挂语法太多了，参见[文档](https://butterfly.js.org/posts/2df239ce/)
+### 插入图片
+```
+//使用插件的语法
+{% asset_img xxx.png 描述 %}
+//Markdown语法
+![描述](xxx.png)
+```
+
+### 插入视频
+```
+{% dplayer "url=wwww.xxx.cn/xxx.mp4" %}
+{% dplayer "url=/video/xxx.mp4" %}
+```
+
+### 文件下载链接
+```
+[文字](xxx.zip)
+```
+### 哔哩哔哩视频
+需要替换的内容：`src`
+```
+{% raw %}
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?aid=727587109&bvid=BV1LS4y1v7Nj&cid=748560556&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;" ></iframe></div>
+{% endraw %}
+```
+### 特殊提示
+{% note danger modern %}
+DANGER!!!
+{% endnote %}
+
+```
+{% note danger modern %}
+DANGER!!!
+{% endnote %}
+```
+
+
+### 折叠代码
+
+<details>
+  <summary>来点击我</summary>
+  于是我就被展开啦
+</details>
+
+```
+<details>
+  <summary>点击时的区域标题</summary>
+  xxx
+</details>
+```
+
+### 小黑块
+这是什么？哦原来{% spoiler 这是一个小黑块 %}哦！
+```
+{% spoiler 被遮挡文字 %}
+```
+
 
 # 文件生成和git提交
 文章编辑完成之后，在`/hexo`目录打开终端，输入`hexo g`进行html文件生成，如果报错请检查文章内是否有语法错误，特别是文章配置部分。
 
-然后进行git提交和推送：
-`git commit -m "说明"`
+如果报错为以下内容，无需理会重新执行`hexo g`就好
+```
+    errno: -2,
+    syscall: 'open',
+    code: 'ENOENT',
+    path: './search.xml'
+  }
+} Something's wrong. Maybe you can find the solution here: %s https://hexo.io/docs/troubleshooting.html
+root@iZj6c9vpc0x2q5gkwla1erZ:/hexo#
+```
+
+然后进行git提交和推送。别忘记这一步，git已经拯救了好几次这个博客
