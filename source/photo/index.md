@@ -9,6 +9,14 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 
 # 2024
 
+## 7.23：乌兰察布
+{% gallery false,220,10 %}
+![](/photo/media/DSC8597.jpg)
+![](/photo/media/DSC8447.jpg)
+![](/photo/media/DSC8326.jpg)
+{% endgallery %}
+
+
 ## 6.24：国家天文台密云站
 {% gallery false,220,10 %}
 ![](/photo/media/DSC5320.jpg)
