@@ -2,7 +2,7 @@
 title: 主要常用文章快速索引
 tags:
   - null
-cover: /img/RUN.png
+cover: /img/d7534a8ee77467263a270461f030945.jpg
 date: 9999-01-01 00:00:00
 description: article bullet train
 ---

@@ -159,7 +159,7 @@ toc:
 post_copyright:
   enable: true
   decode: false
-  author_href: https://triority.cn
+  author_href: https://triority.cc
   license: CC BY-NC-SA 4.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
@@ -592,7 +592,7 @@ ad:
 #   index:
 #  aside: <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=86 src="//music.163.com/outchain/player?type=2&id=1395957507&auto=1&height=66"></iframe>
 #  aside: <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=450 src="//music.163.com/outchain/player?type=0&id=812917997&auto=1&height=430"></iframe>
-  aside:  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=450 src="//music.163.com/outchain/player?type=0&id=9796678610&auto=0&height=430"></iframe>
+  aside:  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="100%" height=300 src="//music.163.com/outchain/player?type=0&id=9796678610&auto=0&height=430"></iframe>
 #   post:
 
 # Verification (站長驗證)

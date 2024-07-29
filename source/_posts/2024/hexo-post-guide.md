@@ -3,7 +3,7 @@ title: 博客文章编辑发布指南
 tags:
   - hexo
   - 文档
-cover: /img/RUN.png
+cover: /img/d7534a8ee77467263a270461f030945.jpg
 categories:
   - 文档&笔记
 date: 2024-07-22 18:33:41

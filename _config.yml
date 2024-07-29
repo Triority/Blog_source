@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://triority.cn
+url: http://triority.cc
 permalink: :year/:title/
 permalink_defaults:
 pretty_urls:
@@ -165,9 +165,9 @@ githubcalendar:
   pc_minheight: 280px
   mobile_minheight: 0px
   color: "['#ebedf0', '#fdcdec', '#fc9bd9', '#fa6ac5', '#f838b2', '#f5089f', '#c4067e', '#92055e', '#540336', '#48022f', '#30021f']"
-  api: http://triority.cn:5000/
+  api: http://triority.cc:5000/
   # api: https://python-gitee-calendar-api.vercel.app/api
-  calendar_js: https://jsdelivr.triority.cn/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js
+  calendar_js: https://jsdelivr.triority.cc/gh/Zfour/hexo-github-calendar@1.21/hexo_githubcalendar.js
   plus_style: ""
 
   sitemap:
@@ -180,11 +180,11 @@ githubcalendar:
   tags: true
   categories: true
 
-# 这个插件用于首页隐藏
+# 这个插件用于首页隐藏，已被删除
 # 带过滤功能的Hexo首页生成器插件。在官方的首页生成器基础上添加了过滤指定分类/标签的功能。
 # 比如，在首页只显示指定分类下面的文章列表。 除此之外，它还在指定的目录下生成指定类型的文章，比如在web目录下生成Web相关的文章。
 # index2 generator是否包含官方的hexo-generator-index，默认true（包含）
-index2_include_index: true
+index2_include_index: false
 index2_generator:
   per_page: 0
   order_by: -date # 按发布时间排序
