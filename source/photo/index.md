@@ -8,6 +8,15 @@ description: 这是一个相册不过也有可能作为朋友圈来发？
 {% endnote %}
 
 # 2024
+## 8.7：斋堂水库
+原计划12号正好英仙座流星雨极大值去的，结果7号下午看12号的天气预报突然变成阴天，而且正好7号最后一个晴朗晚上，由于北京北部有一些云层遮挡，于是直接驾车前往北京西50km的斋堂水库。不过由于光污染比较严重银河效果一般，但是第一次做了深空的尝试，图为仙女座星系。
+{% gallery false,220,10 %}
+![](/photo/media/7d02f60c1430046c386670e6cd30d34.jpg)
+![](/photo/media/c0aa514dae442185e0336078657fd2a.jpg)
+![](/photo/media/8c2243044911f74074dda0e9b8a452e.jpg)
+![](/photo/media/84d88b6e4898142cdfd03c8cb40a7d4.jpg)
+![](/photo/media/296ad388b4f02bbdf20ecfa31993221.jpg)
+{% endgallery %}
 
 ## 7.23：乌兰察布
 {% gallery false,220,10 %}

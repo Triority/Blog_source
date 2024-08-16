@@ -5,13 +5,10 @@ comment: false
 ---
 # Welcome to Triority's Blog
 ## Contact me
-+ QQ:  [2605925210](tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=2605925210&website=www.oicqzone.com)
 + e-mail:  
-  + [triority@qq.com](mailto:triority@qq.com)
   + [triority23@gmail.com](mailto:triority23@gmail.com)
 + Github主页:**[Github](https://github.com/Triority)** 
 + telegram:**[@triority3434](https://t.me/triority3434)**
-+ bilibili主页:**[bilibili](https://space.bilibili.com/162010648)**
 + 无线电QRZ:**[QRZ](https://www.qrz.com/db/bi1rwi)**
 + Steam好友代码:`1218146564`
 
