@@ -5,10 +5,19 @@ tags:
 cover: /img/微信截图_20240216120300.png
 categories:
 - 折腾记录
-date: 2024-01-31 11:49:35
+date: 2024-08-23 11:49:35
 description: 使用外电路作为激励源的DCP仿真模型
 ---
-# 建立模型
+# 视频演示
+之前写的教程比较粗略，这里出一个详细步骤的视频
+
+{% raw %}
+<div style="position: relative; width: 100%; height: 0; padding-bottom: 75%;">
+<iframe src="//player.bilibili.com/player.html?isOutside=true&aid=113007065564118&bvid=BV168WEeBEmV&cid=500001658823200&p=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true" style="position: absolute; width: 100%; height: 100%; Left: 0; top: 0;" ></iframe></div>
+{% endraw %}
+
+# 一些陈旧的晦涩难懂的内容
+## 建立模型
 首先在`maxwell 2D`中选择求解模式，DCP模型应为绕z轴旋转的瞬态模型
 ![](solution_type.png)
 
@@ -18,7 +27,7 @@ description: 使用外电路作为激励源的DCP仿真模型
 
 创建分析域(creat region)，这里就选择z方向200其他100
 
-# 添加外电路(激励源)
+## 添加外电路(激励源)
 为线圈添加激励，首先定义`coil`先设置为300匝，然后定义他的`Winding`为外部激励的`stranded`，就可以将coil `add to winding`了
 ![](assign_excitation.png)
 > 在稳态仿真中可以直接使用电流做激励源，这里使用外电路因此需要定义线圈绕组
@@ -29,7 +38,7 @@ description: 使用外电路作为激励源的DCP仿真模型
 画好电路之后导出并导入到激励
 ![](make_sph.png)
 
-# 准备仿真
+## 准备仿真
 添加边界：先将选择模式改为`edge`边缘，然后选择三个边缘边之后右键`assign boundary/Ballon`
 
 然后定义网格：选中两个物体之后右键`Assign Mesh Operation/Inside Selection/Length Based...`，这里我就直接设置为3mm了
@@ -40,8 +49,8 @@ description: 使用外电路作为激励源的DCP仿真模型
 
 最后，`Analyze ALL`启动！
 
-# 直线运动仿真
+## 直线运动仿真
 
-# 附赠仿真视频
+## 附赠仿真视频
 
 {% dplayer "url=98i7c-nntsv.mp4" %}
